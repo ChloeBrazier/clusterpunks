@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 namespace WarrenWarriorsGame
 {
     /// <summary>
-    /// This is the main type for your game.
+    /// Eddie is just a terrible person. The worst.
     /// </summary>
     public class Game1 : Game
     {
