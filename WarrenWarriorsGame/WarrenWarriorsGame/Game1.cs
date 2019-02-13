@@ -17,7 +17,7 @@ namespace WarrenWarriorsGame
 		KeyboardState PrevkbState;
 
 		int selectedChar; //holds the position of the selected char
-		CharSwapState Swap = CharSwapState.deselected; //gamestate used for if youre swapping characters
+		SelectedState Swap = SelectedState.deselected; //gamestate used for if youre swapping characters
 		Unit[] Units = new Unit[3]; //holds the units that will be displayed on screen
 
 		SpriteFont temp;//the temporary sprite font that we will be using
@@ -87,7 +87,7 @@ namespace WarrenWarriorsGame
 			//handles the swapping of characters (could be moved into a unique class/ method later
 			switch (Swap)
 			{
-				case CharSwapState.deselected:
+				case SelectedState.deselected:
 					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState))
 					{
 						selectedChar = 0;
@@ -105,7 +105,7 @@ namespace WarrenWarriorsGame
 					}
 
 					break;
-				case CharSwapState.selected:
+				case SelectedState.selected:
 
 					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState))
 					{
@@ -148,7 +148,7 @@ namespace WarrenWarriorsGame
 
 				Units[j].Draw(spriteBatch, j);
 
-				if (j == selectedChar && Swap == CharSwapState.selected)
+				if (j == selectedChar && Swap == SelectedState.selected)
 				{
 					drawcolor = Color.MonoGameOrange;
 				}

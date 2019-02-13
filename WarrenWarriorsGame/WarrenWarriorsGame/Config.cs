@@ -29,7 +29,7 @@ namespace WarrenWarriorsGame
 		SpikeTorch
 
 	}
-	public enum CharSwapState //finite state machine used for moving around characters
+	public enum SelectedState //finite state machine used for moving around characters
 	{
 		selected,
 		deselected
@@ -69,6 +69,41 @@ namespace WarrenWarriorsGame
 		public static int getRandom(int min, int max)
 		{
 			return rand.Next(min, max);
+		}
+
+		public static string getItemName(Item i)
+		{
+			switch( i)
+			{
+				case Item.Empty:
+					return "(Empty)";
+					break;
+				case Item.Matches:
+					return "Matches";
+					break;
+				case Item.Nails:
+					return "Nails";
+					break;
+				case Item.Stick:
+					return "Stick";
+					break;
+				case Item.SpikeBat:
+					return "Spike Bat";
+					break;
+				case Item.Torch:
+					return "Torch";
+					break;
+				case Item.HotNails:
+					return "Hot Nails";
+					break;
+				case Item.SpikeTorch:
+					return "Spike Torch";
+					break;
+				
+
+			}
+
+			return "Item Name Not Found";
 		}
 
 	}
