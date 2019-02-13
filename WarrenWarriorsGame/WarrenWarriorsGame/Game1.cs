@@ -5,12 +5,13 @@ using Microsoft.Xna.Framework.Input;
 namespace WarrenWarriorsGame
 {
     /// <summary>
-    /// ///Noah Hulick, Bringer of Chaos, Reporting for duty.
+    /// This is the main type for your game.
     /// </summary>
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
 
         public Game1()
         {
