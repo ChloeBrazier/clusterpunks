@@ -6,6 +6,7 @@ namespace WarrenWarriorsGame
 {
     /// <summary>
     /// This is the main type for your game.John Bateman
+    /// ive made some more changes
     /// </summary>
     public class Game1 : Game
     {
