@@ -11,7 +11,7 @@ namespace WarrenWarriorsGame
 {
     class Inventory
     {
-
+		Item[] items = new Item[12];
 
         public static void update(KeyboardState kbState, KeyboardState PrevkbState)
         {
