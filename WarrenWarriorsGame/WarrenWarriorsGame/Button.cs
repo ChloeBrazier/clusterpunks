@@ -34,6 +34,57 @@ namespace WarrenWarriorsGame
 
         }
 
+        public void update(MouseState ms)
+        {
+            if (state != ButtonState.Selected) //if the button is not selected
+            {
+                if (location.Contains(ms.Position)) //if the button is being hovered over
+                {
+                    state = ButtonState.Hovered; //change it to be hovered over
+                    if (ms.LeftButton == Microsoft.Xna.Framework.Input.ButtonState.Pressed) //if it is being clicked on select it
+                    {
+                        state = ButtonState.Selected;
+
+                    }
+                }
+                else
+                {
+                    //if it is not being hoevered over draw it as it's default
+                    state = ButtonState.Default;
+
+                }
+            }
+
+        }
+
+        public void draw(SpriteBatch sb)
+        {
+            //draws the button
+            switch (state)
+            {
+                case ButtonState.Default:
+                    sb.Draw(normal, location, Color.White);
+                    break;
+                case ButtonState.Hovered:
+                    sb.Draw(hovered, location, Color.White);
+                    break;
+                case ButtonState.Selected:
+                    sb.Draw(selected, location, Color.White);
+                    break;
+            }
+
+        }
+
+
+        public void select()
+        {
+            state = ButtonState.Selected;
+        }
+        public void deselect()
+        {
+            state = ButtonState.Default;
+        }
+
 
     }
 }

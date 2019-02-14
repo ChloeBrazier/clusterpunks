@@ -18,6 +18,7 @@ namespace WarrenWarriorsGame
 
 		PlayerHandler handler;
 
+
 		public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
