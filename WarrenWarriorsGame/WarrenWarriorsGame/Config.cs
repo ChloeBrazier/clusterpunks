@@ -35,6 +35,14 @@ namespace WarrenWarriorsGame
 		deselected
 	}
 
+    public enum ButtonState
+    {
+        Default,
+        Hovered,
+        Selected
+
+    }
+
 	public static class Config
 	{
 
