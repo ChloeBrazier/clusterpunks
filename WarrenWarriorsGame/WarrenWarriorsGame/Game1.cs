@@ -16,13 +16,7 @@ namespace WarrenWarriorsGame
 		KeyboardState kbState;
 		KeyboardState PrevkbState;
 
-		int selectedChar; //holds the position of the selected char
-		SelectedState Swap = SelectedState.deselected; //gamestate used for if youre swapping characters
-		Unit[] Units = new Unit[3]; //holds the units that will be displayed on screen
-
-		Inventory playerInv;
-
-		SpriteFont temp;//the temporary sprite font that we will be using
+		PlayerHandler handler;
 
 		public Game1()
         {
@@ -38,9 +32,7 @@ namespace WarrenWarriorsGame
         /// </summary>
         protected override void Initialize()
         {
-			// TODO: Add your initialization logic here
-
-			playerInv = new Inventory();
+			
             base.Initialize();
         }
 
@@ -53,15 +45,8 @@ namespace WarrenWarriorsGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-
-			//loads in the temporary font
-			temp = Content.Load<SpriteFont>("Arial-12");
-
-
-			//initializes the base units
-			Units[0] = new PlayerChar(temp, CharType.Heavy);
-			Units[1] = new PlayerChar(temp, CharType.Medium);
-			Units[2] = new PlayerChar(temp, CharType.Light);
+			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"));
+			
 			// TODO: use this.Content to load your game content here
 		}
 
@@ -87,53 +72,7 @@ namespace WarrenWarriorsGame
 			// TODO: Add your update logic here
 			kbState = Keyboard.GetState();
 
-			//handles the swapping of characters (could be moved into a unique class/ method later
-			switch (Swap)
-			{
-				case SelectedState.deselected:
-					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1,kbState,PrevkbState))
-					{
-						selectedChar = 0;
-						Swap = SelectedState.selected;
-					}
-					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState))
-					{
-						selectedChar = 1;
-						Swap = SelectedState.selected;
-					}
-					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState))
-					{
-						selectedChar = 2;
-						Swap = SelectedState.selected;
-					}
-
-					break;
-				case SelectedState.selected:
-
-					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState))
-					{
-						SwapUnits(selectedChar, 0);
-						playerInv.CharSwap(selectedChar, 0);
-						Swap = SelectedState.deselected;
-					}
-					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState))
-					{
-						SwapUnits(selectedChar, 1);
-						playerInv.CharSwap(selectedChar, 1);
-						Swap = SelectedState.deselected;
-					}
-					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState))
-					{
-						SwapUnits(selectedChar, 2);
-						playerInv.CharSwap(selectedChar, 2);
-						Swap = SelectedState.deselected;
-					}
-					break;
-
-
-			}
-
-			playerInv.update(kbState, PrevkbState);
+			handler.update(kbState, PrevkbState);
 
 
 			PrevkbState = kbState;
@@ -151,34 +90,13 @@ namespace WarrenWarriorsGame
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
 
-			for (int j = 0; j < Units.Length; j++)
-			{
-				Color drawcolor = Color.Black;
-
-				Units[j].Draw(spriteBatch, j);
-
-				if (j == selectedChar && Swap == SelectedState.selected)
-				{
-					drawcolor = Color.MonoGameOrange;
-				}
-
-				spriteBatch.DrawString(temp, string.Format("{0}:   ", j + 1), j * 5 * Config.LineSpacing, drawcolor);
-
-			}
-
-			playerInv.Draw(spriteBatch, temp);
+			handler.Draw(spriteBatch);
 
 			spriteBatch.End();
 
 			base.Draw(gameTime);
         }
 
-		private void SwapUnits(int pos1, int pos2)
-		{
-			Unit temp = Units[pos1];
-			Units[pos1] = Units[pos2];
-			Units[pos2] = temp;
-
-		}
+		
 	}
 }
