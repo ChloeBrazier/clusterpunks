@@ -343,5 +343,30 @@ namespace WarrenWarriorsGame
 			return "key not found"; 
 		}
 
+		/// <summary>
+		/// used to swap the inventory of two characters
+		/// </summary>
+		/// <param name="char1">the first character</param>
+		/// <param name="char2"></param>
+		public void CharSwap(int char1, int char2)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				Item temp = items[char1, j];
+				items[char1, j] = items[char2, j];
+				items[char2, j] = temp;
+
+			}
+
+			if (SelectedItemX == char1)
+			{
+				SelectedItemX = char2;
+			}else if (SelectedItemX == char2)
+			{
+				SelectedItemX = char1;
+			}
+
+
+		}
     }
 }

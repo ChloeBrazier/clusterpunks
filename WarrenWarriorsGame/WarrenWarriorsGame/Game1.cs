@@ -113,16 +113,19 @@ namespace WarrenWarriorsGame
 					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState))
 					{
 						SwapUnits(selectedChar, 0);
+						playerInv.CharSwap(selectedChar, 0);
 						Swap = SelectedState.deselected;
 					}
 					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState))
 					{
 						SwapUnits(selectedChar, 1);
+						playerInv.CharSwap(selectedChar, 1);
 						Swap = SelectedState.deselected;
 					}
 					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState))
 					{
 						SwapUnits(selectedChar, 2);
+						playerInv.CharSwap(selectedChar, 2);
 						Swap = SelectedState.deselected;
 					}
 					break;
