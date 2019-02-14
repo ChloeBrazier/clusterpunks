@@ -56,7 +56,7 @@ namespace WarrenWarriorsGame
 
 		public override void Draw(SpriteBatch sb,int position)
 		{
-			Vector2 pos = new Vector2(10,0) + position * 5 * Config.LineSpacing;
+			Vector2 pos = new Vector2(12,0) + position * 5 * Config.LineSpacing;
 			sb.DrawString(font, string.Format("{0}/{1}", name , Health),pos,Color.Black);
 
 		}

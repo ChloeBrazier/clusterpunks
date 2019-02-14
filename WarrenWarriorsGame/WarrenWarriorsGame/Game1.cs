@@ -88,39 +88,39 @@ namespace WarrenWarriorsGame
 			switch (Swap)
 			{
 				case SelectedState.deselected:
-					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1,kbState,PrevkbState))
 					{
 						selectedChar = 0;
-						Swap = CharSwapState.selected;
+						Swap = SelectedState.selected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState))
 					{
 						selectedChar = 1;
-						Swap = CharSwapState.selected;
+						Swap = SelectedState.selected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState))
 					{
 						selectedChar = 2;
-						Swap = CharSwapState.selected;
+						Swap = SelectedState.selected;
 					}
 
 					break;
 				case SelectedState.selected:
 
-					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState))
 					{
 						SwapUnits(selectedChar, 0);
-						Swap = CharSwapState.deselected;
+						Swap = SelectedState.deselected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState))
 					{
 						SwapUnits(selectedChar, 1);
-						Swap = CharSwapState.deselected;
+						Swap = SelectedState.deselected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState))
 					{
 						SwapUnits(selectedChar, 2);
-						Swap = CharSwapState.deselected;
+						Swap = SelectedState.deselected;
 					}
 					break;
 
@@ -153,7 +153,7 @@ namespace WarrenWarriorsGame
 					drawcolor = Color.MonoGameOrange;
 				}
 
-				spriteBatch.DrawString(temp, string.Format("{0}:   ", j + 1), j * Config.LineSpacing, drawcolor);
+				spriteBatch.DrawString(temp, string.Format("{0}:   ", j + 1), j * 5 * Config.LineSpacing, drawcolor);
 
 			}
 
