@@ -20,6 +20,8 @@ namespace WarrenWarriorsGame
 		SelectedState Swap = SelectedState.deselected; //gamestate used for if youre swapping characters
 		Unit[] Units = new Unit[3]; //holds the units that will be displayed on screen
 
+		Inventory playerInv;
+
 		SpriteFont temp;//the temporary sprite font that we will be using
 
 		public Game1()
@@ -36,8 +38,9 @@ namespace WarrenWarriorsGame
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+			// TODO: Add your initialization logic here
 
+			playerInv = new Inventory();
             base.Initialize();
         }
 
@@ -127,6 +130,9 @@ namespace WarrenWarriorsGame
 
 			}
 
+			playerInv.update(kbState, PrevkbState);
+
+
 			PrevkbState = kbState;
 			base.Update(gameTime);
         }
@@ -157,7 +163,7 @@ namespace WarrenWarriorsGame
 
 			}
 
-
+			playerInv.Draw(spriteBatch, temp);
 
 			spriteBatch.End();
 
