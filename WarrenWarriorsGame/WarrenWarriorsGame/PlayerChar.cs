@@ -25,12 +25,12 @@ namespace WarrenWarriorsGame
 				case CharType.Heavy:
 					Health = Config.getRandom(40, 51);
 					atk = new Attack(Config.getRandom(10, 16), Config.getRandom(5, 11), new List<int>() { 3, 4, 5 });
-					name = "Steven's Grand-Dad";
+					name = "Kevin's Grand-Dad";
 
 					break;
 				case CharType.Medium:
 					Health = Config.getRandom(30, 41);
-					name = "Steven's Dad";
+					name = "Kevin's Dad";
 
 					if (Config.getRandom(1, 3) == 2)
 					{
@@ -45,7 +45,7 @@ namespace WarrenWarriorsGame
 				case CharType.Light:
 					Health = Config.getRandom(20, 31);
 					atk = new Attack(Config.getRandom(5, 11), Config.getRandom(1, 3), new List<int>() {Config.getRandom(3,6)});
-					name = "Steven";
+					name = "Kevin";
 					break;
 
 			}
