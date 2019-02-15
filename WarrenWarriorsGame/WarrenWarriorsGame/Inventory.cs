@@ -58,7 +58,7 @@ namespace WarrenWarriorsGame
 						items[j, k] = temp;
 					}
 				}
-			} while (!(itemdrops > 5 && itemdrops < 8) || (!dropstick || !dropnail || !dropmatch));
+			} while (!(itemdrops >= 5 && itemdrops <= 8) || (!dropstick || !dropnail || !dropmatch));
 
 
 		}
