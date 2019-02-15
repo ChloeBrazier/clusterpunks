@@ -18,6 +18,8 @@ namespace WarrenWarriorsGame
 
 		PlayerHandler handler;
 
+        //Button test;
+
 
 		public Game1()
         {
@@ -47,6 +49,11 @@ namespace WarrenWarriorsGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"));
+
+            //test = new Button(Content.Load<Texture2D>("Temp/Normal"),
+            //                   Content.Load<Texture2D>("Temp/Hover"),
+            //                   Content.Load<Texture2D>("Temp/Selected"),
+            //                   new Rectangle(150, 150, 50, 50));
 			
 			// TODO: use this.Content to load your game content here
 		}
@@ -74,7 +81,7 @@ namespace WarrenWarriorsGame
 			kbState = Keyboard.GetState();
 
 			handler.update(kbState, PrevkbState);
-
+            //test.update(Mouse.GetState());
 
 			PrevkbState = kbState;
 			base.Update(gameTime);
@@ -92,6 +99,7 @@ namespace WarrenWarriorsGame
 			spriteBatch.Begin();
 
 			handler.Draw(spriteBatch);
+            //test.draw(spriteBatch);
 
 			spriteBatch.End();
 
