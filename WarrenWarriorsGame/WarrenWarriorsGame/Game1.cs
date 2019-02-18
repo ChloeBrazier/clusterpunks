@@ -35,7 +35,7 @@ namespace WarrenWarriorsGame
         /// </summary>
         protected override void Initialize()
         {
-			
+            this.IsMouseVisible = true;
             base.Initialize();
         }
 
