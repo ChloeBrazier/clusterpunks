@@ -35,7 +35,7 @@ namespace WarrenWarriorsGame
 		deselected
 	}
 
-    public enum ButtonState
+    public enum BtnState
     {
         Default,
         Hovered,
@@ -66,6 +66,16 @@ namespace WarrenWarriorsGame
 			}
 
 			return false;
+		}
+
+		public static bool SingleMouseClick(MouseState mouseState, MouseState prevMouseState)
+		{
+			if (mouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
+			{
+				return true;
+			}
+			return false;
+
 		}
 
 		/// <summary>

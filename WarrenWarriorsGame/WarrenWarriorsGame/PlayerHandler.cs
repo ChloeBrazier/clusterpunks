@@ -19,10 +19,10 @@ namespace WarrenWarriorsGame
 
 		Inventory playerInv;
 
-		public PlayerHandler(SpriteFont font)
+		public PlayerHandler(SpriteFont font,Game g)
 		{
 			//initializes the inventory of the player
-			playerInv = new Inventory();
+			playerInv = new Inventory(g);
 
 			//initializes the base units
 			Units[0] = new PlayerChar(font, CharType.Heavy);
@@ -32,7 +32,7 @@ namespace WarrenWarriorsGame
 			text = font;
 		}
 
-		public void update(KeyboardState kbState,KeyboardState PrevkbState)
+		public void update(KeyboardState kbState,KeyboardState PrevkbState,MouseState mState)
 		{
 			switch (Swap)
 			{
@@ -79,7 +79,7 @@ namespace WarrenWarriorsGame
 
 			}
 
-			playerInv.update(kbState, PrevkbState);
+			playerInv.update(kbState, PrevkbState, mState);
 
 		}
 

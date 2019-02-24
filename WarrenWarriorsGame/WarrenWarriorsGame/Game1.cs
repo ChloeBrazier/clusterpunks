@@ -33,8 +33,9 @@ namespace WarrenWarriorsGame
         /// </summary>
         protected override void Initialize()
         {
-			
-            base.Initialize();
+			IsMouseVisible = true;
+
+			base.Initialize();
         }
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace WarrenWarriorsGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"));
+			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"),this);
 			
 			// TODO: use this.Content to load your game content here
 		}
@@ -73,8 +74,7 @@ namespace WarrenWarriorsGame
 			// TODO: Add your update logic here
 			kbState = Keyboard.GetState();
 
-			handler.update(kbState, PrevkbState);
-
+			handler.update(kbState, PrevkbState,Mouse.GetState());
 
 			PrevkbState = kbState;
 			base.Update(gameTime);

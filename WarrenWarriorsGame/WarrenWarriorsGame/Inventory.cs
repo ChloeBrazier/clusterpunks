@@ -11,12 +11,15 @@ namespace WarrenWarriorsGame
 {
     class Inventory
     {
-		Item[,] items = new Item[3,4]; 
-		SelectedState selected = SelectedState.deselected;
-		int SelectedItemX = -1;
-		int SelectedItemY = -1;
+		private Item[,] items = new Item[3,4]; 
+		private SelectedState selected = SelectedState.deselected;
+		private int SelectedItemX = -1;
+		private int SelectedItemY = -1;
 
-		public Inventory()
+		private Button[,] invButtons = new Button[3,4];
+		
+
+		public Inventory(Game g)
 		{
 			int itemdrops;
 
@@ -59,12 +62,31 @@ namespace WarrenWarriorsGame
 					}
 				}
 			} while (!(itemdrops > 5 && itemdrops < 8) || (!dropstick || !dropnail || !dropmatch));
+			
+			//initialize an array of buttons for mouse controls
+			for (int j = 0; j < 3; j++)
+			{
+				for (int k = 0; k < 4; k++)
+				{
+					if (k < 2)
+					{
+						invButtons[j, k] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(10 + 60*k +j*130,300,50,50));
+					}
+					else
+					{
+						invButtons[j, k] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(10 + 60 * (k-2) + j*130, 360, 50, 50));
+					}
 
+
+
+
+				}
+			}
 
 		}
 
 
-        public void update(KeyboardState kbState, KeyboardState PrevkbState)
+        public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState)
         {
 			switch(selected)
 			{
@@ -159,7 +181,22 @@ namespace WarrenWarriorsGame
 					}
 
 
-					break;
+					for (int j = 0; j < 3; j++)
+					{
+						for (int k = 0; k < 4; k++)
+						{
+							if (invButtons[j, k].update(mState) == true)
+							{
+								selected = SelectedState.selected;
+								SelectedItemX = j;
+								SelectedItemY = k;
+							}
+
+
+						}
+					}
+
+							break;
 				case SelectedState.selected:
 					//first char inv
 					if(Config.singelKeyPress(Keys.Q,kbState,PrevkbState))
@@ -241,6 +278,32 @@ namespace WarrenWarriorsGame
 
 					}
 
+					if (Config.singelKeyPress(Keys.Tab, kbState, PrevkbState))
+					{
+						invButtons[SelectedItemX, SelectedItemY].deselect();
+						selected = SelectedState.deselected;
+
+					}
+
+					//handles mouse controls
+					for (int j = 0; j < 3; j++)
+					{
+						for (int k = 0; k < 4; k++)
+						{
+							if (invButtons[j, k].update(mState) == true)
+							{
+
+								invButtons[j, k].deselect();
+								invButtons[SelectedItemX, SelectedItemY].deselect();
+								selected = SelectedState.deselected;
+								Swap(j, k);
+							}
+
+
+						}
+					}
+
+
 					break;
 			}
         }
@@ -265,7 +328,17 @@ namespace WarrenWarriorsGame
 
 				}
 			}
-        }
+
+			for (int j = 0; j < 3; j++)
+			{
+				for (int k = 0; k < 4; k++)
+				{
+					invButtons[j, k].draw(sb);
+
+
+				}
+			}
+		}
 
 		private void Swap(int x, int y) //swaps items in the items array
 		{
