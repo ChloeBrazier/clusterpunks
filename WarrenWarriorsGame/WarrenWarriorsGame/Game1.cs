@@ -12,7 +12,7 @@ namespace WarrenWarriorsGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-
+        UI gameUI;
 		KeyboardState kbState;
 		KeyboardState PrevkbState;
 
@@ -48,8 +48,10 @@ namespace WarrenWarriorsGame
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
 			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"),this);
-			
-			// TODO: use this.Content to load your game content here
+
+            // TODO: use this.Content to load your game content here
+            gameUI = new UI(this);
+            gameUI.Load();
 		}
 
         /// <summary>
@@ -93,7 +95,9 @@ namespace WarrenWarriorsGame
 
 			handler.Draw(spriteBatch);
 
-			spriteBatch.End();
+            //Uncomment this if you want to display the UI, gameUI.Draw(spriteBatch);
+
+            spriteBatch.End();
 
 			base.Draw(gameTime);
         }
