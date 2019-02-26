@@ -11,9 +11,11 @@ namespace WarrenWarriorsGame
 {
 	public abstract class Unit //a class meant to be used for a generic handler
 	{
-		protected int Health;
+        protected string name;
+        protected int Health;
+        protected bool isAttacking;
 		protected SpriteFont font;
-		protected Texture2D sprite; 
+		protected Texture2D sprite;
 		protected Attack atk;
 
 		public abstract void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time);

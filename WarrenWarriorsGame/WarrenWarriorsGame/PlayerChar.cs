@@ -10,11 +10,8 @@ using Microsoft.Xna.Framework.Input;
 namespace WarrenWarriorsGame
 {
 	
-	public class PlayerChar:Unit
+	public class PlayerChar: Unit
 	{
-		Boolean isAttacking = false;
-		string name;
-
 		public PlayerChar(SpriteFont spriteFont, CharType type)
 		{
 			font = spriteFont;
@@ -24,7 +21,7 @@ namespace WarrenWarriorsGame
 			{
 				case CharType.Heavy:
 					Health = Config.getRandom(40, 51);
-					atk = new Attack(Config.getRandom(10, 16), Config.getRandom(5, 11), new List<int>() { 3, 4, 5 });
+					atk = new Attack(Config.getRandom(10, 16), Config.getRandom(5, 11));
 					name = "Kevin's Grand-Dad";
 
 					break;
@@ -34,22 +31,24 @@ namespace WarrenWarriorsGame
 
 					if (Config.getRandom(1, 3) == 2)
 					{
-						atk = new Attack(Config.getRandom(10, 16), Config.getRandom(4, 6), new List<int>() { 4, 5 });
+						atk = new Attack(Config.getRandom(10, 16), Config.getRandom(4, 6));
 					}
 					else
 					{
-						atk = new Attack(Config.getRandom(10, 16), Config.getRandom(4, 6), new List<int>() { 3, 4 });
+						atk = new Attack(Config.getRandom(10, 16), Config.getRandom(4, 6));
 					}
 					
 					break;
 				case CharType.Light:
 					Health = Config.getRandom(20, 31);
-					atk = new Attack(Config.getRandom(5, 11), Config.getRandom(1, 3), new List<int>() {Config.getRandom(3,6)});
+					atk = new Attack(Config.getRandom(5, 11), Config.getRandom(1, 3));
 					name = "Kevin";
 					break;
 
 			}
 
+            //set isAttacking bool to false by default
+            isAttacking = false;
 		}
 
 

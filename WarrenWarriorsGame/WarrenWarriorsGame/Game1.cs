@@ -47,6 +47,7 @@ namespace WarrenWarriorsGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //create playerhandler, which in turn initializes player units
 			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"),this); //initializes the player handler
 
             // TODO: use this.Content to load your game content here

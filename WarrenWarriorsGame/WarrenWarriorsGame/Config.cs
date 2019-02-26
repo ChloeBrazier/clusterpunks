@@ -43,6 +43,15 @@ namespace WarrenWarriorsGame
 
     }
 
+    //enum used to determine enemy stats during enemy creation
+    public enum EnemyType
+    {
+        Buckshot,
+        SewCrow,
+        Bandit,
+        Custom
+    }
+
 	public static class Config
 	{
 
