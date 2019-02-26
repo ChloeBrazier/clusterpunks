@@ -13,10 +13,10 @@ namespace WarrenWarriorsGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         UI gameUI;
-		KeyboardState kbState;
+		KeyboardState kbState; //keyboard states for updating
 		KeyboardState PrevkbState;
 
-		PlayerHandler handler;
+		PlayerHandler handler; //holds all of the player interaction
 
 
 		public Game1()
@@ -33,7 +33,7 @@ namespace WarrenWarriorsGame
         /// </summary>
         protected override void Initialize()
         {
-			IsMouseVisible = true;
+			IsMouseVisible = true; //set up the mouse
 
 			base.Initialize();
         }
@@ -47,7 +47,7 @@ namespace WarrenWarriorsGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"),this);
+			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"),this); //initializes the player handler
 
             // TODO: use this.Content to load your game content here
             gameUI = new UI(this);
@@ -76,9 +76,10 @@ namespace WarrenWarriorsGame
 			// TODO: Add your update logic here
 			kbState = Keyboard.GetState();
 
-			handler.update(kbState, PrevkbState,Mouse.GetState());
+			handler.update(kbState, PrevkbState,Mouse.GetState()); //updates all of the keyboardhandler
 
-			PrevkbState = kbState;
+			PrevkbState = kbState; //stores the previous keyboard state
+
 			base.Update(gameTime);
         }
 
@@ -93,10 +94,11 @@ namespace WarrenWarriorsGame
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
 
+			gameUI.Draw(spriteBatch); 
+
 			handler.Draw(spriteBatch);
 
-            //Uncomment this if you want to display the UI, gameUI.Draw(spriteBatch);
-
+            
             spriteBatch.End();
 
 			base.Draw(gameTime);

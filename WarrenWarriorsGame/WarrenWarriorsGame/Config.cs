@@ -35,7 +35,7 @@ namespace WarrenWarriorsGame
 		deselected
 	}
 
-    public enum BtnState
+    public enum BtnState//used for the buttons in 
     {
         Default,
         Hovered,
@@ -68,6 +68,7 @@ namespace WarrenWarriorsGame
 			return false;
 		}
 
+		//determines if this is the first frame the left mouse button is down
 		public static bool SingleMouseClick(MouseState mouseState, MouseState prevMouseState)
 		{
 			if (mouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
@@ -88,7 +89,7 @@ namespace WarrenWarriorsGame
 		{
 			return rand.Next(min, max);
 		}
-
+		//gets item names from temporary output
 		public static string getItemName(Item i)
 		{
 			switch( i)

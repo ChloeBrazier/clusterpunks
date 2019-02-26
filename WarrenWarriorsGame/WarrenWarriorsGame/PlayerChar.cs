@@ -19,7 +19,7 @@ namespace WarrenWarriorsGame
 		{
 			font = spriteFont;
 
-			//creates characters in a psedorandom method
+			//creates characters in a psedorandom method (this is meant to be temporary)
 			switch (type)
 			{
 				case CharType.Heavy:
@@ -53,15 +53,21 @@ namespace WarrenWarriorsGame
 		}
 
 
-
+		/// <summary>
+		/// draws the character based on the position it is given
+		/// </summary>
+		/// <param name="sb"></param>
+		/// <param name="position"></param>
 		public override void Draw(SpriteBatch sb,int position)
 		{
+			//---temporary solution---//
 			Vector2 pos = new Vector2(12,0) + position * 5 * Config.LineSpacing;
 			sb.DrawString(font, string.Format("{0}/{1}", name , Health),pos,Color.Black);
 
 		}
 		public override void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time)
 		{
+			//---this does nothing right now but should contain the attack stuff---//
 			throw new NotImplementedException();
 		}
 	}

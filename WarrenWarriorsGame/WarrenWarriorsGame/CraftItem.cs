@@ -14,8 +14,12 @@ namespace WarrenWarriorsGame
         private Attack dmg; // holds how much damage the attack should do
         List<Item> Components = new List<Item>(); //holds what components an item has. is used for crafting
 
+		
         public CraftItem(Item Type) //create generic item generation
         {
+
+			//--this is temporary and meant to be changed later--//
+			//when this is changed also change the inventory code
             switch (Type)
             {
                 case Item.Empty:
@@ -58,5 +62,15 @@ namespace WarrenWarriorsGame
             }
         }
 
-    }
+		public override string ToString() //-- when fully implemented you may change this or use the draw method
+		{
+			return base.ToString();
+		}
+
+		public static void Draw(SpriteBatch sb)//use this to draw when fully implemented
+		{
+
+		}
+
+	}
 }

@@ -36,7 +36,7 @@ namespace WarrenWarriorsGame
 		{
 			switch (Swap)
 			{
-				case SelectedState.deselected:
+				case SelectedState.deselected: //if no characters are selected and the user selects a character update the code to match
 					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState))
 					{
 						selectedChar = 0;
@@ -54,7 +54,7 @@ namespace WarrenWarriorsGame
 					}
 
 					break;
-				case SelectedState.selected:
+				case SelectedState.selected://if a character is selected and the user selects a character swap those two characters and their inventorys
 
 					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState))
 					{

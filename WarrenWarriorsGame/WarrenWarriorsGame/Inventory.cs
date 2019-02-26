@@ -26,8 +26,8 @@ namespace WarrenWarriorsGame
 			bool dropstick;
 			bool dropmatch;
 			bool dropnail;
-			do
-			{
+			do //drops between 5 and 8 total items and at least one of the three generic items implemented for testing
+			{ //--temporary--//
 				itemdrops = 0;
 				dropstick = false;
 				dropnail = false;
@@ -63,12 +63,12 @@ namespace WarrenWarriorsGame
 				}
 			} while (!(itemdrops > 5 && itemdrops < 8) || (!dropstick || !dropnail || !dropmatch));
 			
-			//initialize an array of buttons for mouse controls
+			//initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
 			for (int j = 0; j < 3; j++)
 			{
 				for (int k = 0; k < 4; k++)
 				{
-					if (k < 2)
+					if (k < 2) //determines if the button is in the first row and initializes
 					{
 						invButtons[j, k] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(10 + 60*k +j*130,300,50,50));
 					}
@@ -310,7 +310,7 @@ namespace WarrenWarriorsGame
 
         public void Draw(SpriteBatch sb,SpriteFont font)
         {
-            for(int j = 0; j<3; j++)
+            for(int j = 0; j<3; j++)//--temporary, draws text output for the items --//
 			{
 				for(int k = 0; k<4; k++)
 				{
@@ -332,15 +332,13 @@ namespace WarrenWarriorsGame
 			for (int j = 0; j < 3; j++)
 			{
 				for (int k = 0; k < 4; k++)
-				{
+				{//draws the buttons
 					invButtons[j, k].draw(sb);
-
-
 				}
 			}
 		}
 
-		private void Swap(int x, int y) //swaps items in the items array
+		private void Swap(int x, int y) //swaps items in the items array with the item that is currently selected
 		{
 			Item temp = items[x,y];
 			items[x,y] = items[SelectedItemX,SelectedItemY];
@@ -348,7 +346,7 @@ namespace WarrenWarriorsGame
 
 		}
 
-		private string getKeyName(int x, int y)
+		private string getKeyName(int x, int y) //gets the names of keys to be displayed
 		{
 			switch (x)
 			{
@@ -423,7 +421,7 @@ namespace WarrenWarriorsGame
 		/// <param name="char2"></param>
 		public void CharSwap(int char1, int char2)
 		{
-			for (int j = 0; j < 4; j++)
+			for (int j = 0; j < 4; j++) //swaps the items in each slot of each characters inventory
 			{
 				Item temp = items[char1, j];
 				items[char1, j] = items[char2, j];
@@ -431,12 +429,18 @@ namespace WarrenWarriorsGame
 
 			}
 
-			if (SelectedItemX == char1)
+			if (SelectedItemX == char1) //if one of the characters is selected also update the buttons
 			{
+				invButtons[SelectedItemX, SelectedItemY].deselect();
 				SelectedItemX = char2;
-			}else if (SelectedItemX == char2)
+				invButtons[SelectedItemX, SelectedItemY].select();
+
+			}
+			else if (SelectedItemX == char2)
 			{
+				invButtons[SelectedItemX, SelectedItemY].deselect();
 				SelectedItemX = char1;
+				invButtons[SelectedItemX, SelectedItemY].select();
 			}
 
 

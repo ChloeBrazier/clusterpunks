@@ -35,8 +35,14 @@ namespace WarrenWarriorsGame
 
         }
 
+		/// <summary>
+		/// returns true if the mouse is being clicked and changes what sprite it's using
+		/// </summary>
+		/// <param name="ms">the current mouse state</param>
+		/// <returns></returns>
         public Boolean update(MouseState ms)
         {
+			//don't worry about this it just works
             if (state != BtnState.Selected) //if the button is not selected
             {
                 if (location.Contains(ms.Position)) //if the button is being hovered over
@@ -68,7 +74,7 @@ namespace WarrenWarriorsGame
 
         public void draw(SpriteBatch sb)
         {
-            //draws the button
+            //draws the button in its current state
             switch (state)
             {
                 case BtnState.Default:
@@ -85,10 +91,11 @@ namespace WarrenWarriorsGame
         }
 
 
-        public void select()
+        public void select() //used to be called by other methods to select or deselect buttons from other methods
         {
             state = BtnState.Selected;
         }
+
         public void deselect()
         {
             state = BtnState.Default;

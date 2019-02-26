@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WarrenWarriorsGame
 {
-	public class Attack
+	public class Attack //--not currently in use anywhere --//
 	{
 		//how much damage the attack does
 		private int damage;
