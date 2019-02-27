@@ -62,7 +62,6 @@ namespace WarrenWarriorsGame
 			//---temporary solution---//
 			Vector2 pos = new Vector2(12,0) + position * 5 * Config.LineSpacing;
 			sb.DrawString(font, string.Format("{0}/{1}", name , Health),pos,Color.Black);
-
 		}
 		public override void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time)
 		{

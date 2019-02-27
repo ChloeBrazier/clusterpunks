@@ -60,7 +60,40 @@ namespace WarrenWarriorsGame
             isAttacking = false;
         }
 
-        //required methods based on abstract parent, not currently in use
+        /// <summary>
+        /// method to load in the correct sprite based on enemy type
+        /// </summary>
+        /// <param name="game"> 
+        /// object of the Game1 class used to load sprite content
+        /// </param>
+        public void LoadSprite(Game game, EnemyType type)
+        {
+            //switch statement that loads a sprite based on enemy type
+            switch(type)
+            {
+                case EnemyType.Buckshot:
+
+                    //sprite = game.Content.Load<Texture2D>("BUCKSHOT SPRITE FILE NAME HERE");
+
+                    break;
+                case EnemyType.SewCrow:
+
+                    //sprite = game.Content.Load<Texture2D>("SEWCROW SPRITE FILE NAME HERE");
+
+                    break;
+                case EnemyType.Bandit:
+
+                    //sprite = game.Content.Load<Texture2D>("BANDIT SPRITE FILE NAME HERE");
+
+                    break;
+                case EnemyType.Custom:
+
+                    //loaded sprite is based on external tool and file IO
+
+                    break;
+            }
+        }
+        //required methods based on unit parent class, not currently in use
         public override void Draw(SpriteBatch sb, int position)
         {
             throw new NotImplementedException();

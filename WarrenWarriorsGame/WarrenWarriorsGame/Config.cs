@@ -98,6 +98,7 @@ namespace WarrenWarriorsGame
 		{
 			return rand.Next(min, max);
 		}
+
 		//gets item names from temporary output
 		public static string getItemName(Item i)
 		{
