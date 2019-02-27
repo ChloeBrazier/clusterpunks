@@ -13,12 +13,14 @@ namespace WarrenWarriorsGame
     {
         private Attack dmg; // holds how much damage the attack should do
         List<Item> Components = new List<Item>(); //holds what components an item has. is used for crafting
-
+        Item ItemType;
 		
         public CraftItem(Item Type) //create generic item generation
         {
 
-			//--this is temporary and meant to be changed later--//
+            //--this is temporary and meant to be changed later--//
+
+            ItemType = Type;
 			//when this is changed also change the inventory code
             switch (Type)
             {
@@ -64,8 +66,29 @@ namespace WarrenWarriorsGame
 
 		public override string ToString() //-- when fully implemented you may change this or use the draw method
 		{
-			return base.ToString();
-		}
+            switch (ItemType)
+            {
+                case Item.Empty:
+                    return "(Empty)";
+                case Item.Matches:
+                    return "Matches";
+                case Item.Nails:
+                    return "Nails";
+                case Item.Stick:
+                    return "Stick";
+                case Item.SpikeBat:
+                    return "Spike Bat";
+                case Item.Torch:
+                    return "Torch";
+                case Item.HotNails:
+                    return "Hot Nails";
+                case Item.SpikeTorch:
+                    return "Spike Torch";
+
+
+            }
+            return "Item not found";
+        }
 
 		public static void Draw(SpriteBatch sb)//use this to draw when fully implemented
 		{

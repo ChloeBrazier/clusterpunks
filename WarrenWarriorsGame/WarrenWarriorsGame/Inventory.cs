@@ -11,7 +11,7 @@ namespace WarrenWarriorsGame
 {
     class Inventory
     {
-		private Item[,] items = new Item[3,4]; 
+		private CraftItem[,] items = new CraftItem[3,4]; 
 		private SelectedState selected = SelectedState.deselected;
 		private int SelectedItemX = -1;
 		private int SelectedItemY = -1;
@@ -34,10 +34,10 @@ namespace WarrenWarriorsGame
 				dropmatch = false;
 				for (int j = 0; j < 3; j++)
 				{
-					for (int k = 0; k < 3; k++)
+					for (int k = 0; k < 4; k++)
 					{
 						int r = Config.getRandom(0, 10);
-						Item temp = Item.Empty;
+                        Item  temp = Item.Empty;
 
 						switch (r) //randomly generates items for the players to have as starting items
 						{
@@ -58,7 +58,7 @@ namespace WarrenWarriorsGame
 								break;
 						}
 
-						items[j, k] = temp;
+						items[j, k] = new CraftItem(temp);
 					}
 				}
 			} while (!(itemdrops > 5 && itemdrops < 8) || (!dropstick || !dropnail || !dropmatch));
@@ -324,7 +324,7 @@ namespace WarrenWarriorsGame
 						drawColor = Color.DarkBlue;
 					}
 
-					sb.DrawString(font, String.Format("{0}: {1}", getKeyName(j,k), Config.getItemName(items[j, k])), position, drawColor);
+					sb.DrawString(font, String.Format("{0}: {1}", getKeyName(j,k), items[j, k], position, drawColor),position,drawColor);
 
 				}
 			}
@@ -340,7 +340,7 @@ namespace WarrenWarriorsGame
 
 		private void Swap(int x, int y) //swaps items in the items array with the item that is currently selected
 		{
-			Item temp = items[x,y];
+			CraftItem temp = items[x,y];
 			items[x,y] = items[SelectedItemX,SelectedItemY];
 			items[SelectedItemX,SelectedItemY] = temp;
 
@@ -423,7 +423,7 @@ namespace WarrenWarriorsGame
 		{
 			for (int j = 0; j < 4; j++) //swaps the items in each slot of each characters inventory
 			{
-				Item temp = items[char1, j];
+				CraftItem temp = items[char1, j];
 				items[char1, j] = items[char2, j];
 				items[char2, j] = temp;
 

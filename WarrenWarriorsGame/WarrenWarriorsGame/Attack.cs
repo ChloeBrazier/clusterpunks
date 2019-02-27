@@ -18,10 +18,6 @@ namespace WarrenWarriorsGame
 		//holds the timer to keep track of if the player is attacking or not
 		private double timer;
 
-        //field for a target enemy used in the attack method
-        //no longer initialized upon attack object creation
-        private Unit attackTarget;
-
         /// <summary>
         /// parameterized constructor for attack that initializes a unit's base damage, base attack speed, 
         /// and the units targeted by the attack
@@ -61,7 +57,7 @@ namespace WarrenWarriorsGame
             //encounter ends when enemy health is 0
         }
 
-        public void ExecuteAttack()
+        public void ExecuteAttack(Unit attackTarget)
         {
             //pause the attack timers of all other units,
             //damage enemy, then unpause other attack timers
