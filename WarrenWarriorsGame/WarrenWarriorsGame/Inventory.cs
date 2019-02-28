@@ -62,7 +62,9 @@ namespace WarrenWarriorsGame
 					}
 				}
 			} while (!(itemdrops > 5 && itemdrops < 8) || (!dropstick || !dropnail || !dropmatch));
-			
+
+            items[0, 0] = new CraftItem(new CraftItem(Item.HotNails), new CraftItem(Item.Stick));
+
 			//initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
 			for (int j = 0; j < 3; j++)
 			{

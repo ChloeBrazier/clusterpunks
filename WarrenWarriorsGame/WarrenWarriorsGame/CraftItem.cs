@@ -80,6 +80,47 @@ namespace WarrenWarriorsGame
                     break;
 
             }
+            Components.Sort();
+
+        }
+
+        public CraftItem(CraftItem item1, CraftItem item2)
+        {
+            List<Item> materials = new List<Item>(); 
+
+            //add components to the item
+            foreach(Item i in item1.Components)
+            {
+                if (i != Item.Empty)
+                {
+                    materials.Add(i);
+                }
+            }
+            foreach (Item i in item2.Components)
+            {
+                if (i != Item.Empty)
+                {
+                    materials.Add(i);
+                }
+            }
+            //store the items components
+            Components = materials;
+            Components.Sort();
+
+            //loop through all of the items
+            foreach (CraftItem i in Config.AllItems)
+            {
+                //if the items have the same component as the new item
+                if(Components == i.Components)
+                {
+                    //finish the creation of the item
+                    dmg = i.dmg;
+                    itemType = i.itemType;
+                }
+
+            }
+
+
         }
 
 		public override string ToString() //-- when fully implemented you may change this or use the draw method
