@@ -60,7 +60,7 @@ namespace WarrenWarriorsGame
 
 		public static Vector2 LineSpacing = new Vector2(0,14);
 
-        //used in crafting
+
         public static CraftItem[] AllItems = {new CraftItem(Item.Empty),
                                                 new CraftItem(Item.Stick),new CraftItem(Item.Matches),new CraftItem(Item.Nails),
                                                 new CraftItem(Item.Torch), new CraftItem(Item.HotNails),new CraftItem(Item.SpikeBat),

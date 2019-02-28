@@ -86,25 +86,24 @@ namespace WarrenWarriorsGame
 
         public CraftItem(CraftItem item1, CraftItem item2)
         {
-            List<Item> materials = new List<Item>(); 
 
             //add components to the item
             foreach(Item i in item1.Components)
             {
-                if (i != Item.Empty)
+                if (i != Item.Empty && Components.IndexOf(i)==-1)
                 {
-                    materials.Add(i);
+                    Components.Add(i);
                 }
             }
             foreach (Item i in item2.Components)
             {
-                if (i != Item.Empty)
+                if (i != Item.Empty && Components.IndexOf(i) == -1)
                 {
-                    materials.Add(i);
+                    Components.Add(i);
                 }
             }
             //store the items components
-            Components = materials;
+             
             Components.Sort();
 
             //loop through all of the items
