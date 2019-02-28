@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 /*Warren Warriors Group Project
  *Cluster Punks
@@ -91,8 +92,7 @@ namespace WarrenWarriorsGame
                     break;
                 case EnemyType.Custom:
 
-                    //here's where code for enemies created using the external tool
-                    //will go, reading in an enemy file and setting stats based on it 
+                    LoadEnemy("Blob");
 
                     break;
             }
@@ -173,6 +173,21 @@ namespace WarrenWarriorsGame
                 this.Atk.EndEnemyAttack(this, playerParty);
             }
             
+        }
+
+        public void LoadEnemy(string filename)
+        {
+
+            System.IO.StreamReader reader = new StreamReader(filename);
+
+            int attack;
+            int speed;
+            name = reader.ReadLine();
+            Int32.TryParse(reader.ReadLine(), out health);
+            Int32.TryParse(reader.ReadLine(), out attack);
+            Int32.TryParse(reader.ReadLine(), out speed);
+            atk = new Attack(attack, speed);
+            reader.Close();
         }
     }
 }
