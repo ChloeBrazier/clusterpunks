@@ -18,6 +18,8 @@ namespace WarrenWarriorsGame
 
 		PlayerHandler handler; //holds all of the player interaction
 
+        //field for an enemy (spawning currently simplified for testing)
+        Enemy buckShot;
 
 		public Game1()
         {
@@ -34,8 +36,8 @@ namespace WarrenWarriorsGame
         protected override void Initialize()
         {
 			IsMouseVisible = true; //set up the mouse
-
-			base.Initialize();
+            
+            base.Initialize();
         }
 
         /// <summary>
@@ -49,6 +51,12 @@ namespace WarrenWarriorsGame
 
             //create playerhandler, which in turn initializes player units
 			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"),this); //initializes the player handler
+
+            //load in texture2D for enemy (when implemented), may change later
+            //Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
+
+            //initialize enemy for testing
+            buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Buckshot, handler.PlayerParty);
 
             // TODO: use this.Content to load your game content here
             gameUI = new UI(this);
@@ -77,7 +85,11 @@ namespace WarrenWarriorsGame
 			// TODO: Add your update logic here
 			kbState = Keyboard.GetState();
 
-			handler.update(kbState, PrevkbState,Mouse.GetState()); //updates all of the keyboardhandler
+            //now takes in gametime for use with the Attack classe's update method (also an enemy for temporary testing)
+			handler.update(kbState, PrevkbState,Mouse.GetState(), gameTime, buckShot); //updates all of the keyboardhandler
+
+            //update enemy and handle combat
+            buckShot.Update(kbState, PrevkbState, gameTime);
 
 			PrevkbState = kbState; //stores the previous keyboard state
 
@@ -99,6 +111,7 @@ namespace WarrenWarriorsGame
 
 			handler.Draw(spriteBatch);
 
+            buckShot.Draw(spriteBatch, 0);
             
             spriteBatch.End();
 

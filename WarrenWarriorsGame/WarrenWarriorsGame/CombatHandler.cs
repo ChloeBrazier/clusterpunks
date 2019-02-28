@@ -14,14 +14,26 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
-    class CombatHandler
+    public class CombatHandler
     {
         //field for a bool that determines if a combat encounter 
         //has been intiiated
         private bool inEncounter;
+
+        //field for the player party
+        PlayerChar[] playerParty;
+
+        //field for enemy
+        Enemy enemy;
         
-        public CombatHandler()
+        public CombatHandler(PlayerChar[] Units, Enemy nme)
         {
+            //initialize player party
+            playerParty = Units;
+
+            //initialize enemy
+            enemy = nme;
+
             //set inEnounter to false as a default
             inEncounter = false;
         }

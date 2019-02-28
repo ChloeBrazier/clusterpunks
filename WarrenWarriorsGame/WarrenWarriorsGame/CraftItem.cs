@@ -9,18 +9,36 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
-    class CraftItem
+    public class CraftItem
     {
         private Attack dmg; // holds how much damage the attack should do
         List<Item> Components = new List<Item>(); //holds what components an item has. is used for crafting
-        Item ItemType;
+        Item itemType;
+
+        //accessor for item damage
+        public Attack Dmg
+        {
+            get
+            {
+                return dmg;
+            }
+        }
+
+        //accessor for item type
+        public Item ItemType
+        {
+            get
+            {
+                return itemType;
+            }
+        }
 		
         public CraftItem(Item Type) //create generic item generation
         {
 
             //--this is temporary and meant to be changed later--//
 
-            ItemType = Type;
+            itemType = Type;
 			//when this is changed also change the inventory code
             switch (Type)
             {

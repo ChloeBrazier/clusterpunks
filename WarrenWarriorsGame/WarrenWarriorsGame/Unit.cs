@@ -12,7 +12,7 @@ namespace WarrenWarriorsGame
 	public abstract class Unit //a class meant to be used for a generic handler
 	{
         protected string name;
-        protected int Health;
+        protected int health;
         protected bool isAttacking;
 		protected SpriteFont font;
 		protected Texture2D sprite;

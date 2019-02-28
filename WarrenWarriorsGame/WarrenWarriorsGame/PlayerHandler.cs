@@ -15,9 +15,21 @@ namespace WarrenWarriorsGame
 
 		int selectedChar; //holds the position of the selected char
 		SelectedState Swap = SelectedState.deselected; //gamestate used for if youre swapping characters
-		Unit[] Units = new Unit[3]; //holds the units that will be displayed on screen
+
+        //Eddie: Changed Unit array to PlayerChar array due to problems accessing abstract properties
+		PlayerChar[] Units = new PlayerChar[3]; //holds the units that will be displayed on screen
 
 		Inventory playerInv;
+
+        //accessor for player units
+        public PlayerChar[] PlayerParty
+        {
+            get
+            {
+                return Units;
+            }
+        }
+
 
 		public PlayerHandler(SpriteFont font,Game g)
 		{
@@ -32,22 +44,24 @@ namespace WarrenWarriorsGame
 			text = font;
 		}
 
-		public void update(KeyboardState kbState,KeyboardState PrevkbState,MouseState mState)
+        //playerhandler's update now takes a gametime object (also takes an enemy object for testing and will likely be changed later)
+        public void update(KeyboardState kbState,KeyboardState PrevkbState,MouseState mState, GameTime gameTime, Enemy enemy)
 		{
 			switch (Swap)
 			{
 				case SelectedState.deselected: //if no characters are selected and the user selects a character update the code to match
-					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState))
+                                               //cannot swap if either character is currently attacking
+                    if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState) && Units[0].IsAttacking == false)
 					{
 						selectedChar = 0;
 						Swap = SelectedState.selected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState) && Units[1].IsAttacking == false)
 					{
 						selectedChar = 1;
 						Swap = SelectedState.selected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState) && Units[2].IsAttacking == false)
 					{
 						selectedChar = 2;
 						Swap = SelectedState.selected;
@@ -55,20 +69,21 @@ namespace WarrenWarriorsGame
 
 					break;
 				case SelectedState.selected://if a character is selected and the user selects a character swap those two characters and their inventorys
+                                            //cannot swap if either character is currently attacking
 
-					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SwapUnits(selectedChar, 0);
 						playerInv.CharSwap(selectedChar, 0);
 						Swap = SelectedState.deselected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SwapUnits(selectedChar, 1);
 						playerInv.CharSwap(selectedChar, 1);
 						Swap = SelectedState.deselected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState))
+					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SwapUnits(selectedChar, 2);
 						playerInv.CharSwap(selectedChar, 2);
@@ -79,9 +94,19 @@ namespace WarrenWarriorsGame
 
 			}
 
-			playerInv.update(kbState, PrevkbState, mState);
+            //run code for inventory interaction
+            //now takes in the Units array
+			playerInv.update(kbState, PrevkbState, mState, Units);
 
-		}
+            //loop that runs player attacks when initiated
+            for (int i = 0; i < Units.Length; i++)
+            {
+                if(Units[i].IsAttacking == true)
+                {
+                    Units[i].Atk.PlayerUpdate(gameTime, enemy, Units[i]);
+                }
+            }
+        }
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
@@ -107,7 +132,7 @@ namespace WarrenWarriorsGame
 
 		private void SwapUnits(int pos1, int pos2)
 		{
-			Unit temp = Units[pos1];
+			PlayerChar temp = Units[pos1];
 			Units[pos1] = Units[pos2];
 			Units[pos2] = temp;
 

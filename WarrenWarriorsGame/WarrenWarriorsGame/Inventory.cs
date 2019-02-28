@@ -86,21 +86,22 @@ namespace WarrenWarriorsGame
 		}
 
 
-        public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState)
+        public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, PlayerChar[] Units)
         {
 			switch(selected)
 			{
 				case SelectedState.deselected:
 					
 					//First characters inventory
-					if(Config.singelKeyPress(Keys.Q,kbState,PrevkbState))
+                    //cannot access when attacking
+					if(Config.singelKeyPress(Keys.Q,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 0;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.W,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.W,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 1;
@@ -108,14 +109,14 @@ namespace WarrenWarriorsGame
 
 					}
 
-					if(Config.singelKeyPress(Keys.A,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.A,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 2;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.S,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.S,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 3;
@@ -123,28 +124,29 @@ namespace WarrenWarriorsGame
 					}
 
 					//second characters inventory
-					if(Config.singelKeyPress(Keys.E,kbState,PrevkbState))
+                    //cannot access while attacking
+					if(Config.singelKeyPress(Keys.E,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 0;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.R,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.R,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 1;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.D,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.D,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 2;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.F,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.F,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 3;
@@ -152,28 +154,29 @@ namespace WarrenWarriorsGame
 					}
 
 					//third characters inventory
-					if(Config.singelKeyPress(Keys.T,kbState,PrevkbState))
+                    //cannot access while attacking
+					if(Config.singelKeyPress(Keys.T,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 0;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.Y,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.Y,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 1;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.G,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.G,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 2;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.H,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.H,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 3;
@@ -199,25 +202,25 @@ namespace WarrenWarriorsGame
 							break;
 				case SelectedState.selected:
 					//first char inv
-					if(Config.singelKeyPress(Keys.Q,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.Q,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						Swap(0,0);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.W,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.W,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						Swap(0,1);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.A,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.A,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						Swap(0,2);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.S,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.S,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						Swap(0,3);
 						selected = SelectedState.deselected;
@@ -226,25 +229,25 @@ namespace WarrenWarriorsGame
 
 
 					//second char inv
-					if (Config.singelKeyPress(Keys.E,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.E,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						Swap(1,0);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.R,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.R,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						Swap(1,1);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.D,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.D,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						Swap(1,2);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.F,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.F,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						Swap(1,3);
 						selected = SelectedState.deselected;
@@ -253,37 +256,53 @@ namespace WarrenWarriorsGame
 
 					//third char inv
 
-					if (Config.singelKeyPress(Keys.T,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.T,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						Swap(2,0);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.Y,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.Y,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						Swap(2,1);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.G,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.G,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						Swap(2,2);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.H,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.H,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						Swap(2,3);
 						selected = SelectedState.deselected;
 
 					}
 
+                    //deselects any selected items?
 					if (Config.singelKeyPress(Keys.Tab, kbState, PrevkbState))
 					{
 						invButtons[SelectedItemX, SelectedItemY].deselect();
 						selected = SelectedState.deselected;
 
 					}
+
+                    //initiate an attack with a selected item if the space bar is pressed
+                    if (Config.singelKeyPress(Keys.Space, kbState, PrevkbState))
+                    {
+                        //create an item object to send to a given character's attack method
+                        CraftItem usedItem = items[SelectedItemX, SelectedItemY];
+
+                        //deselect the item so the slot isn't selected after an attack executes
+                        invButtons[SelectedItemX, SelectedItemY].deselect();
+                        selected = SelectedState.deselected;
+
+                        //party member attacks based on the selected item's x value
+                        //start the party member's attack and set isAttacking to true
+                        Units[SelectedItemX].IsAttacking = Units[SelectedItemX].Atk.StartAttack(items, usedItem, SelectedItemX, SelectedItemY);
+                    }
 
 					//handles mouse controls
 					for (int j = 0; j < 3; j++)
