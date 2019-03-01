@@ -35,12 +35,21 @@ namespace WarrenWarriorsGame
 		deselected
 	}
 
-    public enum BtnState
+    public enum BtnState//used for the buttons in 
     {
         Default,
         Hovered,
         Selected
 
+    }
+
+    //enum used to determine enemy stats during enemy creation
+    public enum EnemyType
+    {
+        Buckshot,
+        SewCrow,
+        Bandit,
+        Custom
     }
 
 	public static class Config
@@ -50,6 +59,13 @@ namespace WarrenWarriorsGame
 		private static Random rand = new Random();
 
 		public static Vector2 LineSpacing = new Vector2(0,14);
+
+
+        public static CraftItem[] AllItems = {new CraftItem(Item.Empty),
+                                                new CraftItem(Item.Stick),new CraftItem(Item.Matches),new CraftItem(Item.Nails),
+                                                new CraftItem(Item.Torch), new CraftItem(Item.HotNails),new CraftItem(Item.SpikeBat),
+                                                new CraftItem(Item.SpikeTorch)
+                                                };
 
 		/// <summary>
 		/// Determines if this is the first frame the sent key is down
@@ -68,6 +84,7 @@ namespace WarrenWarriorsGame
 			return false;
 		}
 
+		//determines if this is the first frame the left mouse button is down
 		public static bool SingleMouseClick(MouseState mouseState, MouseState prevMouseState)
 		{
 			if (mouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released)
@@ -89,6 +106,7 @@ namespace WarrenWarriorsGame
 			return rand.Next(min, max);
 		}
 
+		//gets item names from temporary output
 		public static string getItemName(Item i)
 		{
 			switch( i)
@@ -124,5 +142,7 @@ namespace WarrenWarriorsGame
 			return "Item Name Not Found";
 		}
 
+
+        
 	}
 }

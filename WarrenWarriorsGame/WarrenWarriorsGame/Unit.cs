@@ -9,11 +9,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
-	public abstract class Unit
+	public abstract class Unit //a class meant to be used for a generic handler
 	{
-		protected int Health;
+        protected string name;
+        protected int health;
+        protected bool isAttacking;
 		protected SpriteFont font;
-		protected Texture2D sprite; //its a tool that will help us later
+		protected Texture2D sprite;
 		protected Attack atk;
 
 		public abstract void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time);

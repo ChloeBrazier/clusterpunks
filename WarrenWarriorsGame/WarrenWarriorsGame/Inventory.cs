@@ -11,12 +11,16 @@ namespace WarrenWarriorsGame
 {
     class Inventory
     {
-		private Item[,] items = new Item[3,4]; 
+		private CraftItem[,] items = new CraftItem[3,4]; 
 		private SelectedState selected = SelectedState.deselected;
 		private int SelectedItemX = -1;
 		private int SelectedItemY = -1;
 
 		private Button[,] invButtons = new Button[3,4];
+
+        private CraftItem selectedToCraft;
+        private Button craftButton;
+		private SelectedState craftState = SelectedState.deselected;
 		
 
 		public Inventory(Game g)
@@ -26,18 +30,18 @@ namespace WarrenWarriorsGame
 			bool dropstick;
 			bool dropmatch;
 			bool dropnail;
-			do
-			{
+			do //drops between 5 and 8 total items and at least one of the three generic items implemented for testing
+			{ //--temporary--//
 				itemdrops = 0;
 				dropstick = false;
 				dropnail = false;
 				dropmatch = false;
 				for (int j = 0; j < 3; j++)
 				{
-					for (int k = 0; k < 3; k++)
+					for (int k = 0; k < 4; k++)
 					{
 						int r = Config.getRandom(0, 10);
-						Item temp = Item.Empty;
+                        Item  temp = Item.Empty;
 
 						switch (r) //randomly generates items for the players to have as starting items
 						{
@@ -58,17 +62,18 @@ namespace WarrenWarriorsGame
 								break;
 						}
 
-						items[j, k] = temp;
+						items[j, k] = new CraftItem(temp);
 					}
 				}
 			} while (!(itemdrops > 5 && itemdrops < 8) || (!dropstick || !dropnail || !dropmatch));
-			
-			//initialize an array of buttons for mouse controls
+
+
+			//initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
 			for (int j = 0; j < 3; j++)
 			{
 				for (int k = 0; k < 4; k++)
 				{
-					if (k < 2)
+					if (k < 2) //determines if the button is in the first row and initializes
 					{
 						invButtons[j, k] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(10 + 60*k +j*130,300,50,50));
 					}
@@ -83,24 +88,27 @@ namespace WarrenWarriorsGame
 				}
 			}
 
+
+			craftButton = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(10,420,390,50));
 		}
 
 
-        public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState)
+        public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, PlayerChar[] Units)
         {
 			switch(selected)
 			{
 				case SelectedState.deselected:
 					
 					//First characters inventory
-					if(Config.singelKeyPress(Keys.Q,kbState,PrevkbState))
+                    //cannot access when attacking
+					if(Config.singelKeyPress(Keys.Q,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 0;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.W,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.W,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 1;
@@ -108,14 +116,14 @@ namespace WarrenWarriorsGame
 
 					}
 
-					if(Config.singelKeyPress(Keys.A,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.A,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 2;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.S,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.S,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 3;
@@ -123,28 +131,29 @@ namespace WarrenWarriorsGame
 					}
 
 					//second characters inventory
-					if(Config.singelKeyPress(Keys.E,kbState,PrevkbState))
+                    //cannot access while attacking
+					if(Config.singelKeyPress(Keys.E,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 0;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.R,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.R,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 1;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.D,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.D,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 2;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.F,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.F,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 3;
@@ -152,28 +161,29 @@ namespace WarrenWarriorsGame
 					}
 
 					//third characters inventory
-					if(Config.singelKeyPress(Keys.T,kbState,PrevkbState))
+                    //cannot access while attacking
+					if(Config.singelKeyPress(Keys.T,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 0;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.Y,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.Y,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 1;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.G,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.G,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 2;
 						selected = SelectedState.selected;
 					}
 
-					if(Config.singelKeyPress(Keys.H,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.H,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 3;
@@ -196,28 +206,30 @@ namespace WarrenWarriorsGame
 						}
 					}
 
+					//dont call update for craft button because it cannot be used unless you have already selected an item
+
 							break;
 				case SelectedState.selected:
 					//first char inv
-					if(Config.singelKeyPress(Keys.Q,kbState,PrevkbState))
+					if(Config.singelKeyPress(Keys.Q,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						Swap(0,0);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.W,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.W,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						Swap(0,1);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.A,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.A,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						Swap(0,2);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.S,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.S,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						Swap(0,3);
 						selected = SelectedState.deselected;
@@ -226,25 +238,25 @@ namespace WarrenWarriorsGame
 
 
 					//second char inv
-					if (Config.singelKeyPress(Keys.E,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.E,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						Swap(1,0);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.R,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.R,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						Swap(1,1);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.D,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.D,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						Swap(1,2);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.F,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.F,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						Swap(1,3);
 						selected = SelectedState.deselected;
@@ -253,37 +265,57 @@ namespace WarrenWarriorsGame
 
 					//third char inv
 
-					if (Config.singelKeyPress(Keys.T,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.T,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						Swap(2,0);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.Y,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.Y,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						Swap(2,1);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.G,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.G,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						Swap(2,2);
 						selected = SelectedState.deselected;
 
 					}
-					if (Config.singelKeyPress(Keys.H,kbState,PrevkbState))
+					if (Config.singelKeyPress(Keys.H,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						Swap(2,3);
 						selected = SelectedState.deselected;
 
 					}
 
+                    //deselects any selected items?
 					if (Config.singelKeyPress(Keys.Tab, kbState, PrevkbState))
 					{
 						invButtons[SelectedItemX, SelectedItemY].deselect();
 						selected = SelectedState.deselected;
+						foreach (Button b in invButtons)
+						{
+							b.deselect();
+						}
 
 					}
+
+                    //initiate an attack with a selected item if the space bar is pressed
+                    if (Config.singelKeyPress(Keys.Space, kbState, PrevkbState))
+                    {
+                        //create an item object to send to a given character's attack method
+                        CraftItem usedItem = items[SelectedItemX, SelectedItemY];
+
+                        //deselect the item so the slot isn't selected after an attack executes
+                        invButtons[SelectedItemX, SelectedItemY].deselect();
+                        selected = SelectedState.deselected;
+
+                        //party member attacks based on the selected item's x value
+                        //start the party member's attack and set isAttacking to true
+                        Units[SelectedItemX].IsAttacking = Units[SelectedItemX].Atk.StartAttack(items, usedItem, SelectedItemX, SelectedItemY);
+                    }
 
 					//handles mouse controls
 					for (int j = 0; j < 3; j++)
@@ -303,14 +335,43 @@ namespace WarrenWarriorsGame
 						}
 					}
 
+					//Handles crafting controls
+					if(craftButton.update(mState) || Config.singelKeyPress(Keys.LeftShift,kbState,PrevkbState) || Config.singelKeyPress(Keys.RightShift,kbState,PrevkbState))
+					{
+						switch (craftState)
+						{
+							case SelectedState.deselected:
+								selectedToCraft = items[SelectedItemX, SelectedItemY];
+								items[SelectedItemX, SelectedItemY] = new CraftItem(Item.Empty);
+
+								craftState = SelectedState.selected;
+								craftButton.deselect();
+
+								break;
+							case SelectedState.selected:
+								items[SelectedItemX, SelectedItemY] = new CraftItem(items[SelectedItemX, SelectedItemY], selectedToCraft);
+
+								craftState = SelectedState.deselected;
+								craftButton.deselect();
+
+								break;
+
+
+						}
+						selected = SelectedState.deselected;
+						invButtons[SelectedItemX, SelectedItemY].deselect();
+
+					}
+
 
 					break;
 			}
+
         }
 
         public void Draw(SpriteBatch sb,SpriteFont font)
         {
-            for(int j = 0; j<3; j++)
+            for(int j = 0; j<3; j++)//--temporary, draws text output for the items --//
 			{
 				for(int k = 0; k<4; k++)
 				{
@@ -324,7 +385,7 @@ namespace WarrenWarriorsGame
 						drawColor = Color.DarkBlue;
 					}
 
-					sb.DrawString(font, String.Format("{0}: {1}", getKeyName(j,k), Config.getItemName(items[j, k])), position, drawColor);
+					sb.DrawString(font, String.Format("{0}: {1}", getKeyName(j,k), items[j, k], position, drawColor),position,drawColor);
 
 				}
 			}
@@ -332,23 +393,25 @@ namespace WarrenWarriorsGame
 			for (int j = 0; j < 3; j++)
 			{
 				for (int k = 0; k < 4; k++)
-				{
+				{//draws the buttons
 					invButtons[j, k].draw(sb);
-
-
 				}
 			}
+
+
+
+			craftButton.draw(sb);
 		}
 
-		private void Swap(int x, int y) //swaps items in the items array
+		private void Swap(int x, int y) //swaps items in the items array with the item that is currently selected
 		{
-			Item temp = items[x,y];
+			CraftItem temp = items[x,y];
 			items[x,y] = items[SelectedItemX,SelectedItemY];
 			items[SelectedItemX,SelectedItemY] = temp;
 
 		}
 
-		private string getKeyName(int x, int y)
+		private string getKeyName(int x, int y) //gets the names of keys to be displayed
 		{
 			switch (x)
 			{
@@ -423,20 +486,26 @@ namespace WarrenWarriorsGame
 		/// <param name="char2"></param>
 		public void CharSwap(int char1, int char2)
 		{
-			for (int j = 0; j < 4; j++)
+			for (int j = 0; j < 4; j++) //swaps the items in each slot of each characters inventory
 			{
-				Item temp = items[char1, j];
+				CraftItem temp = items[char1, j];
 				items[char1, j] = items[char2, j];
 				items[char2, j] = temp;
 
 			}
 
-			if (SelectedItemX == char1)
+			if (SelectedItemX == char1) //if one of the characters is selected also update the buttons
 			{
+				invButtons[SelectedItemX, SelectedItemY].deselect();
 				SelectedItemX = char2;
-			}else if (SelectedItemX == char2)
+				invButtons[SelectedItemX, SelectedItemY].select();
+
+			}
+			else if (SelectedItemX == char2)
 			{
+				invButtons[SelectedItemX, SelectedItemY].deselect();
 				SelectedItemX = char1;
+				invButtons[SelectedItemX, SelectedItemY].select();
 			}
 
 

@@ -21,6 +21,7 @@ namespace WarrenWarriorsGame
         {
             get { return iconStorage; }
         }
+
         public UI(Game coolGame)
         {
             iconStorage = new List<Texture2D>();
