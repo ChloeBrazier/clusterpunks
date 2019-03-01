@@ -14,7 +14,7 @@ namespace WarrenWarriorsGame
 	{
 		Boolean isAttacking = false;
 		string name;
-        
+
 		public PlayerChar(SpriteFont spriteFont, CharType type)
 		{
 			font = spriteFont;
