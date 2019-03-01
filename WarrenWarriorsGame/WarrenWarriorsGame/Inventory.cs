@@ -20,6 +20,7 @@ namespace WarrenWarriorsGame
 
         private CraftItem selectedToCraft;
         private Button craftButton;
+		private SelectedState craftState = SelectedState.deselected;
 		
 
 		public Inventory(Game g)
@@ -87,6 +88,8 @@ namespace WarrenWarriorsGame
 				}
 			}
 
+
+			craftButton = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(10,420,390,50));
 		}
 
 
@@ -203,6 +206,8 @@ namespace WarrenWarriorsGame
 						}
 					}
 
+					//dont call update for craft button because it cannot be used unless you have already selected an item
+
 							break;
 				case SelectedState.selected:
 					//first char inv
@@ -290,6 +295,10 @@ namespace WarrenWarriorsGame
 					{
 						invButtons[SelectedItemX, SelectedItemY].deselect();
 						selected = SelectedState.deselected;
+						foreach (Button b in invButtons)
+						{
+							b.deselect();
+						}
 
 					}
 
@@ -326,9 +335,38 @@ namespace WarrenWarriorsGame
 						}
 					}
 
+					//Handles crafting controls
+					if(craftButton.update(mState) || Config.singelKeyPress(Keys.LeftShift,kbState,PrevkbState) || Config.singelKeyPress(Keys.RightShift,kbState,PrevkbState))
+					{
+						switch (craftState)
+						{
+							case SelectedState.deselected:
+								selectedToCraft = items[SelectedItemX, SelectedItemY];
+								items[SelectedItemX, SelectedItemY] = new CraftItem(Item.Empty);
+
+								craftState = SelectedState.selected;
+								craftButton.deselect();
+
+								break;
+							case SelectedState.selected:
+								items[SelectedItemX, SelectedItemY] = new CraftItem(items[SelectedItemX, SelectedItemY], selectedToCraft);
+
+								craftState = SelectedState.deselected;
+								craftButton.deselect();
+
+								break;
+
+
+						}
+						selected = SelectedState.deselected;
+						invButtons[SelectedItemX, SelectedItemY].deselect();
+
+					}
+
 
 					break;
 			}
+
         }
 
         public void Draw(SpriteBatch sb,SpriteFont font)
@@ -359,6 +397,10 @@ namespace WarrenWarriorsGame
 					invButtons[j, k].draw(sb);
 				}
 			}
+
+
+
+			craftButton.draw(sb);
 		}
 
 		private void Swap(int x, int y) //swaps items in the items array with the item that is currently selected
