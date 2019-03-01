@@ -17,6 +17,9 @@ namespace WarrenWarriorsGame
 		private int SelectedItemY = -1;
 
 		private Button[,] invButtons = new Button[3,4];
+
+        private CraftItem selectedToCraft;
+        private Button craftButton;
 		
 
 		public Inventory(Game g)
@@ -63,7 +66,6 @@ namespace WarrenWarriorsGame
 				}
 			} while (!(itemdrops > 5 && itemdrops < 8) || (!dropstick || !dropnail || !dropmatch));
 
-            //items[0, 0] = new CraftItem(new CraftItem(Item.Nails), new CraftItem(Item.Stick));
 
 			//initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
 			for (int j = 0; j < 3; j++)

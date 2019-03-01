@@ -80,14 +80,20 @@ namespace WarrenWarriorsGame
                     break;
 
             }
+
             Components.Sort();
 
         }
 
+        /// <summary>
+        /// send in two craftitems and outputs a third from the craffting, order does not matter, level two items can be combined, combining an item that is already contained causes no changes
+        /// </summary>
+        /// <param name="item1">the first item</param>
+        /// <param name="item2">the second item</param>
         public CraftItem(CraftItem item1, CraftItem item2)
         {
 
-            //add components to the item
+            //add components to the item only if the component isn't empty
             foreach(Item i in item1.Components)
             {
                 if (i != Item.Empty && Components.IndexOf(i)==-1)
@@ -103,14 +109,21 @@ namespace WarrenWarriorsGame
                 }
             }
             //store the items components
-             
+
+            if (Components.Count() == 0)
+            {
+                CraftItem temp = new CraftItem(Item.Empty);
+                dmg = temp.dmg;
+                itemType = temp.ItemType;
+            }
+
             Components.Sort();
 
             //loop through all of the items
             foreach (CraftItem i in Config.AllItems)
             {
                 //if the items have the same component as the new item
-                if(Components == i.Components)
+                if(Components.Except(i.Components).ToList<Item>().Count() == 0 && i.Components.Except(Components).ToList<Item>().Count() == 0) 
                 {
                     //finish the creation of the item
                     dmg = i.dmg;
