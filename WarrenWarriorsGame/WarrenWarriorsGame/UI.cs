@@ -40,14 +40,59 @@ namespace WarrenWarriorsGame
             iconStorage.Add(coolGame.Content.Load<Texture2D>("InventoryIcon")); //4
             iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicUIBackground")); //5
             iconStorage.Add(coolGame.Content.Load<Texture2D>("DefaultAttackIcon")); //6
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("btnNormal")); //7
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("btnHovered")); //8
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void DrawUI(SpriteBatch spriteBatch)
         {
+            //For player one.
 
+            //Draw the main background.
             spriteBatch.Draw(iconStorage[4], new Rectangle(0, 225, 128, 256), Color.White);
-            //Dimensions of the heart are 16 width, 14 height initially, so alter the size ONLY by multiples of those.
-            spriteBatch.Draw(iconStorage[3], new Rectangle(5, 275, 48, 42), Color.White);
+
+            //Draw the heart icon, Dimensions of the heart are 16 width, 14 height initially, so alter the size ONLY by multiples of those.
+            spriteBatch.Draw(iconStorage[3], new Rectangle(5, 300, 32, 28), Color.White);
+
+            //Draw the 4 Inventory slots for player 1.
+            spriteBatch.Draw(iconStorage[7], new Rectangle(14, 350, 50, 50), Color.White);
+            spriteBatch.Draw(iconStorage[7], new Rectangle(64, 350, 50, 50), Color.White);
+            spriteBatch.Draw(iconStorage[7], new Rectangle(14, 400, 50, 50), Color.White);
+            spriteBatch.Draw(iconStorage[7], new Rectangle(64, 400, 50, 50), Color.White);
+
+
+            //For player two.
+            //Main background
+            spriteBatch.Draw(iconStorage[4], new Rectangle(128, 225, 128, 258), Color.White);
+
+            //Draw health icon.
+            spriteBatch.Draw(iconStorage[3], new Rectangle(133, 300, 32, 28), Color.White);
+
+            //4 Inventory slots.
+
+            spriteBatch.Draw(iconStorage[7], new Rectangle(142, 350, 50, 50), Color.White);
+            spriteBatch.Draw(iconStorage[7], new Rectangle(192, 350, 50, 50), Color.White);
+            spriteBatch.Draw(iconStorage[7], new Rectangle(142, 400, 50, 50), Color.White);
+            spriteBatch.Draw(iconStorage[7], new Rectangle(192, 400, 50, 50), Color.White);
+
+            //For player 3.
+            //Main Background
+            spriteBatch.Draw(iconStorage[4], new Rectangle(256, 225, 128, 256), Color.White);
+
+            //Heart Icon.
+            spriteBatch.Draw(iconStorage[3], new Rectangle(261, 300, 32, 28), Color.White);
+
+            //4 Inventory slots.
+
+            spriteBatch.Draw(iconStorage[7], new Rectangle(270, 350, 50, 50), Color.White);
+            spriteBatch.Draw(iconStorage[7], new Rectangle(320, 350, 50, 50), Color.White);
+            spriteBatch.Draw(iconStorage[7], new Rectangle(270, 400, 50, 50), Color.White);
+            spriteBatch.Draw(iconStorage[7], new Rectangle(320, 400, 50, 50), Color.White);
+
+
+
+
+
         }
     }
 }

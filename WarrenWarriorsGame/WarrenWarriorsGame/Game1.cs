@@ -93,9 +93,11 @@ namespace WarrenWarriorsGame
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
 
-			handler.Draw(spriteBatch);
+            
+            handler.Draw(spriteBatch);
+            gameUI.DrawUI(spriteBatch);
 
-            //Uncomment this if you want to display the UI, gameUI.Draw(spriteBatch);
+
 
             spriteBatch.End();
 
