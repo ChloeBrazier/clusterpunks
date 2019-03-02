@@ -37,7 +37,7 @@ namespace WarrenWarriorsGame
             iconStorage.Add(coolGame.Content.Load<Texture2D>("KnifeIcon")); //2
             iconStorage.Add(coolGame.Content.Load<Texture2D>("HotKnifeIcon")); //3
             iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicMatchSprite")); //4
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicTorcSprite")); //5
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicTorchSprite")); //5
              
 
             //Load important information that will be displayed in the UI.
