@@ -56,8 +56,8 @@ namespace WarrenWarriorsGame
             //Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
 
             //initialize enemy for testing
-            buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Buckshot, handler.PlayerParty);
-            buckShot.LoadSprite(this, EnemyType.Buckshot);
+            buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Custom, handler.PlayerParty);
+            buckShot.LoadSprite(this, EnemyType.Custom);
 
             // TODO: use this.Content to load your game content here
             gameUI = new UI(this);
