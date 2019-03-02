@@ -102,11 +102,11 @@ namespace WarrenWarriorsGame
 
             if(isAttacking != true)
             {
-                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + atk.Length), pos, Color.Black);
+                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Black);
             }
 			else
             {
-                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + atk.Length), pos, Color.Red);
+                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Red);
             }
 		}
 
