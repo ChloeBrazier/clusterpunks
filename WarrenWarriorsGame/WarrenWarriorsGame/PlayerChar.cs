@@ -48,7 +48,7 @@ namespace WarrenWarriorsGame
             }
         }
 
-        public PlayerChar(SpriteFont spriteFont, CharType type)
+        public PlayerChar(SpriteFont spriteFont, Game game, CharType type)
 		{
 			font = spriteFont;
 
@@ -59,13 +59,14 @@ namespace WarrenWarriorsGame
 					health = Config.getRandom(40, 51);
 					atk = new Attack(Config.getRandom(10, 16), Config.getRandom(5, 11));
 					name = "Kevin's Grand-Dad";
+                    sprite = game.Content.Load<Texture2D>("player_char_ranger_red");
 
-					break;
+                    break;
 				case CharType.Medium:
 					health = Config.getRandom(30, 41);
 					name = "Kevin's Dad";
-
-					if (Config.getRandom(1, 3) == 2)
+                    sprite = game.Content.Load<Texture2D>("player_char_ranger_blue");
+                    if (Config.getRandom(1, 3) == 2)
 					{
 						atk = new Attack(Config.getRandom(10, 16), Config.getRandom(4, 6));
 					}
@@ -79,42 +80,15 @@ namespace WarrenWarriorsGame
 					health = Config.getRandom(20, 31);
 					atk = new Attack(Config.getRandom(5, 11), Config.getRandom(1, 3));
 					name = "Kevin";
-					break;
+                    sprite = game.Content.Load<Texture2D>("player_char_ranger_fixed");
+
+                    break;
 
 			}
 
             //set isAttacking bool to false by default
             isAttacking = false;
 		}
-
-        /// <summary>
-        /// method to load in the correct sprite based on player type
-        /// </summary>
-        /// <param name="game"> 
-        /// object of the Game1 class used to load sprite content
-        /// </param>
-        public void LoadSprite(Game game, CharType type)
-        {
-            //switch statement that loads a sprite based on enemy type
-            switch (type)
-            {
-                case CharType.Light:
-
-                    //sprite = game.Content.Load<Texture2D>("LIGHT PLAYER SPRITE FILE NAME HERE");
-
-                    break;
-                case CharType.Medium:
-
-                    //sprite = game.Content.Load<Texture2D>("MEDIUM PLAYER SPRITE FILE NAME HERE");
-
-                    break;
-                case CharType.Heavy:
-
-                    //sprite = game.Content.Load<Texture2D>("HEAVY PLAYER SPRITE FILE NAME HERE");
-
-                    break;
-            }
-        }
 
 
         /// <summary>
@@ -132,10 +106,12 @@ namespace WarrenWarriorsGame
             if(isAttacking != true)
             {
                 sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Black);
+                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.White);
             }
 			else
             {
                 sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Red);
+                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.PaleVioletRed);
             }
 		}
 
