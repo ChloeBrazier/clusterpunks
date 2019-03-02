@@ -120,7 +120,7 @@ namespace WarrenWarriorsGame
 
 			handler.Draw(spriteBatch);
 
-            gameUI.DrawUI(spriteBatch);
+            //gameUI.DrawUI(spriteBatch);
 
             buckShot.Draw(spriteBatch, 0);
             

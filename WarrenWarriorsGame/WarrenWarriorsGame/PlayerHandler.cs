@@ -21,6 +21,8 @@ namespace WarrenWarriorsGame
 
 		Inventory playerInv;
 
+        Button[] playerButtons = new Button[3];
+
         //accessor for player units
         public PlayerChar[] PlayerParty
         {
@@ -41,7 +43,13 @@ namespace WarrenWarriorsGame
 			Units[1] = new PlayerChar(font, CharType.Medium);
 			Units[2] = new PlayerChar(font, CharType.Light);
 
-			text = font;
+
+            //initializes buttons for player controls
+            playerButtons[0] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(70,240,50,50));
+            playerButtons[1] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(200, 240, 50, 50));
+            playerButtons[2] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(330, 240, 50, 50));
+
+            text = font;
 		}
 
         //playerhandler's update now takes a gametime object (also takes an enemy object for testing and will likely be changed later)
@@ -67,29 +75,57 @@ namespace WarrenWarriorsGame
 						Swap = SelectedState.selected;
 					}
 
+                    for (int i = 0; i < playerButtons.Length; i++) //handles button conrols
+                    {
+                        if(playerButtons[i].update(mState) && Units[i].IsAttacking == false)
+                        {
+                            selectedChar = i;
+                            Swap = SelectedState.selected;
+
+                        }
+
+                    }
+
+
 					break;
 				case SelectedState.selected://if a character is selected and the user selects a character swap those two characters and their inventorys
                                             //cannot swap if either character is currently attacking
 
-					if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState) && Units[0].IsAttacking == false)
+					if ((Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState)) && Units[0].IsAttacking == false)
 					{
 						SwapUnits(selectedChar, 0);
 						playerInv.CharSwap(selectedChar, 0);
 						Swap = SelectedState.deselected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState) && Units[1].IsAttacking == false)
+					if ((Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState)) && Units[1].IsAttacking == false)
 					{
 						SwapUnits(selectedChar, 1);
 						playerInv.CharSwap(selectedChar, 1);
 						Swap = SelectedState.deselected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState) && Units[2].IsAttacking == false)
+					if ((Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState)) && Units[2].IsAttacking == false)
 					{
 						SwapUnits(selectedChar, 2);
 						playerInv.CharSwap(selectedChar, 2);
 						Swap = SelectedState.deselected;
 					}
-					break;
+
+                    for (int i = 0; i < playerButtons.Length; i++) //handles button control
+                    {
+                        if (playerButtons[i].update(mState) && Units[i].IsAttacking == false)
+                        {
+                            SwapUnits(selectedChar,i);
+                            playerInv.CharSwap(selectedChar, i);
+                            playerButtons[i].deselect();
+                            playerButtons[selectedChar].deselect();
+                            Swap = SelectedState.deselected;
+
+                        }
+
+                    }
+
+
+                    break;
 
 
 			}
@@ -124,6 +160,12 @@ namespace WarrenWarriorsGame
 				spriteBatch.DrawString(text, string.Format("{0}:   ", j + 1), j * 5 * Config.LineSpacing, drawcolor);
 
 			}
+
+            for(int j=0;j<playerButtons.Length;j++)
+            {
+                playerButtons[j].draw(spriteBatch);
+            }
+
 
 			playerInv.Draw(spriteBatch, text);
 		}
