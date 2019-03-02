@@ -16,6 +16,10 @@ namespace WarrenWarriorsGame
 		KeyboardState kbState; //keyboard states for updating
 		KeyboardState PrevkbState;
 
+        //fields for mouse states
+        MouseState mState;
+        MouseState prevMsState;
+
 		PlayerHandler handler; //holds all of the player interaction
 
         //field for an enemy (spawning currently simplified for testing)
@@ -56,8 +60,8 @@ namespace WarrenWarriorsGame
             //Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
 
             //initialize enemy for testing
-            buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Buckshot, handler.PlayerParty);
-            buckShot.LoadSprite(this, EnemyType.Buckshot);
+            buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Custom, handler.PlayerParty);
+            buckShot.LoadSprite(this, EnemyType.Custom);
 
             // TODO: use this.Content to load your game content here
             gameUI = new UI(this);
@@ -85,9 +89,10 @@ namespace WarrenWarriorsGame
 
 			// TODO: Add your update logic here
 			kbState = Keyboard.GetState();
+            mState = Mouse.GetState();
 
             //now takes in gametime for use with the Attack classe's update method (also an enemy for temporary testing)
-			handler.update(kbState, PrevkbState,Mouse.GetState(), gameTime, buckShot); //updates all of the keyboardhandler
+			handler.update(kbState, PrevkbState, mState, prevMsState, gameTime, buckShot); //updates all of the keyboardhandler
 
             //update enemy and handle combat
 
@@ -101,6 +106,7 @@ namespace WarrenWarriorsGame
             }
 
 			PrevkbState = kbState; //stores the previous keyboard state
+            prevMsState = mState; //stores previous mouse state
 
 			base.Update(gameTime);
         }
@@ -118,7 +124,7 @@ namespace WarrenWarriorsGame
 
 			
 
-			handler.Draw(spriteBatch);
+			handler.Draw(spriteBatch,gameUI);
 
             //gameUI.DrawUI(spriteBatch);
 

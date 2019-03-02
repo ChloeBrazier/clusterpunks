@@ -62,7 +62,7 @@ namespace WarrenWarriorsGame
 		}
 
 
-        public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, PlayerChar[] Units)
+        public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, MouseState prevMsState, PlayerChar[] Units)
         {
             Boolean madeSelection = false;
 
@@ -299,7 +299,8 @@ namespace WarrenWarriorsGame
 					}
 
                     //initiate an attack with a selected item if the space bar is pressed
-                    if (Config.singelKeyPress(Keys.Space, kbState, PrevkbState))
+                    //or if the right mouse button is clicked
+                    if (Config.singelKeyPress(Keys.Space, kbState, PrevkbState) || Config.SingleRightMouseClick(mState, prevMsState))
                     {
                         //create an item object to send to a given character's attack method
                         CraftItem usedItem = items[SelectedItemX, SelectedItemY];
@@ -365,37 +366,20 @@ namespace WarrenWarriorsGame
 
         }
 
-        public void Draw(SpriteBatch sb,SpriteFont font)
+        public void Draw(SpriteBatch sb,SpriteFont font,UI uI)
         {
-            for(int j = 0; j<3; j++)//--temporary, draws text output for the items --//
-			{
-				for(int k = 0; k<4; k++)
-				{
-					Vector2 position = new Vector2(30,0);
-					position += Config.LineSpacing + j * 5 * Config.LineSpacing + k*Config.LineSpacing;
-					Color drawColor = Color.Black;
-
-					if (j == SelectedItemX && k == SelectedItemY && selected == SelectedState.selected)
-					{
-						position -= new Vector2(5, 0);
-						drawColor = Color.DarkBlue;
-					}
-
-					sb.DrawString(font, String.Format("{0}: {1}", getKeyName(j,k), items[j, k], position, drawColor),position,drawColor);
-
-				}
-			}
-
 			for (int j = 0; j < 3; j++)
 			{
 				for (int k = 0; k < 4; k++)
 				{//draws the buttons
 					invButtons[j, k].draw(sb);
+
+                    Rectangle drawpos = new Rectangle(invButtons[j, k].Location.Left+5, invButtons[j, k].Location.Top+5, invButtons[j, k].Location.Width-10, invButtons[j, k].Location.Height-10);
+                    sb.Draw(uI.IconStorage[items[j, k].ItemType],drawpos , Color.White);
+
 				}
 			}
-
-
-
+            
 			craftButton.draw(sb);
 		}
 
