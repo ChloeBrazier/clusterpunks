@@ -95,6 +95,8 @@ namespace WarrenWarriorsGame
 
         public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, PlayerChar[] Units)
         {
+            Boolean madeSelection = false;
+
 			switch(selected)
 			{
 				case SelectedState.deselected:
@@ -105,6 +107,8 @@ namespace WarrenWarriorsGame
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 0;
+                        madeSelection = true;
+
 						selected = SelectedState.selected;
 					}
 
@@ -113,22 +117,24 @@ namespace WarrenWarriorsGame
 						SelectedItemX = 0;
 						SelectedItemY = 1;
 						selected = SelectedState.selected;
-
-					}
+                        madeSelection = true;
+                    }
 
 					if(Config.singelKeyPress(Keys.A,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 2;
 						selected = SelectedState.selected;
-					}
+                        madeSelection = true;
+                    }
 
 					if(Config.singelKeyPress(Keys.S,kbState,PrevkbState) && Units[0].IsAttacking == false)
 					{
 						SelectedItemX = 0;
 						SelectedItemY = 3;
 						selected = SelectedState.selected;
-					}
+                        madeSelection = true;
+                    }
 
 					//second characters inventory
                     //cannot access while attacking
@@ -137,28 +143,32 @@ namespace WarrenWarriorsGame
 						SelectedItemX = 1;
 						SelectedItemY = 0;
 						selected = SelectedState.selected;
-					}
+                        madeSelection = true;
+                    }
 
 					if(Config.singelKeyPress(Keys.R,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 1;
 						selected = SelectedState.selected;
-					}
+                        madeSelection = true;
+                    }
 
 					if(Config.singelKeyPress(Keys.D,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 2;
 						selected = SelectedState.selected;
-					}
+                        madeSelection = true;
+                    }
 
 					if(Config.singelKeyPress(Keys.F,kbState,PrevkbState) && Units[1].IsAttacking == false)
 					{
 						SelectedItemX = 1;
 						SelectedItemY = 3;
 						selected = SelectedState.selected;
-					}
+                        madeSelection = true;
+                    }
 
 					//third characters inventory
                     //cannot access while attacking
@@ -167,29 +177,37 @@ namespace WarrenWarriorsGame
 						SelectedItemX = 2;
 						SelectedItemY = 0;
 						selected = SelectedState.selected;
-					}
+                        madeSelection = true;
+                    }
 
 					if(Config.singelKeyPress(Keys.Y,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 1;
 						selected = SelectedState.selected;
-					}
+                        madeSelection = true;
+                    }
 
 					if(Config.singelKeyPress(Keys.G,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 2;
 						selected = SelectedState.selected;
-					}
+                        madeSelection = true;
+                    }
 
 					if(Config.singelKeyPress(Keys.H,kbState,PrevkbState) && Units[2].IsAttacking == false)
 					{
 						SelectedItemX = 2;
 						SelectedItemY = 3;
 						selected = SelectedState.selected;
-					}
+                        madeSelection = true;
+                    }
 
+                    if (madeSelection)
+                    {
+                        invButtons[SelectedItemX, SelectedItemY].select();
+                    }
 
 					for (int j = 0; j < 3; j++)
 					{
@@ -405,6 +423,9 @@ namespace WarrenWarriorsGame
 
 		private void Swap(int x, int y) //swaps items in the items array with the item that is currently selected
 		{
+            invButtons[SelectedItemX, SelectedItemY].deselect();
+            invButtons[x, y].deselect();
+
 			CraftItem temp = items[x,y];
 			items[x,y] = items[SelectedItemX,SelectedItemY];
 			items[SelectedItemX,SelectedItemY] = temp;
