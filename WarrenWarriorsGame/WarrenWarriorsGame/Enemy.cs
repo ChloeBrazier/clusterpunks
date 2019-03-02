@@ -23,6 +23,9 @@ namespace WarrenWarriorsGame
         //field for enemy cooldown
         private double cooldown;
 
+        //Field to store enemy sprite when loaded in
+        private string enemySprite;
+
         //public accessor for IsAttacking bool
         public bool IsAttacking
         {
@@ -98,7 +101,10 @@ namespace WarrenWarriorsGame
                     break;
                 case EnemyType.Custom:
 
-                    LoadEnemy("Blob");
+                    //Currently not working correctly. I believe this to be an issue with the .enemy files, as having them in the Content.mgcb caused errors regardless of how they were called
+                    //Once I find a way to get the program to not throw a fit when .enemy files are present, this code should work fine
+
+                    //enemySprite = LoadEnemy("../../../../Content/ClemTestFile.enemy");
 
                     break;
             }
@@ -135,7 +141,7 @@ namespace WarrenWarriorsGame
                     break;
                 case EnemyType.Custom:
 
-                    //loaded sprite is based on external tool and file IO
+                    sprite = game.Content.Load<Texture2D>(enemySprite);
 
                     break;
             }
@@ -192,19 +198,31 @@ namespace WarrenWarriorsGame
             }
         }
 
-        public void LoadEnemy(string filename)
+        public string LoadEnemy(string filename)
         {
 
             System.IO.StreamReader reader = new StreamReader(filename);
-
+            
             int attack;
             int speed;
+            int cooldownTime;
             name = reader.ReadLine();
             Int32.TryParse(reader.ReadLine(), out health);
             Int32.TryParse(reader.ReadLine(), out attack);
             Int32.TryParse(reader.ReadLine(), out speed);
             atk = new Attack(attack, speed);
+            Int32.TryParse(reader.ReadLine(), out cooldownTime);
+            cooldown = cooldownTime;
+            string longName = reader.ReadLine();
             reader.Close();
+
+            String[] storage = longName.Split('/');
+            string shorterName = storage[storage.Length-1];
+            String[] secondStorage = shorterName.Split('.');
+
+            return secondStorage[0];
+
+            
         }
     }
 }
