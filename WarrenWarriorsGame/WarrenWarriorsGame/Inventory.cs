@@ -31,12 +31,9 @@ namespace WarrenWarriorsGame
 
 		public Inventory(Game g)
 		{
+            //drops items for the players
             DropItems();
-
-
-            
-
-
+           
 			//initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
 			for (int j = 0; j < 3; j++)
 			{
@@ -50,10 +47,7 @@ namespace WarrenWarriorsGame
 					{
 						invButtons[j, k] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(10 + 60 * (k-2) + j*130, 360, 50, 50));
 					}
-
-
-
-
+                    
 				}
 			}
 
