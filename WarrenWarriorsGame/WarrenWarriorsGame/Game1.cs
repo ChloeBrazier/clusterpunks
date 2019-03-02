@@ -124,7 +124,7 @@ namespace WarrenWarriorsGame
 
 			
 
-			handler.Draw(spriteBatch);
+			handler.Draw(spriteBatch,gameUI);
 
             //gameUI.DrawUI(spriteBatch);
 
