@@ -368,25 +368,6 @@ namespace WarrenWarriorsGame
 
         public void Draw(SpriteBatch sb,SpriteFont font,UI uI)
         {
-            for(int j = 0; j<3; j++)//--temporary, draws text output for the items --//
-			{
-				for(int k = 0; k<4; k++)
-				{
-					Vector2 position = new Vector2(30,0);
-					position += Config.LineSpacing + j * 5 * Config.LineSpacing + k*Config.LineSpacing;
-					Color drawColor = Color.Black;
-
-					if (j == SelectedItemX && k == SelectedItemY && selected == SelectedState.selected)
-					{
-						position -= new Vector2(5, 0);
-						drawColor = Color.DarkBlue;
-					}
-
-					sb.DrawString(font, String.Format("{0}: {1}", getKeyName(j,k), items[j, k], position, drawColor),position,drawColor);
-
-				}
-			}
-
 			for (int j = 0; j < 3; j++)
 			{
 				for (int k = 0; k < 4; k++)
@@ -398,11 +379,7 @@ namespace WarrenWarriorsGame
 
 				}
 			}
-
             
-
-
-
 			craftButton.draw(sb);
 		}
 
