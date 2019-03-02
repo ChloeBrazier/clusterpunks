@@ -89,7 +89,15 @@ namespace WarrenWarriorsGame
 			handler.update(kbState, PrevkbState,Mouse.GetState(), gameTime, buckShot); //updates all of the keyboardhandler
 
             //update enemy and handle combat
-            buckShot.Update(kbState, PrevkbState, gameTime);
+
+            if (buckShot.IsAttacking != true)
+            {
+                buckShot.CoolDown(gameTime);
+            }
+            else
+            {
+                buckShot.Update(kbState, PrevkbState, gameTime);
+            }
 
 			PrevkbState = kbState; //stores the previous keyboard state
 

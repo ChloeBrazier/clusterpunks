@@ -18,7 +18,10 @@ namespace WarrenWarriorsGame
     public class Enemy: Unit
     {
         //field to reference the player's party
-        PlayerChar[] playerParty;
+        private PlayerChar[] playerParty;
+
+        //field for enemy cooldown
+        private double cooldown;
 
         //public accessor for IsAttacking bool
         public bool IsAttacking
@@ -72,6 +75,7 @@ namespace WarrenWarriorsGame
                     health = 100;
                     atk = new Attack(10, 10);
                     name = "Buckshot";
+                    cooldown = 10;
 
                     break;
                 case EnemyType.SewCrow:
@@ -80,6 +84,7 @@ namespace WarrenWarriorsGame
                     health = 60;
                     atk = new Attack(1, 3);
                     name = "Sew Crow";
+                    cooldown = 3;
 
                     break;
                 case EnemyType.Bandit:
@@ -88,6 +93,7 @@ namespace WarrenWarriorsGame
                     health = 75;
                     atk = new Attack(8, 6);
                     name = "Bandit";
+                    cooldown = 5;
 
                     break;
                 case EnemyType.Custom:
@@ -144,7 +150,7 @@ namespace WarrenWarriorsGame
 
             if (isAttacking != true)
             {
-                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Attack time: " + atk.Length), pos, Color.Black);
+                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Cooldown: " + cooldown), pos, Color.Black);
             }
             else
             {
@@ -154,12 +160,6 @@ namespace WarrenWarriorsGame
         
         public override void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time)
         {
-
-            //enemy attacks periodically until it dies
-            //start the enemy on a cooldown of 15 seconds
-            //double cooldown = 15;
-            //cooldown = cooldown = time.ElapsedGameTime.TotalSeconds;
-            //cooldown currently doesn't work properly
             
             //set isAttacking to true
             isAttacking = true;
@@ -173,6 +173,21 @@ namespace WarrenWarriorsGame
                 this.Atk.EndEnemyAttack(this, playerParty);
             }
             
+        }
+
+        public void CoolDown(GameTime time)
+        {
+            //enemy attacks periodically until it dies
+
+            //start the enemy on a cooldown of 15 seconds
+            cooldown = cooldown - time.ElapsedGameTime.TotalSeconds;
+
+            if(cooldown <= 0)
+            {
+                cooldown = 15;
+                atk.ResetAttack(this, "Enemy");
+                isAttacking = true;
+            }
         }
 
         public void LoadEnemy(string filename)
