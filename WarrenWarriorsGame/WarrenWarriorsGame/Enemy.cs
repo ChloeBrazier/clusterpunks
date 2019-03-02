@@ -193,14 +193,18 @@ namespace WarrenWarriorsGame
             }
         }
 
+        //Method to load in custom enemies
         public string LoadEnemy(string filename)
         {
-
+            //Fie Reader
             System.IO.StreamReader reader = new StreamReader(filename);
             
+            //Storage Variables
             int attack;
             int speed;
             int cooldownTime;
+
+            //Data Reading
             name = reader.ReadLine();
             Int32.TryParse(reader.ReadLine(), out health);
             Int32.TryParse(reader.ReadLine(), out attack);
@@ -209,8 +213,9 @@ namespace WarrenWarriorsGame
             Int32.TryParse(reader.ReadLine(), out cooldownTime);
             cooldown = cooldownTime;
             string longName = reader.ReadLine();
-            reader.Close();
+            reader.Close(); //Close Reader
 
+            //Code to reduce the sprite filename to just the name
             String[] storage = longName.Split('\\');
             string shorterName = storage[storage.Length-1];
             String[] secondStorage = shorterName.Split('.');

@@ -61,10 +61,10 @@ namespace WarrenWarriorsGame
             //Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
 
             //initialize enemy for testing
-            buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Custom, handler.PlayerParty);
-            buckShot.LoadSprite(this, EnemyType.Custom);
+            buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Buckshot, handler.PlayerParty);
+            buckShot.LoadSprite(this, EnemyType.Buckshot);
 
-            Song song = Content.Load<Song>("Super Sentai Theme Song");  // Put the name of your song here instead of "song_title"
+            Song song = Content.Load<Song>("Power Rangers");  // Put the name of your song here instead of "song_title"
             MediaPlayer.Play(song);
             MediaPlayer.IsRepeating = true;
 
