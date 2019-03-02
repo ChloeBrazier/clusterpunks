@@ -87,13 +87,42 @@ namespace WarrenWarriorsGame
             isAttacking = false;
 		}
 
+        /// <summary>
+        /// method to load in the correct sprite based on player type
+        /// </summary>
+        /// <param name="game"> 
+        /// object of the Game1 class used to load sprite content
+        /// </param>
+        public void LoadSprite(Game game, CharType type)
+        {
+            //switch statement that loads a sprite based on enemy type
+            switch (type)
+            {
+                case CharType.Light:
 
-		/// <summary>
-		/// draws the character based on the position it is given
-		/// </summary>
-		/// <param name="sb"></param>
-		/// <param name="position"></param>
-		public override void Draw(SpriteBatch sb,int position)
+                    //sprite = game.Content.Load<Texture2D>("LIGHT PLAYER SPRITE FILE NAME HERE");
+
+                    break;
+                case CharType.Medium:
+
+                    //sprite = game.Content.Load<Texture2D>("MEDIUM PLAYER SPRITE FILE NAME HERE");
+
+                    break;
+                case CharType.Heavy:
+
+                    //sprite = game.Content.Load<Texture2D>("HEAVY PLAYER SPRITE FILE NAME HERE");
+
+                    break;
+            }
+        }
+
+
+        /// <summary>
+        /// draws the character based on the position it is given
+        /// </summary>
+        /// <param name="sb"></param>
+        /// <param name="position"></param>
+        public override void Draw(SpriteBatch sb,int position)
 		{
 			//---temporary solution---//
             //Eddie: Added readout for formatted attack speed to test combat and
