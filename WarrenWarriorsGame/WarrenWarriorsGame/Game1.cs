@@ -57,6 +57,7 @@ namespace WarrenWarriorsGame
 
             //initialize enemy for testing
             buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Buckshot, handler.PlayerParty);
+            buckShot.LoadSprite(this, EnemyType.Buckshot);
 
             // TODO: use this.Content to load your game content here
             gameUI = new UI(this);
