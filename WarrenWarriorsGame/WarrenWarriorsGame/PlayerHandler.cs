@@ -55,6 +55,7 @@ namespace WarrenWarriorsGame
         //playerhandler's update now takes a gametime object (also takes an enemy object for testing and will likely be changed later)
         public void update(KeyboardState kbState,KeyboardState PrevkbState,MouseState mState, GameTime gameTime, Enemy enemy)
 		{
+
 			switch (Swap)
 			{
 				case SelectedState.deselected: //if no characters are selected and the user selects a character update the code to match
@@ -74,6 +75,11 @@ namespace WarrenWarriorsGame
 						selectedChar = 2;
 						Swap = SelectedState.selected;
 					}
+
+                    if(Swap == SelectedState.selected)
+                    {
+                        playerButtons[selectedChar].select();
+                    }
 
                     for (int i = 0; i < playerButtons.Length; i++) //handles button conrols
                     {
@@ -174,6 +180,9 @@ namespace WarrenWarriorsGame
 
 		private void SwapUnits(int pos1, int pos2)
 		{
+            playerButtons[pos1].deselect();
+            playerButtons[pos2].deselect();
+
 			PlayerChar temp = Units[pos1];
 			Units[pos1] = Units[pos2];
 			Units[pos2] = temp;
