@@ -35,14 +35,18 @@ namespace WarrenWarriorsGame
             iconStorage.Add(coolGame.Content.Load<Texture2D>("BladeIcon")); //0
             iconStorage.Add(coolGame.Content.Load<Texture2D>("HandleIcon")); //1
             iconStorage.Add(coolGame.Content.Load<Texture2D>("KnifeIcon")); //2
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("HotKnifeIcon")); //3
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicMatchSprite")); //4
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicTorcSprite")); //5
+             
 
             //Load important information that will be displayed in the UI.
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("HealthIcon")); //3
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("InventoryIcon")); //4
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicUIBackground")); //5
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("DefaultAttackIcon")); //6
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("btnNormal")); //7
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("btnHovered")); //8
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("HealthIcon")); //6
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("InventoryIcon")); //7
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicUIBackground")); //8
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("DefaultAttackIcon")); //9
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("btnNormal")); //10
+            iconStorage.Add(coolGame.Content.Load<Texture2D>("btnHovered")); //11
         }
 
         public void DrawUI(SpriteBatch spriteBatch)
