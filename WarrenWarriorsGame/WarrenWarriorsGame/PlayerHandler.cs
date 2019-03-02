@@ -157,7 +157,7 @@ namespace WarrenWarriorsGame
             }
         }
 
-		public void Draw(SpriteBatch spriteBatch)
+		public void Draw(SpriteBatch spriteBatch,UI GameUI)
 		{
             for (int j = 0; j < playerButtons.Length; j++)
             {
@@ -183,7 +183,7 @@ namespace WarrenWarriorsGame
 
 
 
-			playerInv.Draw(spriteBatch, text);
+			playerInv.Draw(spriteBatch, text,GameUI);
 		}
 
 

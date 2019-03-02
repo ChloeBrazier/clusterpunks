@@ -13,11 +13,19 @@ namespace WarrenWarriorsGame
     {
         private BtnState state = BtnState.Default;
 
-        Texture2D normal;
-        Texture2D hovered;
-        Texture2D selected;
-        Rectangle location;
-		MouseState prevMouseState;
+        private Texture2D normal;
+        private Texture2D hovered;
+        private Texture2D selected;
+        private Rectangle location;
+        private MouseState prevMouseState;
+
+        public Rectangle Location
+        {
+            get
+            {
+                return location;
+            }
+        }
 
         /// <summary>
         /// creates a button with three states

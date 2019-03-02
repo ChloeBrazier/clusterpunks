@@ -365,7 +365,7 @@ namespace WarrenWarriorsGame
 
         }
 
-        public void Draw(SpriteBatch sb,SpriteFont font)
+        public void Draw(SpriteBatch sb,SpriteFont font,UI uI)
         {
             for(int j = 0; j<3; j++)//--temporary, draws text output for the items --//
 			{
@@ -391,8 +391,14 @@ namespace WarrenWarriorsGame
 				for (int k = 0; k < 4; k++)
 				{//draws the buttons
 					invButtons[j, k].draw(sb);
+
+                    Rectangle drawpos = new Rectangle(invButtons[j, k].Location.Left+5, invButtons[j, k].Location.Top+5, invButtons[j, k].Location.Width-10, invButtons[j, k].Location.Height-10);
+                    sb.Draw(uI.IconStorage[items[j, k].ItemType],drawpos , Color.White);
+
 				}
 			}
+
+            
 
 
 
