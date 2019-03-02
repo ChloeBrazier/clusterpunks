@@ -100,12 +100,7 @@ namespace WarrenWarriorsGame
 
                     break;
                 case EnemyType.Custom:
-
-                    //Currently not working correctly. I believe this to be an issue with the .enemy files, as having them in the Content.mgcb caused errors regardless of how they were called
-                    //Once I find a way to get the program to not throw a fit when .enemy files are present, this code should work fine
-
-                    //enemySprite = LoadEnemy("../../../../Content/ClemTestFile.enemy");
-
+                    enemySprite = LoadEnemy("../../../../Content/ClemTestFile.enemy");
                     break;
             }
 
@@ -216,10 +211,9 @@ namespace WarrenWarriorsGame
             string longName = reader.ReadLine();
             reader.Close();
 
-            String[] storage = longName.Split('/');
+            String[] storage = longName.Split('\\');
             string shorterName = storage[storage.Length-1];
             String[] secondStorage = shorterName.Split('.');
-
             return secondStorage[0];
 
             
