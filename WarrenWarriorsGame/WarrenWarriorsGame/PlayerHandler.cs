@@ -46,9 +46,9 @@ namespace WarrenWarriorsGame
 			playerInv = new Inventory(g);
 
 			//initializes the base units
-			Units[0] = new PlayerChar(font, CharType.Heavy);
-			Units[1] = new PlayerChar(font, CharType.Medium);
-			Units[2] = new PlayerChar(font, CharType.Light);
+			Units[0] = new PlayerChar(font, g, CharType.Heavy);
+			Units[1] = new PlayerChar(font, g, CharType.Medium);
+			Units[2] = new PlayerChar(font, g, CharType.Light);
 
 
             //initializes buttons for player controls
