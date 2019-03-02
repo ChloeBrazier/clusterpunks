@@ -9,6 +9,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
+    /// <summary>
+    /// Warren Warriors
+    /// John, Liam, Eddie, Noah
+    /// Handles the players inventory as well as crafting
+    /// 3/2/2019
+    /// </summary>
     class Inventory
     {
 		private CraftItem[,] items = new CraftItem[3,4]; 
@@ -25,47 +31,10 @@ namespace WarrenWarriorsGame
 
 		public Inventory(Game g)
 		{
-			int itemdrops;
+            DropItems();
 
-			bool dropstick;
-			bool dropmatch;
-			bool dropnail;
-			do //drops between 5 and 8 total items and at least one of the three generic items implemented for testing
-			{ //--temporary--//
-				itemdrops = 0;
-				dropstick = false;
-				dropnail = false;
-				dropmatch = false;
-				for (int j = 0; j < 3; j++)
-				{
-					for (int k = 0; k < 4; k++)
-					{
-						int r = Config.getRandom(0, 10);
-                        Item  temp = Item.Empty;
 
-						switch (r) //randomly generates items for the players to have as starting items
-						{
-							case 0:
-								temp = Item.Stick;
-								itemdrops += 1;
-								dropstick = true;
-								break;
-							case 1:
-								temp = Item.Nails;
-								dropnail = true;
-								itemdrops += 1;
-								break;
-							case 2:
-								temp = Item.Matches;
-								itemdrops += 1;
-								dropmatch = true;
-								break;
-						}
-
-						items[j, k] = new CraftItem(temp);
-					}
-				}
-			} while (!(itemdrops > 5 && itemdrops < 8) || (!dropstick || !dropnail || !dropmatch));
+            
 
 
 			//initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
@@ -96,6 +65,13 @@ namespace WarrenWarriorsGame
         public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, PlayerChar[] Units)
         {
             Boolean madeSelection = false;
+
+            if(Config.singelKeyPress(Keys.Down,kbState,PrevkbState))
+            {
+                DropItems();
+
+            }
+
 
 			switch(selected)
 			{
@@ -531,5 +507,50 @@ namespace WarrenWarriorsGame
 
 
 		}
+
+        public void DropItems()
+        {
+            int itemdrops;
+
+            bool dropstick;
+            bool dropmatch;
+            bool dropnail;
+            do //drops between 5 and 8 total items and at least one of the three generic items implemented for testing
+            { //--temporary--//
+                itemdrops = 0;
+                dropstick = false;
+                dropnail = false;
+                dropmatch = false;
+                for (int j = 0; j < 3; j++)
+                {
+                    for (int k = 0; k < 4; k++)
+                    {
+                        int r = Config.getRandom(0, 10);
+                        Item temp = Item.Empty;
+
+                        switch (r) //randomly generates items for the players to have as starting items
+                        {
+                            case 0:
+                                temp = Item.Stick;
+                                itemdrops += 1;
+                                dropstick = true;
+                                break;
+                            case 1:
+                                temp = Item.Nails;
+                                dropnail = true;
+                                itemdrops += 1;
+                                break;
+                            case 2:
+                                temp = Item.Matches;
+                                itemdrops += 1;
+                                dropmatch = true;
+                                break;
+                        }
+
+                        items[j, k] = new CraftItem(temp);
+                    }
+                }
+            } while (!(itemdrops > 5 && itemdrops < 8) || (!dropstick || !dropnail || !dropmatch));
+        }
     }
 }
