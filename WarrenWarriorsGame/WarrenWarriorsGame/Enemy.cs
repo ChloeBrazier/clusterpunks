@@ -146,16 +146,16 @@ namespace WarrenWarriorsGame
         {
             //Eddie: Added readout for attack speed to test combat and
             //and made an if statement to change text color when attacking
-            Vector2 pos = new Vector2(300, 0) + position * 5 * Config.LineSpacing;
+            Vector2 pos = new Vector2(470, 0) + position * 5 * Config.LineSpacing;
 
             if (isAttacking != true)
             {
-                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Cooldown: " + cooldown), pos, Color.Black);
+                sb.DrawString(font, string.Format("{0}/{1}/{2:2.2}", name, Health, "Cooldown: " + string.Format("{0: 0.00}", cooldown)), pos, Color.Black);
                 sb.Draw(sprite, new Rectangle((int) pos.X + 40, (int) pos.Y - 80, 212, 300), Color.White);
             }
             else
             {
-                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Attack time: " + atk.Length), pos, Color.Red);
+                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Red);
                 sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.PaleVioletRed);
             }
         }
