@@ -151,12 +151,12 @@ namespace WarrenWarriorsGame
             if (isAttacking != true)
             {
                 sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Cooldown: " + cooldown), pos, Color.Black);
-                sb.Draw(sprite, new Vector2(pos.X, pos.Y + 20), Color.White);
+                sb.Draw(sprite, new Rectangle((int) pos.X + 40, (int) pos.Y - 80, 212, 300), Color.White);
             }
             else
             {
                 sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Attack time: " + atk.Length), pos, Color.Red);
-                sb.Draw(sprite, new Vector2(pos.X, pos.Y + 20), Color.PaleVioletRed);
+                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.PaleVioletRed);
             }
         }
         
