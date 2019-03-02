@@ -177,7 +177,7 @@ namespace WarrenWarriorsGame
 				}
 
 				spriteBatch.DrawString(text, string.Format("{0}:   ", j + 1), j * 5 * Config.LineSpacing, drawcolor);
-                spriteBatch.DrawString(text, j.ToString(), new Vector2(95 + j * 130, 265), drawcolor);
+                spriteBatch.DrawString(text, (j + 1).ToString(), new Vector2(95 + j * 130, 265), drawcolor);
 
 			}
 
