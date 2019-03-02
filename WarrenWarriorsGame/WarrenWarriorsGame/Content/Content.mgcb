@@ -200,6 +200,18 @@
 /processorParam:TextureFormat=Color
 /build:KnifeIcon.png
 
+#begin NewMatchSprite.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:NewMatchSprite.png
+
 #begin NewTorchSprite.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -259,4 +271,10 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:player_char_ranger_red.png
+
+#begin Super Sentai Theme Song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Super Sentai Theme Song.mp3
 
