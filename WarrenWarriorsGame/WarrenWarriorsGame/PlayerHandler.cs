@@ -46,9 +46,9 @@ namespace WarrenWarriorsGame
 			playerInv = new Inventory(g);
 
 			//initializes the base units
-			Units[0] = new PlayerChar(font, CharType.Heavy);
-			Units[1] = new PlayerChar(font, CharType.Medium);
-			Units[2] = new PlayerChar(font, CharType.Light);
+			Units[0] = new PlayerChar(font, g, CharType.Heavy);
+			Units[1] = new PlayerChar(font, g, CharType.Medium);
+			Units[2] = new PlayerChar(font, g, CharType.Light);
 
 
             //initializes buttons for player controls
@@ -177,7 +177,7 @@ namespace WarrenWarriorsGame
 				}
 
 				spriteBatch.DrawString(text, string.Format("{0}:   ", j + 1), j * 5 * Config.LineSpacing, drawcolor);
-                spriteBatch.DrawString(text, j.ToString(), new Vector2(95 + j * 130, 265), drawcolor);
+                spriteBatch.DrawString(text, (j + 1).ToString(), new Vector2(95 + j * 130, 265), drawcolor);
 
 			}
 
