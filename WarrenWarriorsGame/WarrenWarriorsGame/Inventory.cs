@@ -374,6 +374,7 @@ namespace WarrenWarriorsGame
 				{//draws the buttons
 					invButtons[j, k].draw(sb);
 
+                    //draws the ui icons to their resepective buttons
                     Rectangle drawpos = new Rectangle(invButtons[j, k].Location.Left+5, invButtons[j, k].Location.Top+5, invButtons[j, k].Location.Width-10, invButtons[j, k].Location.Height-10);
                     sb.Draw(uI.IconStorage[items[j, k].ItemType],drawpos , Color.White);
 

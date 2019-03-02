@@ -159,12 +159,13 @@ namespace WarrenWarriorsGame
 
 		public void Draw(SpriteBatch spriteBatch,UI GameUI)
 		{
+            //draws the  buttons
             for (int j = 0; j < playerButtons.Length; j++)
             {
                 playerButtons[j].draw(spriteBatch);
             }
 
-
+            //draws the players numbers
             for (int j = 0; j < Units.Length; j++)
 			{
 				Color drawcolor = Color.Black;
