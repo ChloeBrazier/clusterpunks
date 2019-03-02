@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
-    class UI
+    public class UI
     {
         //Declare variables.
 

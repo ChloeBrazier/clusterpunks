@@ -60,7 +60,7 @@ namespace WarrenWarriorsGame
 		}
 
         //playerhandler's update now takes a gametime object (also takes an enemy object for testing and will likely be changed later)
-        public void update(KeyboardState kbState,KeyboardState PrevkbState,MouseState mState, GameTime gameTime, Enemy enemy)
+        public void update(KeyboardState kbState,KeyboardState PrevkbState,MouseState mState, MouseState prevMsState, GameTime gameTime, Enemy enemy)
 		{
 
 			switch (Swap)
@@ -145,7 +145,7 @@ namespace WarrenWarriorsGame
 
             //run code for inventory interaction
             //now takes in the Units array
-			playerInv.update(kbState, PrevkbState, mState, Units);
+			playerInv.update(kbState, PrevkbState, mState, prevMsState, Units);
 
             //loop that runs player attacks when initiated
             for (int i = 0; i < Units.Length; i++)
@@ -157,7 +157,7 @@ namespace WarrenWarriorsGame
             }
         }
 
-		public void Draw(SpriteBatch spriteBatch)
+		public void Draw(SpriteBatch spriteBatch,UI GameUI)
 		{
             for (int j = 0; j < playerButtons.Length; j++)
             {
@@ -183,7 +183,7 @@ namespace WarrenWarriorsGame
 
 
 
-			playerInv.Draw(spriteBatch, text);
+			playerInv.Draw(spriteBatch, text,GameUI);
 		}
 
 
