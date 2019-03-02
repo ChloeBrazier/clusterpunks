@@ -12,19 +12,35 @@ namespace WarrenWarriorsGame
     class UI
     {
         //Declare variables.
-        protected List<Texture2D> iconStorage;
+
+        //dictionary field for item UI
+        private Dictionary<Item, Texture2D> iconStorage;
+
+        //separate List field for general game UI
+        private List<Texture2D> gameUI;
+
         Game coolGame;
 
         //Allow us to access the icon storage outside the class just in case.
 
-        public List<Texture2D> IconStorage
+        public Dictionary<Item, Texture2D> IconStorage
         {
             get { return iconStorage; }
         }
 
+        //accessor for game UI list
+        public List<Texture2D> GameUI
+        {
+            get
+            {
+                return gameUI;
+            }
+        }
+
         public UI(Game coolGame)
         {
-            iconStorage = new List<Texture2D>();
+            iconStorage = new Dictionary<Item, Texture2D>();
+            gameUI = new List<Texture2D>();
             this.coolGame = coolGame;
 
         }
@@ -32,21 +48,23 @@ namespace WarrenWarriorsGame
         public void Load()
         {
             //Load each item that will be loaded into inventory slots.
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("BladeIcon")); //0
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("HandleIcon")); //1
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("KnifeIcon")); //2
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("HotKnifeIcon")); //3
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicMatchSprite")); //4
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicTorchSprite")); //5
+            //add each item to the icon storage dictionary with enum keys and texture values
+            iconStorage.Add(Item.Empty, coolGame.Content.Load<Texture2D>("DefaultAttackIcon"));
+            iconStorage.Add(Item.Nails, coolGame.Content.Load<Texture2D>("BladeIcon"));
+            iconStorage.Add(Item.Stick, coolGame.Content.Load<Texture2D>("HandleIcon"));
+            iconStorage.Add(Item.SpikeBat, coolGame.Content.Load<Texture2D>("KnifeIcon"));
+            iconStorage.Add(Item.SpikeTorch, coolGame.Content.Load<Texture2D>("HotKnifeIcon"));
+            iconStorage.Add(Item.Matches, coolGame.Content.Load<Texture2D>("BasicMatchSprite"));
+            iconStorage.Add(Item.Torch, coolGame.Content.Load<Texture2D>("BasicTorchSprite"));
              
 
             //Load important information that will be displayed in the UI.
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("HealthIcon")); //6
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("InventoryIcon")); //7
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("BasicUIBackground")); //8
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("DefaultAttackIcon")); //9
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("btnNormal")); //10
-            iconStorage.Add(coolGame.Content.Load<Texture2D>("btnHovered")); //11
+            gameUI.Add(coolGame.Content.Load<Texture2D>("HealthIcon")); //0
+            gameUI.Add(coolGame.Content.Load<Texture2D>("InventoryIcon")); //1
+            gameUI.Add(coolGame.Content.Load<Texture2D>("BasicUIBackground")); //2
+            gameUI.Add(coolGame.Content.Load<Texture2D>("DefaultAttackIcon")); //3
+            gameUI.Add(coolGame.Content.Load<Texture2D>("btnNormal")); //4
+            gameUI.Add(coolGame.Content.Load<Texture2D>("btnHovered")); //5
         }
 
         public void DrawUI(SpriteBatch spriteBatch)
@@ -54,45 +72,45 @@ namespace WarrenWarriorsGame
             //For player one.
 
             //Draw the main background.
-            spriteBatch.Draw(iconStorage[4], new Rectangle(0, 225, 128, 256), Color.White);
+            spriteBatch.Draw(gameUI[2], new Rectangle(0, 225, 128, 256), Color.White);
 
             //Draw the heart icon, Dimensions of the heart are 16 width, 14 height initially, so alter the size ONLY by multiples of those.
-            spriteBatch.Draw(iconStorage[3], new Rectangle(5, 300, 32, 28), Color.White);
+            spriteBatch.Draw(gameUI[0], new Rectangle(5, 300, 32, 28), Color.White);
 
             //Draw the 4 Inventory slots for player 1.
-            spriteBatch.Draw(iconStorage[7], new Rectangle(14, 350, 50, 50), Color.White);
-            spriteBatch.Draw(iconStorage[7], new Rectangle(64, 350, 50, 50), Color.White);
-            spriteBatch.Draw(iconStorage[7], new Rectangle(14, 400, 50, 50), Color.White);
-            spriteBatch.Draw(iconStorage[7], new Rectangle(64, 400, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(14, 350, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(64, 350, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(14, 400, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(64, 400, 50, 50), Color.White);
 
 
             //For player two.
             //Main background
-            spriteBatch.Draw(iconStorage[4], new Rectangle(128, 225, 128, 258), Color.White);
+            spriteBatch.Draw(gameUI[2], new Rectangle(128, 225, 128, 258), Color.White);
 
             //Draw health icon.
-            spriteBatch.Draw(iconStorage[3], new Rectangle(133, 300, 32, 28), Color.White);
+            spriteBatch.Draw(gameUI[0], new Rectangle(133, 300, 32, 28), Color.White);
 
             //4 Inventory slots.
 
-            spriteBatch.Draw(iconStorage[7], new Rectangle(142, 350, 50, 50), Color.White);
-            spriteBatch.Draw(iconStorage[7], new Rectangle(192, 350, 50, 50), Color.White);
-            spriteBatch.Draw(iconStorage[7], new Rectangle(142, 400, 50, 50), Color.White);
-            spriteBatch.Draw(iconStorage[7], new Rectangle(192, 400, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(142, 350, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(192, 350, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(142, 400, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(192, 400, 50, 50), Color.White);
 
             //For player 3.
             //Main Background
-            spriteBatch.Draw(iconStorage[4], new Rectangle(256, 225, 128, 256), Color.White);
+            spriteBatch.Draw(gameUI[2], new Rectangle(256, 225, 128, 256), Color.White);
 
             //Heart Icon.
-            spriteBatch.Draw(iconStorage[3], new Rectangle(261, 300, 32, 28), Color.White);
+            spriteBatch.Draw(gameUI[0], new Rectangle(261, 300, 32, 28), Color.White);
 
             //4 Inventory slots.
 
-            spriteBatch.Draw(iconStorage[7], new Rectangle(270, 350, 50, 50), Color.White);
-            spriteBatch.Draw(iconStorage[7], new Rectangle(320, 350, 50, 50), Color.White);
-            spriteBatch.Draw(iconStorage[7], new Rectangle(270, 400, 50, 50), Color.White);
-            spriteBatch.Draw(iconStorage[7], new Rectangle(320, 400, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(270, 350, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(320, 350, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(270, 400, 50, 50), Color.White);
+            spriteBatch.Draw(gameUI[1], new Rectangle(320, 400, 50, 50), Color.White);
         }
     }
 }

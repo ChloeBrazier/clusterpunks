@@ -9,7 +9,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
-	public class PlayerHandler
+    /// <summary>
+    /// Warren Warriors
+    /// John, Liam, Eddie, Noah
+    /// handles the movement of players
+    /// 3/2/2019
+    /// </summary>
+    public class PlayerHandler
 	{
 		SpriteFont text;
 
@@ -19,8 +25,9 @@ namespace WarrenWarriorsGame
         //Eddie: Changed Unit array to PlayerChar array due to problems accessing abstract properties
 		PlayerChar[] Units = new PlayerChar[3]; //holds the units that will be displayed on screen
 
+        //the players inventory
 		Inventory playerInv;
-
+        //buttons that handle moveing players
         Button[] playerButtons = new Button[3];
 
         //accessor for player units
@@ -48,7 +55,7 @@ namespace WarrenWarriorsGame
             playerButtons[0] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(70,240,50,50));
             playerButtons[1] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(200, 240, 50, 50));
             playerButtons[2] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(330, 240, 50, 50));
-
+            //*Temporary*
             text = font;
 		}
 
@@ -152,7 +159,13 @@ namespace WarrenWarriorsGame
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			for (int j = 0; j < Units.Length; j++)
+            for (int j = 0; j < playerButtons.Length; j++)
+            {
+                playerButtons[j].draw(spriteBatch);
+            }
+
+
+            for (int j = 0; j < Units.Length; j++)
 			{
 				Color drawcolor = Color.Black;
 
@@ -164,13 +177,10 @@ namespace WarrenWarriorsGame
 				}
 
 				spriteBatch.DrawString(text, string.Format("{0}:   ", j + 1), j * 5 * Config.LineSpacing, drawcolor);
+                spriteBatch.DrawString(text, j.ToString(), new Vector2(95 + j * 130, 265), drawcolor);
 
 			}
 
-            for(int j=0;j<playerButtons.Length;j++)
-            {
-                playerButtons[j].draw(spriteBatch);
-            }
 
 
 			playerInv.Draw(spriteBatch, text);
