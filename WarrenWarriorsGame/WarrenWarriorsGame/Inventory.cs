@@ -62,7 +62,7 @@ namespace WarrenWarriorsGame
 		}
 
 
-        public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, PlayerChar[] Units)
+        public void update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, MouseState prevMsState, PlayerChar[] Units)
         {
             Boolean madeSelection = false;
 
@@ -299,7 +299,8 @@ namespace WarrenWarriorsGame
 					}
 
                     //initiate an attack with a selected item if the space bar is pressed
-                    if (Config.singelKeyPress(Keys.Space, kbState, PrevkbState))
+                    //or if the right mouse button is clicked
+                    if (Config.singelKeyPress(Keys.Space, kbState, PrevkbState) || Config.SingleRightMouseClick(mState, prevMsState))
                     {
                         //create an item object to send to a given character's attack method
                         CraftItem usedItem = items[SelectedItemX, SelectedItemY];

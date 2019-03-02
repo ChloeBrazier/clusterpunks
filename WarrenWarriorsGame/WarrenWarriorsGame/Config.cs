@@ -95,13 +95,24 @@ namespace WarrenWarriorsGame
 
 		}
 
-		/// <summary>
-		/// Gets a random integer between min and max
-		/// </summary>
-		/// <param name="min">The inclusive lower bound</param>
-		/// <param name="max">The Exclusive Upper Bound</param>
-		/// <returns></returns>
-		public static int getRandom(int min, int max)
+        //determines if this is the first frame the right mouse button is down
+        public static bool SingleRightMouseClick(MouseState mouseState, MouseState prevMouseState)
+        {
+            if (mouseState.RightButton == ButtonState.Pressed && prevMouseState.RightButton == ButtonState.Released)
+            {
+                return true;
+            }
+            return false;
+
+        }
+
+        /// <summary>
+        /// Gets a random integer between min and max
+        /// </summary>
+        /// <param name="min">The inclusive lower bound</param>
+        /// <param name="max">The Exclusive Upper Bound</param>
+        /// <returns></returns>
+        public static int getRandom(int min, int max)
 		{
 			return rand.Next(min, max);
 		}
