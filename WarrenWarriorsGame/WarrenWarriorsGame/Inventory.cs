@@ -66,6 +66,8 @@ namespace WarrenWarriorsGame
         {
             Boolean madeSelection = false;
 
+            //--Temporary--//
+            //refills the players inventory
             if(Config.singelKeyPress(Keys.Down,kbState,PrevkbState))
             {
                 DropItems();
@@ -508,6 +510,9 @@ namespace WarrenWarriorsGame
 
 		}
 
+        /// <summary>
+        /// drops items to the player
+        /// </summary>
         public void DropItems()
         {
             int itemdrops;

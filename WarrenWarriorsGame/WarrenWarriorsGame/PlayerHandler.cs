@@ -159,7 +159,13 @@ namespace WarrenWarriorsGame
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			for (int j = 0; j < Units.Length; j++)
+            for (int j = 0; j < playerButtons.Length; j++)
+            {
+                playerButtons[j].draw(spriteBatch);
+            }
+
+
+            for (int j = 0; j < Units.Length; j++)
 			{
 				Color drawcolor = Color.Black;
 
@@ -171,13 +177,10 @@ namespace WarrenWarriorsGame
 				}
 
 				spriteBatch.DrawString(text, string.Format("{0}:   ", j + 1), j * 5 * Config.LineSpacing, drawcolor);
+                spriteBatch.DrawString(text, j.ToString(), new Vector2(95 + j * 130, 265), drawcolor);
 
 			}
 
-            for(int j=0;j<playerButtons.Length;j++)
-            {
-                playerButtons[j].draw(spriteBatch);
-            }
 
 
 			playerInv.Draw(spriteBatch, text);
