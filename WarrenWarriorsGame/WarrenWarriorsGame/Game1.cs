@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace WarrenWarriorsGame
 {
@@ -62,6 +63,11 @@ namespace WarrenWarriorsGame
             //initialize enemy for testing
             buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Custom, handler.PlayerParty);
             buckShot.LoadSprite(this, EnemyType.Custom);
+
+            Song song = Content.Load<Song>("Super Sentai Theme Song");  // Put the name of your song here instead of "song_title"
+            MediaPlayer.Play(song);
+            MediaPlayer.IsRepeating = true;
+
 
             // TODO: use this.Content to load your game content here
             gameUI = new UI(this);

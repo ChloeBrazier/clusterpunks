@@ -248,3 +248,9 @@
 /processorParam:TextureFormat=Color
 /build:player_char_ranger_red.png
 
+#begin Super Sentai Theme Song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Super Sentai Theme Song.mp3
+
