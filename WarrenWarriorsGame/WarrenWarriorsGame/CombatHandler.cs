@@ -51,5 +51,21 @@ namespace WarrenWarriorsGame
             //if all players die, end encounter and run gameover (when it's made)
             //if enemy dies, end encounter and continue the game
         }
+
+        /// <summary>
+        /// method that returns the palyer party's total health
+        /// </summary>
+        /// <returns> the party's total health </returns>
+        public int PartyHealth()
+        {
+            int partyHealth = 0;
+
+            foreach(PlayerChar player in playerParty)
+            {
+                partyHealth = partyHealth + player.Health;
+            }
+
+            return partyHealth;
+        }
     }
 }
