@@ -12,6 +12,7 @@ namespace WarrenWarriorsGame
     /// <summary>
     /// Warren Warriors
     /// John
+    /// Eddie Brazier
     /// Handles the players inventory as well as crafting
     /// 3/8/2019
     /// </summary>

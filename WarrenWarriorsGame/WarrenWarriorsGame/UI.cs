@@ -7,6 +7,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+/// <summary>
+/// Warren Warriors
+/// Noah Hulick
+/// Eddie Brazier
+/// Class used to load and manage all UI elements
+/// 3/8/2019
+/// </summary>
 namespace WarrenWarriorsGame
 {
     public class UI

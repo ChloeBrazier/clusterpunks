@@ -12,6 +12,7 @@ namespace WarrenWarriorsGame
     /// <summary>
     /// Warren Warriors
     /// John Bateman
+    /// Eddie Brazier
     /// The player class that holds information about the player units
     /// 3/8/2019
     /// </summary>

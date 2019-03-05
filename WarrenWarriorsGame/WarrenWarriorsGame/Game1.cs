@@ -8,6 +8,7 @@ namespace WarrenWarriorsGame
     /// <summary>
     /// Warren Warriors
     /// John Bateman
+    /// Eddie Brazier
     /// main game functions
     ///3/8/2019
     /// </summary>

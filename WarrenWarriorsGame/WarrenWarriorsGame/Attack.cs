@@ -7,6 +7,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+/// <summary>
+/// Warren Warriors
+/// Eddie Brazier
+/// class that holds methods used to execute player and enemy attacks
+/// 3/8/2019
+/// </summary>
 namespace WarrenWarriorsGame
 {
     //class is currently being modified by Eddie for use in player-enemy interactions

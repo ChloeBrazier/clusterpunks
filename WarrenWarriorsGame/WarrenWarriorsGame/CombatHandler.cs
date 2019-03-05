@@ -7,11 +7,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-/*Warren Warriors Group Project
- *Cluster Punks
- *Enemy class
- */
-
+/// <summary>
+/// Warren Warriors
+/// Eddie Brazier
+/// class that holds methods used to manage the game in its combat stat
+/// 3/8/2019
+/// </summary>
 namespace WarrenWarriorsGame
 {
     public class CombatHandler

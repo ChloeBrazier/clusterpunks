@@ -8,11 +8,12 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
 
-/*Warren Warriors Group Project
- *Cluster Punks
- *Enemy class
- */
-
+/// <summary>
+/// Warren Warriors
+/// Eddie Brazier
+/// The enemy class which holds information and methods pertaining to enemies
+/// 3/8/2019
+/// </summary>
 namespace WarrenWarriorsGame
 {
     public class Enemy: Unit

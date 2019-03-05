@@ -7,7 +7,12 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-
+/// <summary>
+/// Warren Warriors
+/// Eddie Brazier
+/// static class that holds methods used throughout most other classes
+/// 3/8/2019
+/// </summary>
 namespace WarrenWarriorsGame
 {
     //enum for game states
