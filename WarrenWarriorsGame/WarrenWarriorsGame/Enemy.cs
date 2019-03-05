@@ -10,7 +10,7 @@ using System.IO;
 
 /// <summary>
 /// Warren Warriors
-/// Eddie Brazier
+/// Eddie Brazier, Liam Perry
 /// The enemy class which holds information and methods pertaining to enemies
 /// 3/8/2019
 /// </summary>
