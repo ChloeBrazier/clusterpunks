@@ -10,9 +10,7 @@ using Microsoft.Xna.Framework.Input;
 /// <summary>
 /// Warren Warriors
 /// Noah Hulick
-/// Eddie Brazier
-/// Class used to load and manage all UI elements
-/// 3/8/2019
+/// Class that holds icons for inventory (i.e items), or elements/images to be displayed on the UI.
 /// </summary>
 namespace WarrenWarriorsGame
 {
@@ -63,7 +61,9 @@ namespace WarrenWarriorsGame
             iconStorage.Add(Item.SpikeTorch, coolGame.Content.Load<Texture2D>("NewHotKnifeSprite"));
             iconStorage.Add(Item.Matches, coolGame.Content.Load<Texture2D>("NewMatchSprite"));
             iconStorage.Add(Item.Torch, coolGame.Content.Load<Texture2D>("NewTorchSprite"));
-           //***IMPORTANT: GAME CRASHING PROBLEM*** -missing the sprite for the Item.Hotnails
+            iconStorage.Add(Item.HotNails, coolGame.Content.Load<Texture2D>("HotBladeIcon"));
+            
+             
 
             //Load important information that will be displayed in the UI.
             gameUI.Add(coolGame.Content.Load<Texture2D>("HealthIcon")); //0
@@ -84,13 +84,6 @@ namespace WarrenWarriorsGame
             //Draw the heart icon, Dimensions of the heart are 16 width, 14 height initially, so alter the size ONLY by multiples of those.
             spriteBatch.Draw(gameUI[0], new Rectangle(5, 300, 32, 28), Color.White);
 
-            //Draw the 4 Inventory slots for player 1.
-            spriteBatch.Draw(gameUI[1], new Rectangle(14, 350, 50, 50), Color.White);
-            spriteBatch.Draw(gameUI[1], new Rectangle(64, 350, 50, 50), Color.White);
-            spriteBatch.Draw(gameUI[1], new Rectangle(14, 400, 50, 50), Color.White);
-            spriteBatch.Draw(gameUI[1], new Rectangle(64, 400, 50, 50), Color.White);
-
-
             //For player two.
             //Main background
             spriteBatch.Draw(gameUI[2], new Rectangle(128, 225, 128, 258), Color.White);
@@ -98,12 +91,7 @@ namespace WarrenWarriorsGame
             //Draw health icon.
             spriteBatch.Draw(gameUI[0], new Rectangle(133, 300, 32, 28), Color.White);
 
-            //4 Inventory slots.
-
-            spriteBatch.Draw(gameUI[1], new Rectangle(142, 350, 50, 50), Color.White);
-            spriteBatch.Draw(gameUI[1], new Rectangle(192, 350, 50, 50), Color.White);
-            spriteBatch.Draw(gameUI[1], new Rectangle(142, 400, 50, 50), Color.White);
-            spriteBatch.Draw(gameUI[1], new Rectangle(192, 400, 50, 50), Color.White);
+            
 
             //For player 3.
             //Main Background
@@ -112,12 +100,7 @@ namespace WarrenWarriorsGame
             //Heart Icon.
             spriteBatch.Draw(gameUI[0], new Rectangle(261, 300, 32, 28), Color.White);
 
-            //4 Inventory slots.
-
-            spriteBatch.Draw(gameUI[1], new Rectangle(270, 350, 50, 50), Color.White);
-            spriteBatch.Draw(gameUI[1], new Rectangle(320, 350, 50, 50), Color.White);
-            spriteBatch.Draw(gameUI[1], new Rectangle(270, 400, 50, 50), Color.White);
-            spriteBatch.Draw(gameUI[1], new Rectangle(320, 400, 50, 50), Color.White);
+            
         }
     }
 }

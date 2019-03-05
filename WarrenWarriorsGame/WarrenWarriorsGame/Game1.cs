@@ -7,6 +7,7 @@ namespace WarrenWarriorsGame
 {
     /// <summary>
     /// Warren Warriors
+    /// Noah Hulick
     /// John Bateman
     /// Eddie Brazier
     /// main game functions
