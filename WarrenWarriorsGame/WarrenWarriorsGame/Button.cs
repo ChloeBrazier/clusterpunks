@@ -9,6 +9,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
+    /// <summary>
+    /// Warren Warriors
+    /// John Bateman
+    /// buttons class that is used for clickable objects in the game
+    /// 3/8/2019
+    /// </summary>
     class Button
     {
         private BtnState state = BtnState.Default;

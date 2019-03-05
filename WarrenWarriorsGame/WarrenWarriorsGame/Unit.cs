@@ -10,8 +10,10 @@ using Microsoft.Xna.Framework.Input;
 namespace WarrenWarriorsGame
 {
     /// <summary>
+    /// Warren Warriors
     /// John Bateman
     /// a class meant to be used for a generic handler as well as being used as an outline for the enemy and ai
+    /// 3/8/2019
     /// </summary>
 	public abstract class Unit 
 	{

@@ -9,8 +9,13 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
-	
-	public class PlayerChar: Unit
+    /// <summary>
+    /// Warren Warriors
+    /// John Bateman
+    /// The player class that holds information about the player units
+    /// 3/8/2019
+    /// </summary>
+    public class PlayerChar: Unit
 	{
 
         //public accessor/mutator for IsAttacking bool

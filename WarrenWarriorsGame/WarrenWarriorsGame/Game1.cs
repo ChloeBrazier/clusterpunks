@@ -6,8 +6,10 @@ using Microsoft.Xna.Framework.Media;
 namespace WarrenWarriorsGame
 {
     /// <summary>
-    /// This is the main type for your game.John Bateman
-    /// ive made some more changes
+    /// Warren Warriors
+    /// John Bateman
+    /// main game functions
+    ///3/8/2019
     /// </summary>
     public class Game1 : Game
     {

@@ -13,6 +13,7 @@ namespace WarrenWarriorsGame
     /// Warren Warriors
     /// John Bateman
     /// items held in player inventory. hold an attack 
+    /// 3/8/2019
     /// </summary>
     public class CraftItem
     {
