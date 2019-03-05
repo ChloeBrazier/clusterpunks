@@ -23,8 +23,22 @@ namespace WarrenWarriorsGame
 
 		PlayerHandler handler; //holds all of the player interaction
 
+        //field for the combat handler
+        CombatHandler combatHandler;
+
         //field for an enemy (spawning currently simplified for testing)
         Enemy buckShot;
+
+        //field for the game's current state
+        GameState gameState;
+
+        //field for game music
+        Song song;
+        //temporary bool to make the song start only once
+        bool songStart;
+
+        //field for the menu's spritefont
+        SpriteFont menuFont;
 
 		public Game1()
         {
@@ -41,7 +55,12 @@ namespace WarrenWarriorsGame
         protected override void Initialize()
         {
 			IsMouseVisible = true; //set up the mouse
+
+            //initialize game state as menu
+            gameState = GameState.Menu;
             
+            songStart = false;
+
             base.Initialize();
         }
 
@@ -61,13 +80,16 @@ namespace WarrenWarriorsGame
             //Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
 
             //initialize enemy for testing
-            buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Custom, handler.PlayerParty);
-            buckShot.LoadSprite(this, EnemyType.Custom);
+            buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Buckshot, handler.PlayerParty);
+            buckShot.LoadSprite(this, EnemyType.Buckshot);
 
-            Song song = Content.Load<Song>("Super Sentai Theme Song");  // Put the name of your song here instead of "song_title"
-            MediaPlayer.Play(song);
-            MediaPlayer.IsRepeating = true;
+            //initialize combat handler using loaded players and enemy
+            combatHandler = new CombatHandler(handler.PlayerParty, buckShot);
 
+            song = Content.Load<Song>("Power Rangers");  // Put the name of your song here instead of "song_title"
+
+            //load temporary menu font
+            menuFont = Content.Load<SpriteFont>("Arial-12");
 
             // TODO: use this.Content to load your game content here
             gameUI = new UI(this);
@@ -97,20 +119,63 @@ namespace WarrenWarriorsGame
 			kbState = Keyboard.GetState();
             mState = Mouse.GetState();
 
-            //now takes in gametime for use with the Attack classe's update method (also an enemy for temporary testing)
-			handler.update(kbState, PrevkbState, mState, prevMsState, gameTime, buckShot); //updates all of the keyboardhandler
-
-            //update enemy and handle combat
-
-            if (buckShot.IsAttacking != true)
+            //switch statement to determine which state the game is in and run update methods accordingly
+            switch(gameState)
             {
-                buckShot.CoolDown(gameTime);
-            }
-            else
-            {
-                buckShot.Update(kbState, PrevkbState, gameTime);
-            }
+                case GameState.Menu:
 
+                    //start game when the player presses enter
+                    if (Config.singelKeyPress(Keys.Enter, kbState, PrevkbState) == true)
+                    {
+                        gameState = GameState.Combat;
+                    }
+
+                    break;
+                case GameState.Combat:
+                    
+                    //play background music (temp)
+                    
+                    if(songStart == false)
+                    {
+                        MediaPlayer.Play(song);
+                        MediaPlayer.IsRepeating = true;
+                        songStart = true;
+                    }
+                    
+                    //now takes in gametime for use with the Attack classe's update method (also an enemy for temporary testing)
+                    handler.update(kbState, PrevkbState, mState, prevMsState, gameTime, buckShot); //updates all of the keyboardhandler
+
+                    //update enemy and handle combat
+
+                    if (buckShot.IsAttacking != true)
+                    {
+                        buckShot.CoolDown(gameTime);
+                    }
+                    else
+                    {
+                        buckShot.Update(kbState, PrevkbState, gameTime);
+                    }
+
+                    //check party's health and enter GameOver state if it equals zero
+                    int partyHealth = combatHandler.PartyHealth();
+                    if(partyHealth == 0)
+                    {
+                        MediaPlayer.Stop();
+                        gameState = GameState.GameOver;
+                    }
+
+                    break;
+                case GameState.GameOver:
+
+                    //return to menu when player presses Enter
+                    if (Config.singelKeyPress(Keys.Enter, kbState, PrevkbState) == true)
+                    {
+                        gameState = GameState.Menu;
+                    }
+
+                    break;
+            }
+            
 			PrevkbState = kbState; //stores the previous keyboard state
             prevMsState = mState; //stores previous mouse state
 
@@ -128,13 +193,45 @@ namespace WarrenWarriorsGame
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
 
-			
+            //switch statement to determine which state the game is in and run draw methods accordingly
+            switch (gameState)
+            {
+                case GameState.Menu:
 
-			handler.Draw(spriteBatch,gameUI);
+                    //temporary opening menu that informs the player to press enter to start the game
+                    spriteBatch.DrawString
+                        (
+                        menuFont, 
+                        "Press Enter to start the Game", 
+                        new Vector2(GraphicsDevice.Viewport.Width/2, GraphicsDevice.Viewport.Height/2),
+                        Color.Black
+                        );
 
-            //gameUI.DrawUI(spriteBatch);
+                    break;
+                case GameState.Combat:
 
-            buckShot.Draw(spriteBatch, 0);
+                    //draw characters and combat UI
+                    handler.Draw(spriteBatch, gameUI);
+
+                    //gameUI.DrawUI(spriteBatch);
+
+                    //draw the enemy
+                    buckShot.Draw(spriteBatch, 0);
+
+                    break;
+                case GameState.GameOver:
+
+                    //temporary game over screen that informs the player to press enter to return to the menu
+                    spriteBatch.DrawString
+                        (
+                        menuFont,
+                        "Press Enter to return to the menu",
+                        new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2),
+                        Color.Black
+                        );
+
+                    break;
+            }
             
             spriteBatch.End();
 

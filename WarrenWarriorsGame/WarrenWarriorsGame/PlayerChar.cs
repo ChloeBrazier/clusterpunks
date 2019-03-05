@@ -103,16 +103,26 @@ namespace WarrenWarriorsGame
             //and made an if statement to change text color when attacking
 			Vector2 pos = new Vector2(12,0) + position * 5 * Config.LineSpacing;
 
-            if(isAttacking != true)
+            if(this.Health > 0)
             {
-                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Black);
-                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.White);
+                if (isAttacking != true)
+                {
+                    sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Black);
+                    sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.White);
+                }
+                else
+                {
+                    sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Red);
+                    sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.PaleVioletRed);
+                }
             }
-			else
+            else
             {
-                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Red);
-                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.PaleVioletRed);
+                //player is grayed out when dead
+                sb.DrawString(font, string.Format("{0}/{1}", name, "Dead"), pos, Color.Black);
+                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.Gray);
             }
+            
 		}
 
 		public override void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time)

@@ -66,18 +66,18 @@ namespace WarrenWarriorsGame
 			switch (Swap)
 			{
 				case SelectedState.deselected: //if no characters are selected and the user selects a character update the code to match
-                                               //cannot swap if either character is currently attacking
-                    if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState) && Units[0].IsAttacking == false)
+                                               //cannot swap if either character is currently attacking or dead
+                    if (Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
 					{
 						selectedChar = 0;
 						Swap = SelectedState.selected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState) && Units[1].IsAttacking == false)
+					if (Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
 					{
 						selectedChar = 1;
 						Swap = SelectedState.selected;
 					}
-					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState) && Units[2].IsAttacking == false)
+					if (Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
 					{
 						selectedChar = 2;
 						Swap = SelectedState.selected;
@@ -90,7 +90,7 @@ namespace WarrenWarriorsGame
 
                     for (int i = 0; i < playerButtons.Length; i++) //handles button conrols
                     {
-                        if(playerButtons[i].update(mState) && Units[i].IsAttacking == false)
+                        if(playerButtons[i].update(mState) && Units[i].IsAttacking == false && Units[i].Health > 0)
                         {
                             selectedChar = i;
                             Swap = SelectedState.selected;
@@ -104,19 +104,19 @@ namespace WarrenWarriorsGame
 				case SelectedState.selected://if a character is selected and the user selects a character swap those two characters and their inventorys
                                             //cannot swap if either character is currently attacking
 
-					if ((Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState)) && Units[0].IsAttacking == false)
+					if ((Config.singelKeyPress(Keys.NumPad1, kbState, PrevkbState) || Config.singelKeyPress(Keys.D1, kbState, PrevkbState)) && Units[0].IsAttacking == false && Units[0].Health > 0)
 					{
 						SwapUnits(selectedChar, 0);
 						playerInv.CharSwap(selectedChar, 0);
 						Swap = SelectedState.deselected;
 					}
-					if ((Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState)) && Units[1].IsAttacking == false)
+					if ((Config.singelKeyPress(Keys.NumPad2, kbState, PrevkbState) || Config.singelKeyPress(Keys.D2, kbState, PrevkbState)) && Units[1].IsAttacking == false && Units[1].Health > 0)
 					{
 						SwapUnits(selectedChar, 1);
 						playerInv.CharSwap(selectedChar, 1);
 						Swap = SelectedState.deselected;
 					}
-					if ((Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState)) && Units[2].IsAttacking == false)
+					if ((Config.singelKeyPress(Keys.NumPad3, kbState, PrevkbState) || Config.singelKeyPress(Keys.D3, kbState, PrevkbState)) && Units[2].IsAttacking == false && Units[2].Health > 0)
 					{
 						SwapUnits(selectedChar, 2);
 						playerInv.CharSwap(selectedChar, 2);
@@ -125,7 +125,7 @@ namespace WarrenWarriorsGame
 
                     for (int i = 0; i < playerButtons.Length; i++) //handles button control
                     {
-                        if (playerButtons[i].update(mState) && Units[i].IsAttacking == false)
+                        if (playerButtons[i].update(mState) && Units[i].IsAttacking == false && Units[i].Health > 0)
                         {
                             SwapUnits(selectedChar,i);
                             playerInv.CharSwap(selectedChar, i);

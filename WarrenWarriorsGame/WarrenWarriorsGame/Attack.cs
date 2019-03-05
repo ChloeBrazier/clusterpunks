@@ -123,10 +123,10 @@ namespace WarrenWarriorsGame
             ResetAttack(attacker, "Player");
         }
 
-        public void EndEnemyAttack(Enemy enemy, PlayerChar[] playerParty)
+        public void EndEnemyAttack(Enemy enemy, PlayerChar[] playerParty, int playerNumber)
         {
-            //roll for a randomly attacked player
-            int attackedPlayer = Config.getRandom(0, 3);
+            //set attacked player to the passed-in player number
+            int attackedPlayer = playerNumber;
 
             //damage the chosen player
             playerParty[attackedPlayer].Health = playerParty[attackedPlayer].Health - enemy.Atk.Damage;

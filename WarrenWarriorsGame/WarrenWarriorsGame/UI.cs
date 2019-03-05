@@ -49,11 +49,11 @@ namespace WarrenWarriorsGame
         {
             //Load each item that will be loaded into inventory slots.
             //add each item to the icon storage dictionary with enum keys and texture values
-            iconStorage.Add(Item.Empty, coolGame.Content.Load<Texture2D>("DefaultAttackIcon"));
-            iconStorage.Add(Item.Nails, coolGame.Content.Load<Texture2D>("BladeIcon"));
-            iconStorage.Add(Item.Stick, coolGame.Content.Load<Texture2D>("HandleIcon"));
-            iconStorage.Add(Item.SpikeBat, coolGame.Content.Load<Texture2D>("KnifeIcon"));
-            iconStorage.Add(Item.SpikeTorch, coolGame.Content.Load<Texture2D>("HotKnifeIcon"));
+            iconStorage.Add(Item.Empty, coolGame.Content.Load<Texture2D>("NewDefaultAttackSprite"));
+            iconStorage.Add(Item.Nails, coolGame.Content.Load<Texture2D>("NewBladeIcon"));
+            iconStorage.Add(Item.Stick, coolGame.Content.Load<Texture2D>("NewHandleIcon"));
+            iconStorage.Add(Item.SpikeBat, coolGame.Content.Load<Texture2D>("NewKnifeIcon"));
+            iconStorage.Add(Item.SpikeTorch, coolGame.Content.Load<Texture2D>("NewHotKnifeSprite"));
             iconStorage.Add(Item.Matches, coolGame.Content.Load<Texture2D>("NewMatchSprite"));
             iconStorage.Add(Item.Torch, coolGame.Content.Load<Texture2D>("NewTorchSprite"));
              //missing the sprite for the Item.Hotnails
@@ -62,7 +62,7 @@ namespace WarrenWarriorsGame
             gameUI.Add(coolGame.Content.Load<Texture2D>("HealthIcon")); //0
             gameUI.Add(coolGame.Content.Load<Texture2D>("InventoryIcon")); //1
             gameUI.Add(coolGame.Content.Load<Texture2D>("BasicUIBackground")); //2
-            gameUI.Add(coolGame.Content.Load<Texture2D>("DefaultAttackIcon")); //3
+            gameUI.Add(coolGame.Content.Load<Texture2D>("NewDefaultAttackSprite")); //3
             gameUI.Add(coolGame.Content.Load<Texture2D>("btnNormal")); //4
             gameUI.Add(coolGame.Content.Load<Texture2D>("btnHovered")); //5
         }

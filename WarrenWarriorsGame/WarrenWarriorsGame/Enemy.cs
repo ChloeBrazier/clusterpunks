@@ -149,33 +149,53 @@ namespace WarrenWarriorsGame
             //and made an if statement to change text color when attacking
             Vector2 pos = new Vector2(470, 0) + position * 5 * Config.LineSpacing;
 
-            if (isAttacking != true)
+            //draw enemy based on its health
+            if(this.Health > 0)
             {
-                sb.DrawString(font, string.Format("{0}/{1}/{2:2.2}", name, Health, "Cooldown: " + string.Format("{0: 0.00}", cooldown)), pos, Color.Black);
-                sb.Draw(sprite, new Rectangle((int) pos.X + 40, (int) pos.Y - 80, 212, 300), Color.White);
+                if (isAttacking != true)
+                {
+                    //enemy is drawn normally on cooldown
+                    sb.DrawString(font, string.Format("{0}/{1}/{2:2.2}", name, Health, "Cooldown: " + string.Format("{0: 0.00}", cooldown)), pos, Color.Black);
+                    sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.White);
+                }
+                else
+                {
+                    //enemy turns red when it starts to attack
+                    sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Red);
+                    sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.PaleVioletRed);
+                }
             }
             else
             {
-                sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Red);
-                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.PaleVioletRed);
+                //enemy is grayed out when dead
+                sb.DrawString(font, string.Format("{0}/{1}", name, "Dead"), pos, Color.Black);
+                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.Gray);
             }
         }
         
         public override void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time)
         {
-            
-            //set isAttacking to true
-            isAttacking = true;
-
-            //enemy starts their attack timer
-            atk.Length = atk.Length - time.ElapsedGameTime.TotalSeconds;
-
-            //execute attack length when timer runs down
-            if (atk.Length <= 0)
+            //enemy only takes action if it has health
+            if(this.Health > 0)
             {
-                this.Atk.EndEnemyAttack(this, playerParty);
+                //set isAttacking to true
+                isAttacking = true;
+
+                //roll for a randomly attacked player
+                int attackedPlayer = Config.getRandom(0, 3);
+
+                //enemy starts their attack timer
+                atk.Length = atk.Length - time.ElapsedGameTime.TotalSeconds;
+
+                //inform the user which player is being attacked(Will be implemented later)
+
+                //execute attack when timer runs down
+                if (atk.Length <= 0)
+                {
+
+                    this.Atk.EndEnemyAttack(this, playerParty, attackedPlayer);
+                }
             }
-            
         }
 
         public void CoolDown(GameTime time)
@@ -193,14 +213,18 @@ namespace WarrenWarriorsGame
             }
         }
 
+        //Method to load in custom enemies
         public string LoadEnemy(string filename)
         {
-
+            //Fie Reader
             System.IO.StreamReader reader = new StreamReader(filename);
             
+            //Storage Variables
             int attack;
             int speed;
             int cooldownTime;
+
+            //Data Reading
             name = reader.ReadLine();
             Int32.TryParse(reader.ReadLine(), out health);
             Int32.TryParse(reader.ReadLine(), out attack);
@@ -209,8 +233,9 @@ namespace WarrenWarriorsGame
             Int32.TryParse(reader.ReadLine(), out cooldownTime);
             cooldown = cooldownTime;
             string longName = reader.ReadLine();
-            reader.Close();
+            reader.Close(); //Close Reader
 
+            //Code to reduce the sprite filename to just the name
             String[] storage = longName.Split('\\');
             string shorterName = storage[storage.Length-1];
             String[] secondStorage = shorterName.Split('.');

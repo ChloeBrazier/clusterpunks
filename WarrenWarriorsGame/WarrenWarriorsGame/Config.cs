@@ -10,6 +10,14 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
+    //enum for game states
+    public enum GameState
+    {
+        Menu,
+        Combat,
+        GameOver
+    }
+
 	public enum CharType //used for generic character generation
 	{
 		Heavy,
@@ -27,7 +35,6 @@ namespace WarrenWarriorsGame
 		SpikeBat,
 		HotNails,
 		SpikeTorch
-
 	}
 	public enum SelectedState //finite state machine used for moving around characters
 	{
@@ -40,7 +47,6 @@ namespace WarrenWarriorsGame
         Default,
         Hovered,
         Selected
-
     }
 
     //enum used to determine enemy stats during enemy creation
