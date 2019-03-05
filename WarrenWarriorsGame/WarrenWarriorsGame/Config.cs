@@ -52,6 +52,11 @@ namespace WarrenWarriorsGame
         Custom
     }
 
+    /// <summary>
+    /// Warren Warriors
+    /// John Bateman
+    /// Config is a static class that holds several generic methods and items
+    /// </summary>
 	public static class Config
 	{
 

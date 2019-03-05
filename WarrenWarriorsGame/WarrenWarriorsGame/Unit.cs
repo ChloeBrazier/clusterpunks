@@ -9,7 +9,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
-	public abstract class Unit //a class meant to be used for a generic handler
+    /// <summary>
+    /// John Bateman
+    /// a class meant to be used for a generic handler as well as being used as an outline for the enemy and ai
+    /// </summary>
+	public abstract class Unit 
 	{
         protected string name;
         protected int health;

@@ -9,6 +9,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace WarrenWarriorsGame
 {
+    /// <summary>
+    /// Warren Warriors
+    /// John Bateman
+    /// items held in player inventory. hold an attack 
+    /// </summary>
     public class CraftItem
     {
         private Attack dmg; // holds how much damage the attack should do

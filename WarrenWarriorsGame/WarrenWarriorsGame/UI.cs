@@ -56,7 +56,7 @@ namespace WarrenWarriorsGame
             iconStorage.Add(Item.SpikeTorch, coolGame.Content.Load<Texture2D>("HotKnifeIcon"));
             iconStorage.Add(Item.Matches, coolGame.Content.Load<Texture2D>("NewMatchSprite"));
             iconStorage.Add(Item.Torch, coolGame.Content.Load<Texture2D>("NewTorchSprite"));
-             
+             //missing the sprite for the Item.Hotnails
 
             //Load important information that will be displayed in the UI.
             gameUI.Add(coolGame.Content.Load<Texture2D>("HealthIcon")); //0

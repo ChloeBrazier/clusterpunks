@@ -11,7 +11,7 @@ namespace WarrenWarriorsGame
 {
     /// <summary>
     /// Warren Warriors
-    /// John, Liam, Eddie, Noah
+    /// John
     /// Handles the players inventory as well as crafting
     /// 3/2/2019
     /// </summary>
