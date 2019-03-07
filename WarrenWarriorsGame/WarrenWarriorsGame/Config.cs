@@ -99,7 +99,7 @@ namespace WarrenWarriorsGame
 		/// <param name="kb">The Current keyboard state</param>
 		/// <param name="pkb">The Previous keyboard state</param>
 		/// <returns>true if this is the first frame the key is down</returns>
-		public static  bool singelKeyPress(Keys key,KeyboardState kb, KeyboardState pkb)
+		public static  bool SingleKeyPress(Keys key,KeyboardState kb, KeyboardState pkb)
 		{
 			if (kb.IsKeyDown(key) && pkb.IsKeyUp(key))
 			{
@@ -137,13 +137,13 @@ namespace WarrenWarriorsGame
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The Exclusive Upper Bound</param>
         /// <returns></returns>
-        public static int getRandom(int min, int max)
+        public static int GetRandom(int min, int max)
 		{
 			return rand.Next(min, max);
 		}
 
 		//gets item names from temporary output
-		public static string getItemName(Item i)
+		public static string GetItemName(Item i)
 		{
 			switch( i)
 			{

@@ -54,7 +54,7 @@ namespace WarrenWarriorsGame
 		/// </summary>
 		/// <param name="ms">the current mouse state</param>
 		/// <returns></returns>
-        public Boolean update(MouseState ms)
+        public Boolean Update(MouseState ms)
         {
 			//don't worry about this it just works
             if (state != BtnState.Selected) //if the button is not selected
@@ -86,7 +86,7 @@ namespace WarrenWarriorsGame
 
         }
 
-        public void draw(SpriteBatch sb)
+        public void Draw(SpriteBatch sb)
         {
             //draws the button in its current state
             switch (state)
@@ -105,12 +105,12 @@ namespace WarrenWarriorsGame
         }
 
 
-        public void select() //used to be called by other methods to select or deselect buttons from other methods
+        public void Select() //used to be called by other methods to select or deselect buttons from other methods
         {
             state = BtnState.Selected;
         }
 
-        public void deselect()
+        public void Deselect()
         {
             state = BtnState.Default;
         }

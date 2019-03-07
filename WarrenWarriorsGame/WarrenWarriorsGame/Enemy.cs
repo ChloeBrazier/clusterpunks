@@ -183,7 +183,7 @@ namespace WarrenWarriorsGame
                 isAttacking = true;
 
                 //roll for a randomly attacked player
-                int attackedPlayer = Config.getRandom(0, 3);
+                int attackedPlayer = Config.GetRandom(0, 3);
 
                 //enemy starts their attack timer
                 atk.Length = atk.Length - time.ElapsedGameTime.TotalSeconds;

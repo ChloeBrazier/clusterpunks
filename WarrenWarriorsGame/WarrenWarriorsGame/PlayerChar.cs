@@ -62,29 +62,29 @@ namespace WarrenWarriorsGame
 			switch (type)
 			{
 				case CharType.Heavy:
-					health = Config.getRandom(40, 51);
-					atk = new Attack(Config.getRandom(10, 16), Config.getRandom(5, 11));
+					health = Config.GetRandom(40, 51);
+					atk = new Attack(Config.GetRandom(10, 16), Config.GetRandom(5, 11));
 					name = "Kevin's Grand-Dad";
                     sprite = game.Content.Load<Texture2D>("player_char_ranger_red");
 
                     break;
 				case CharType.Medium:
-					health = Config.getRandom(30, 41);
+					health = Config.GetRandom(30, 41);
 					name = "Kevin's Dad";
                     sprite = game.Content.Load<Texture2D>("player_char_ranger_blue");
-                    if (Config.getRandom(1, 3) == 2)
+                    if (Config.GetRandom(1, 3) == 2)
 					{
-						atk = new Attack(Config.getRandom(10, 16), Config.getRandom(4, 6));
+						atk = new Attack(Config.GetRandom(10, 16), Config.GetRandom(4, 6));
 					}
 					else
 					{
-						atk = new Attack(Config.getRandom(10, 16), Config.getRandom(4, 6));
+						atk = new Attack(Config.GetRandom(10, 16), Config.GetRandom(4, 6));
 					}
 					
 					break;
 				case CharType.Light:
-					health = Config.getRandom(20, 31);
-					atk = new Attack(Config.getRandom(5, 11), Config.getRandom(1, 3));
+					health = Config.GetRandom(20, 31);
+					atk = new Attack(Config.GetRandom(5, 11), Config.GetRandom(1, 3));
 					name = "Kevin";
                     sprite = game.Content.Load<Texture2D>("player_char_ranger_fixed");
 

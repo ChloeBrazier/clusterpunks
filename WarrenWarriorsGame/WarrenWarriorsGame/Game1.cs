@@ -17,6 +17,8 @@ namespace WarrenWarriorsGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+
         UI gameUI;
 		KeyboardState kbState; //keyboard states for updating
 		KeyboardState PrevkbState;
@@ -129,7 +131,7 @@ namespace WarrenWarriorsGame
                 case GameState.Menu:
 
                     //start game when the player presses enter
-                    if (Config.singelKeyPress(Keys.Enter, kbState, PrevkbState) == true)
+                    if (Config.SingleKeyPress(Keys.Enter, kbState, PrevkbState) == true)
                     {
                         gameState = GameState.Combat;
                     }
@@ -147,7 +149,7 @@ namespace WarrenWarriorsGame
                     }
                     
                     //now takes in gametime for use with the Attack classe's update method (also an enemy for temporary testing)
-                    handler.update(kbState, PrevkbState, mState, prevMsState, gameTime, buckShot); //updates all of the keyboardhandler
+                    handler.Update(kbState, PrevkbState, mState, prevMsState, gameTime, buckShot); //updates all of the keyboardhandler
 
                     //update enemy and handle combat
 
@@ -172,7 +174,7 @@ namespace WarrenWarriorsGame
                 case GameState.GameOver:
 
                     //return to menu when player presses Enter
-                    if (Config.singelKeyPress(Keys.Enter, kbState, PrevkbState) == true)
+                    if (Config.SingleKeyPress(Keys.Enter, kbState, PrevkbState) == true)
                     {
                         gameState = GameState.Menu;
                     }
