@@ -75,7 +75,7 @@ namespace WarrenWarriorsGame
 		//random used for random generation
 		private static Random rand = new Random();
 
-		public static Vector2 LineSpacing = new Vector2(0,14);
+		public static Vector2 LineSpacing = new Vector2(30, 0);
 
 
         public static CraftItem[] AllItems = {new CraftItem(Item.Empty),

@@ -107,26 +107,52 @@ namespace WarrenWarriorsGame
 			//---temporary solution---//
             //Eddie: Added readout for formatted attack speed to test combat and
             //and made an if statement to change text color when attacking
-			Vector2 pos = new Vector2(12,0) + position * 5 * Config.LineSpacing;
+			Vector2 pos = position * 5 * Config.LineSpacing;
+            pos.X = pos.X - 10;
+            pos.Y = pos.Y - 40;
 
-            if(this.Health > 0)
+            //vector for character info
+            Vector2 textPos = new Vector2(470, 100);
+            textPos.Y = textPos.Y * (1 + position);
+            textPos.Y = textPos.Y + 100;
+
+            if (this.Health > 0)
             {
                 if (isAttacking != true)
                 {
-                    sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Black);
-                    sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.White);
+                    sb.DrawString(
+                        font, 
+                        string.Format("{0}/{1}/{2}", 
+                        name, 
+                        health, 
+                        "Attack time: " + string.Format("{0: 0.00}", atk.Length)), 
+                        textPos, 
+                        Color.Black);
+                    sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 300), Color.White);
                 }
                 else
                 {
-                    sb.DrawString(font, string.Format("{0}/{1}/{2}", name, health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Red);
-                    sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.PaleVioletRed);
+                    sb.DrawString(
+                        font, 
+                        string.Format("{0}/{1}/{2}", 
+                        name, 
+                        health, 
+                        "Attack time: " + string.Format("{0: 0.00}", 
+                        atk.Length)),
+                        textPos, 
+                        Color.Red);
+                    sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 300), Color.PaleVioletRed);
                 }
             }
             else
             {
                 //player is grayed out when dead
-                sb.DrawString(font, string.Format("{0}/{1}", name, "Dead"), pos, Color.Black);
-                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.Gray);
+                sb.DrawString(
+                    font, 
+                    string.Format("{0}/{1}", name, "Dead"),
+                    textPos, 
+                    Color.Black);
+                sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 300), Color.Gray);
             }
             
 		}
