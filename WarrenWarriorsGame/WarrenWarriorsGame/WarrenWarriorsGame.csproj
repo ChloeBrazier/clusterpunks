@@ -46,6 +46,8 @@
     <Compile Include="CombatHandler.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="CraftItem.cs" />
+    <Compile Include="Dungeon.cs" />
+    <Compile Include="Encounter.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Inventory.cs" />

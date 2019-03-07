@@ -20,6 +20,7 @@ namespace WarrenWarriorsGame
         private Attack dmg; // holds how much damage the attack should do
         List<Item> Components = new List<Item>(); //holds what components an item has. is used for crafting
         Item itemType;
+        int Duration; //not yet implemented, will be used to balance items
 
         //accessor for item damage
         public Attack Dmg

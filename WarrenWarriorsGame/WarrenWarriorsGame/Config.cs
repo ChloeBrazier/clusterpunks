@@ -63,6 +63,14 @@ namespace WarrenWarriorsGame
         Custom
     }
 
+    public enum Difficulty
+    {
+        Easy,
+        Medium,
+        Hard,
+        Boss
+    }
+
     /// <summary>
     /// Warren Warriors
     /// John Bateman
