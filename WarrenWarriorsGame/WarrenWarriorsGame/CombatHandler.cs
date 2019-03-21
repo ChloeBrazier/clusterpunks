@@ -22,10 +22,13 @@ namespace WarrenWarriorsGame
         private bool inEncounter;
 
         //field for the player party
-        PlayerChar[] playerParty;
+        private PlayerChar[] playerParty;
 
         //field for enemy
-        Enemy enemy;
+        private Enemy enemy;
+
+        //field for a string queue for the battle log
+        private Queue<string> logQueue;
         
         public CombatHandler(PlayerChar[] Units, Enemy nme)
         {
@@ -67,6 +70,23 @@ namespace WarrenWarriorsGame
             }
 
             return partyHealth;
+        }
+
+        /// <summary>
+        /// basic method for the battle log that needs fleshing out
+        /// must add way to handle all info in the log and properly display it
+        /// (very basic)
+        /// </summary>
+        /// <param name="battleInfo"> takes in a string based on a given event in battle </param>
+        /// <returns> the information added to the log </returns>
+        public string BattleLog(string battleInfo)
+        {
+            //add the string to the battle log queue
+            logQueue.Enqueue(battleInfo);
+
+            //return battle log info to be printed on screen
+            string logString = logQueue.Dequeue();
+            return logString;
         }
     }
 }
