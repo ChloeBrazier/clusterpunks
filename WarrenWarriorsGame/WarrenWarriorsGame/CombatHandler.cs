@@ -84,6 +84,12 @@ namespace WarrenWarriorsGame
             //add the string to the battle log queue
             logQueue.Enqueue(battleInfo);
 
+            //plans for implementation: 
+            // - add string to queue when character attaks
+            // - print all string in queue
+            // - remove the item at the front of the queue if count is > x number
+            // - draw latest info in the log in a different color?
+
             //return battle log info to be printed on screen
             string logString = logQueue.Dequeue();
             return logString;
