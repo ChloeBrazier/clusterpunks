@@ -74,7 +74,6 @@ namespace WarrenWarriorsGame
 		}
 
         
-
         public bool StartAttack(CraftItem[,] inventory, CraftItem usedItem, int x, int y)
         {
             //set player damage to item damage (only if armed)
@@ -100,6 +99,9 @@ namespace WarrenWarriorsGame
 
             //set isAttacking to false
             attacker.IsAttacking = false;
+
+            //add attack information to the battle log
+            BattleLog.AddPlayerAttack(attacker.Name, attackTarget.Name, attacker.Atk.damage);
 
             //reset attack timer
             ResetAttack(attacker, "Player");

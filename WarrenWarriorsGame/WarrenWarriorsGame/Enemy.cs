@@ -62,6 +62,15 @@ namespace WarrenWarriorsGame
             }
         }
 
+        //accessor for name
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
         public Enemy(SpriteFont enemyFont, EnemyType type, PlayerChar[] Units)
         {
             //set font based on the spritefont that's passed in
@@ -188,12 +197,12 @@ namespace WarrenWarriorsGame
                 //enemy starts their attack timer
                 atk.Length = atk.Length - time.ElapsedGameTime.TotalSeconds;
 
-                //inform the user which player is being attacked(Will be implemented later)
+                //inform the user which player is being attacked
+                BattleLog.AddEnemyAttack(this.Name, playerParty[attackedPlayer].Name);
 
                 //execute attack when timer runs down
                 if (atk.Length <= 0)
                 {
-
                     this.Atk.EndEnemyAttack(this, playerParty, attackedPlayer);
                 }
             }

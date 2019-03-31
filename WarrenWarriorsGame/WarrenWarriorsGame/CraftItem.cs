@@ -22,6 +22,9 @@ namespace WarrenWarriorsGame
         Item itemType;
         int Duration; //not yet implemented, will be used to balance items
 
+        //string to hold an item's name
+        string itemName;
+
         //accessor for item damage
         public Attack Dmg
         {
@@ -39,6 +42,15 @@ namespace WarrenWarriorsGame
                 return itemType;
             }
         }
+
+        //accessor for item name
+        public string ItemName
+        {
+            get
+            {
+                return itemName;
+            }
+        }
 		
         public CraftItem(Item Type) //create generic item generation
         {
@@ -51,35 +63,44 @@ namespace WarrenWarriorsGame
             {
                 case Item.Empty:
 
+                    itemName = "unarmed";
+
                     break;
                 case Item.Stick: //individual values can be read in or changed later
+                    itemName = "a stick";
                     Components.Add(Item.Stick);
                     dmg = new Attack(3, 4);
                     break;
                 case Item.Nails:
+                    itemName = "some nails";
                     Components.Add(Item.Nails);
                     dmg = new Attack(3, 4);
                     break;
                 case Item.Matches:
+                    itemName = "some matches";
                     Components.Add(Item.Matches);
                     dmg = new Attack(3, 4);
                     break;
                 case Item.Torch:
+                    itemName = "a torch";
                     Components.Add(Item.Stick);
                     Components.Add(Item.Matches);
                     dmg = new Attack(5, 5);
                     break;
                 case Item.SpikeBat:
+                    itemName = "a spike bat";
                     Components.Add(Item.Stick);
                     Components.Add(Item.Nails);
                     dmg = new Attack(5, 5);
                     break;
                 case Item.HotNails:
+                    itemName = "some hot nails";
                     Components.Add(Item.Nails);
                     Components.Add(Item.Matches);
                     dmg = new Attack(5, 5);
                     break;
                 case Item.SpikeTorch:
+                    itemName = "a spike torch";
                     Components.Add(Item.Nails);
                     Components.Add(Item.Matches);
                     Components.Add(Item.Stick);
