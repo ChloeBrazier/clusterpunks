@@ -73,31 +73,7 @@ namespace WarrenWarriorsGame
             length = time;
 		}
 
-        /// <summary>
-        /// WILL REMOVE WHEN FEATURES DESCRIBED HAVE ALL BEEN IMPLEMENTED
-        /// </summary>
-        public void CombatEncounter()
-        {
-            //encounter begins if (entire enemy sprite is on screen?)
-            //(a timer counts down and an enemy is spawned?)
-
-            //if the game ends up having any sort of player movement, lock player characters 
-            //and the game screen in place until the encounter is over
-
-            //bool inEncounter = true;
-
-            //enemy attacks repeatedly until they die
-
-            //player characters attack based on player input (duh)
-            //once a player selects a weapon to attack with and chooses to attack,
-            //a player attack is initiated on a timer based on weapon type and base player
-            //attack speed
-
-            //players and enemy take damage when a given attack timer ends
-            //when a player character attacks the selected item is removed from their inventory
-
-            //encounter ends when enemy health is 0
-        }
+        
 
         public bool StartAttack(CraftItem[,] inventory, CraftItem usedItem, int x, int y)
         {
