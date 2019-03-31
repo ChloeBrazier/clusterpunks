@@ -165,6 +165,12 @@ namespace WarrenWarriorsGame
                 playerButtons[j].Draw(spriteBatch);
             }
 
+            //draw the health icon
+            for (int j = 0; j < 3; j++)
+            {
+                spriteBatch.Draw(GameUI.GameUI[0], new Rectangle(10 +130*j, 240, 50, 50), Color.White);
+            }
+
             //draws the players numbers
             for (int j = 0; j < Units.Length; j++)
 			{
