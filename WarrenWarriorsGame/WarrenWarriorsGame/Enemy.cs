@@ -110,7 +110,7 @@ namespace WarrenWarriorsGame
 
                     break;
                 case EnemyType.Custom:
-                    enemySprite = LoadEnemy("../../../../Content/ClemTestFile.enemy");
+                    enemySprite = LoadEnemy("../../../../Content/[PUNISHED]Kevin.enemy");
                     break;
             }
 
@@ -166,20 +166,20 @@ namespace WarrenWarriorsGame
                 {
                     //enemy is drawn normally on cooldown
                     sb.DrawString(font, string.Format("{0}/{1}/{2:2.2}", name, Health, "Cooldown: " + string.Format("{0: 0.00}", cooldown)), pos, Color.Black);
-                    sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.White);
+                    sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y, 212, 300), Color.White);
                 }
                 else
                 {
                     //enemy turns red when it starts to attack
                     sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), pos, Color.Red);
-                    sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.PaleVioletRed);
+                    sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y, 212, 300), Color.PaleVioletRed);
                 }
             }
             else
             {
                 //enemy is grayed out when dead
                 sb.DrawString(font, string.Format("{0}/{1}", name, "Dead"), pos, Color.Black);
-                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y - 80, 212, 300), Color.Gray);
+                sb.Draw(sprite, new Rectangle((int)pos.X + 40, (int)pos.Y, 212, 300), Color.Gray);
             }
         }
         

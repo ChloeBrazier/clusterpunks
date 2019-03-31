@@ -73,6 +73,7 @@ namespace WarrenWarriorsGame
             length = time;
 		}
 
+        
         public bool StartAttack(CraftItem[,] inventory, CraftItem usedItem, int x, int y)
         {
             //set player damage to item damage (only if armed)
