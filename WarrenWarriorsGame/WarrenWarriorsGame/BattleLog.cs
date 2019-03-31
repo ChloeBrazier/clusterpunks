@@ -20,7 +20,7 @@ namespace WarrenWarriorsGame
     static class BattleLog
     {
         //field for a string queue for the battle log
-        static private Queue<string> logQueue;
+        static private Queue<string> logQueue = new Queue<string>();
 
         /// <summary>
         /// adds a string to the queue summarizing a player character's attack

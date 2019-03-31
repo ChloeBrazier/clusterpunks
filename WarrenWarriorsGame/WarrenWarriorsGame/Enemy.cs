@@ -27,6 +27,9 @@ namespace WarrenWarriorsGame
         //Field to store enemy sprite when loaded in
         private string enemySprite;
 
+        //field for an int for an attacked player
+        int attackedPlayer;
+
         //public accessor for IsAttacking bool
         public bool IsAttacking
         {
@@ -188,18 +191,9 @@ namespace WarrenWarriorsGame
             //enemy only takes action if it has health
             if(this.Health > 0)
             {
-                //set isAttacking to true
-                isAttacking = true;
-
-                //roll for a randomly attacked player
-                int attackedPlayer = Config.GetRandom(0, 3);
-
                 //enemy starts their attack timer
                 atk.Length = atk.Length - time.ElapsedGameTime.TotalSeconds;
-
-                //inform the user which player is being attacked
-                BattleLog.AddEnemyAttack(this.Name, playerParty[attackedPlayer].Name);
-
+                
                 //execute attack when timer runs down
                 if (atk.Length <= 0)
                 {
@@ -220,6 +214,12 @@ namespace WarrenWarriorsGame
                 cooldown = 15;
                 atk.ResetAttack(this, "Enemy");
                 isAttacking = true;
+
+                //roll for a randomly attacked player
+                attackedPlayer = Config.GetRandom(0, 3);
+
+                //inform the user which player is being attacked
+                BattleLog.AddEnemyAttack(this.Name, playerParty[attackedPlayer].Name);
             }
         }
 
