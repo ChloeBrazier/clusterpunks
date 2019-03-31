@@ -54,6 +54,15 @@ namespace WarrenWarriorsGame
             }
         }
 
+        //accessor for name
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
         public PlayerChar(SpriteFont spriteFont, Game game, CharType type)
 		{
 			font = spriteFont;

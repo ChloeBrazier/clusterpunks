@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Attack.cs" />
+    <Compile Include="BattleLog.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="CombatHandler.cs" />
     <Compile Include="Config.cs" />

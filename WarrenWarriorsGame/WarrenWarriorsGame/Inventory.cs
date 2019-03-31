@@ -342,7 +342,7 @@ namespace WarrenWarriorsGame
 								break;
 							case SelectedState.selected:
 								items[SelectedItemX, SelectedItemY] = new CraftItem(items[SelectedItemX, SelectedItemY], selectedToCraft);
-
+                                BattleLog.AddCraft(items[SelectedItemX, SelectedItemY]);
 								craftState = SelectedState.deselected;
 								craftButton.Deselect();
 
