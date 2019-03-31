@@ -127,14 +127,23 @@ namespace WarrenWarriorsGame
 
             if (this.Health > 0)
             {
+
+                sb.DrawString(font, health.ToString(), new Vector2(25 + 130 * position, 255), Color.Black);
+
+
+
+
                 if (isAttacking != true)
                 {
                     sb.DrawString(
                         font, 
-                        string.Format("{0}/{1}/{2}", 
-                        name, 
-                        health, 
-                        "Attack time: " + string.Format("{0: 0.00}", atk.Length)), 
+                        string.Format
+                            ("{0}/{1}/{2}", 
+                            name, 
+                            health, 
+                            "Attack time: " + string.Format
+                                ("{0: 0.00}", atk.Length)
+                            ), 
                         textPos, 
                         Color.Black);
                     sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 300), Color.White);
@@ -143,11 +152,13 @@ namespace WarrenWarriorsGame
                 {
                     sb.DrawString(
                         font, 
-                        string.Format("{0}/{1}/{2}", 
-                        name, 
-                        health, 
-                        "Attack time: " + string.Format("{0: 0.00}", 
-                        atk.Length)),
+                        string.Format
+                            ("{0}/{1}/{2}", 
+                            name, 
+                            health, 
+                            "Attack time: " + string.Format
+                                ("{0: 0.00}", atk.Length)
+                            ),
                         textPos, 
                         Color.Red);
                     sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 300), Color.PaleVioletRed);
