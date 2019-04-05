@@ -30,6 +30,9 @@ namespace WarrenWarriorsGame
         //field for an int for an attacked player
         int attackedPlayer;
 
+        //field to hold a reference to the enemy's current target
+        private PlayerChar currentTarget;
+
         //public accessor for IsAttacking bool
         public bool IsAttacking
         {
@@ -193,6 +196,17 @@ namespace WarrenWarriorsGame
             {
                 //enemy starts their attack timer
                 atk.Length = atk.Length - time.ElapsedGameTime.TotalSeconds;
+
+                //if the position of the attacked party member is swapped,
+                //inform the player that the swapped-in member is being attacked
+                if(currentTarget != playerParty[attackedPlayer])
+                {
+                    //add info to the combat log
+                    BattleLog.ChangeEnemyTarget(this.name, playerParty[attackedPlayer].Name);
+
+                    //set current target to the new attacked player
+                    currentTarget = playerParty[attackedPlayer];
+                }
                 
                 //execute attack when timer runs down
                 if (atk.Length <= 0)
@@ -218,8 +232,11 @@ namespace WarrenWarriorsGame
                 //roll for a randomly attacked player
                 attackedPlayer = Config.GetRandom(0, 3);
 
+                //set current target to the player in the spot that was rolled
+                currentTarget = playerParty[attackedPlayer];
+
                 //inform the user which player is being attacked
-                BattleLog.AddEnemyAttack(this.Name, playerParty[attackedPlayer].Name);
+                BattleLog.AddEnemyAttack(this.name, playerParty[attackedPlayer].Name);
             }
         }
 

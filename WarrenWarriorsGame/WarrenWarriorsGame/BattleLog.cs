@@ -31,7 +31,6 @@ namespace WarrenWarriorsGame
         public static void AddPlayerAttack(string charName, string targetName, int damage)
         {
             logQueue.Enqueue(charName + " attacked " + targetName + " for " + damage + " damage");
-            CheckQueue();
         }
 
         /// <summary>
@@ -42,7 +41,6 @@ namespace WarrenWarriorsGame
         public static void AddEnemyAttack(string enemyName, string targetName)
         {
             logQueue.Enqueue(enemyName + " is attacking " + targetName + "!");
-            CheckQueue();
         }
 
         /// <summary>
@@ -53,7 +51,6 @@ namespace WarrenWarriorsGame
         public static void ChangeEnemyTarget(string enemyName, string targetName)
         {
             logQueue.Enqueue(enemyName + " is now attacking " + targetName + "!");
-            CheckQueue();
         }
 
         /// <summary>
@@ -64,7 +61,6 @@ namespace WarrenWarriorsGame
         public static void AddCraft(CraftItem item)
         {
             logQueue.Enqueue("Crafted " + item.ItemName);
-            CheckQueue();
         }
 
         /// <summary>
@@ -85,6 +81,23 @@ namespace WarrenWarriorsGame
         public static void ClearLog()
         {
             logQueue.Clear();
+        }
+
+        /// <summary>
+        /// update method that prints the battle log on screen
+        /// </summary>
+        public static void Update(Game g, SpriteBatch sb, SpriteFont font)
+        {
+            CheckQueue();
+            foreach(string battleInfo in logQueue)
+            {
+                sb.DrawString(
+                    font, 
+                    battleInfo, 
+                    new Vector2((g.GraphicsDevice.Viewport.Width/2 * 2), g.GraphicsDevice.Viewport.Height/2), 
+                    Color.Black
+                    );
+            }
         }
     }
 }

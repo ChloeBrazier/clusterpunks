@@ -224,6 +224,9 @@ namespace WarrenWarriorsGame
                     //draw the enemy
                     buckShot.Draw(spriteBatch, 0);
 
+                    //update battlelog and draw it to the screen
+                    BattleLog.Update(this, spriteBatch, menuFont);
+
                     break;
                 case GameState.GameOver:
 
