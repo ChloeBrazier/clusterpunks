@@ -156,6 +156,9 @@ namespace WarrenWarriorsGame
                     //finish the creation of the item
                     dmg = i.dmg;
                     itemType = i.itemType;
+
+                    //add crafting notification to battle log
+                    BattleLog.AddCraft(this);
                 }
 
             }

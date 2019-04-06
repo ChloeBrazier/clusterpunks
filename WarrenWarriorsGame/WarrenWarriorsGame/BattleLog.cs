@@ -60,7 +60,7 @@ namespace WarrenWarriorsGame
         /// <param name="item"> the item that was crafted </param>
         public static void AddCraft(CraftItem item)
         {
-            logQueue.Enqueue("Crafted " + item.ItemName);
+            logQueue.Enqueue("Crafted " + item.ToString());
         }
 
         /// <summary>
@@ -86,16 +86,36 @@ namespace WarrenWarriorsGame
         /// <summary>
         /// update method that prints the battle log on screen
         /// </summary>
-        public static void Update(Game g, SpriteBatch sb, SpriteFont font)
+        public static void Draw(Game g, SpriteBatch sb, SpriteFont font)
         {
+            //create a temporary vector to control spacing of log test
+            Vector2 logVector = new Vector2(400, (g.GraphicsDevice.Viewport.Height/3 * 2));
+            Console.WriteLine(logVector);
+
+            //run checkqueue to get rid of the oldest message in the log
             CheckQueue();
-            foreach(string battleInfo in logQueue)
+
+            //create temporary array to print log info
+            string[] logArray = logQueue.ToArray();
+
+            //create log text color that changes depending on whether
+            //the text is the latest in the log
+            Color logTextColor = Color.Black;
+
+            //print all info in the log
+            for(int i = 0; i < logArray.Length; i++)
             {
+                //change text to red if item is latest in the queue
+                if(i == logArray.Length - 1)
+                {
+                    logTextColor = Color.Red;
+                }
+
                 sb.DrawString(
                     font, 
-                    battleInfo, 
-                    new Vector2((g.GraphicsDevice.Viewport.Width/2 * 2), g.GraphicsDevice.Viewport.Height/2), 
-                    Color.Black
+                    logArray[i], 
+                    new Vector2(logVector.X, logVector.Y + (i * 15)), 
+                    logTextColor
                     );
             }
         }

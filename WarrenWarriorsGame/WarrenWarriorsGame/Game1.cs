@@ -141,12 +141,14 @@ namespace WarrenWarriorsGame
                     
                     //play background music (temp)
                     
-                    if(songStart == false)
-                    {
-                        MediaPlayer.Play(song);
-                        MediaPlayer.IsRepeating = true;
-                        songStart = true;
-                    }
+                    //Eddie: commented out because it was driving me crazy while testing
+
+                    //if(songStart == false)
+                    //{
+                    //    MediaPlayer.Play(song);
+                    //    MediaPlayer.IsRepeating = true;
+                    //    songStart = true;
+                    //}
                     
                     //now takes in gametime for use with the Attack classe's update method (also an enemy for temporary testing)
                     handler.Update(kbState, PrevkbState, mState, prevMsState, gameTime, buckShot); //updates all of the keyboardhandler
@@ -225,7 +227,7 @@ namespace WarrenWarriorsGame
                     buckShot.Draw(spriteBatch, 0);
 
                     //update battlelog and draw it to the screen
-                    BattleLog.Update(this, spriteBatch, menuFont);
+                    BattleLog.Draw(this, spriteBatch, menuFont);
 
                     break;
                 case GameState.GameOver:
