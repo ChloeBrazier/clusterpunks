@@ -28,9 +28,18 @@ namespace WarrenWarriorsGame
         /// <param name="charName"> The name of the player character who is attacking </param>
         /// <param name="targetName"> the enemy being attacked </param>
         /// <param name="item"> the item the player is attacking with </param>
-        public static void AddPlayerAttack(string charName, string targetName, int damage)
+        public static void AddPlayerAttackEnd(string charName, string targetName, int damage)
         {
             logQueue.Enqueue(charName + " attacked " + targetName + " for " + damage + " damage");
+        }
+
+        /// <summary>
+        /// adds a string that informs the user that a player character has started their attack
+        /// </summary>
+        /// <param name="player"> The party member whose attack has been initiated </param>
+        public static void AddPlayerAttackStart(PlayerChar player)
+        {
+            logQueue.Enqueue(player.Name + " is attacking the enemy!");
         }
 
         /// <summary>
@@ -51,6 +60,11 @@ namespace WarrenWarriorsGame
         public static void ChangeEnemyTarget(string enemyName, string targetName)
         {
             logQueue.Enqueue(enemyName + " is now attacking " + targetName + "!");
+        }
+
+        public static void AddEnemyAttackEnd(string enemyName, string targetName, int enemyDamage)
+        {
+            logQueue.Enqueue(enemyName + " attacked " + targetName + " for " + enemyDamage + " damage!");
         }
 
         /// <summary>

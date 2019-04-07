@@ -307,6 +307,9 @@ namespace WarrenWarriorsGame
                         //party member attacks based on the selected item's x value
                         //start the party member's attack and set isAttacking to true
                         Units[SelectedItemX].IsAttacking = Units[SelectedItemX].Atk.StartAttack(items, usedItem, SelectedItemX, SelectedItemY);
+
+                        //send info for attack initiation to battle log
+                        BattleLog.AddPlayerAttackStart(Units[SelectedItemX]);
                     }
 
 					//handles mouse controls

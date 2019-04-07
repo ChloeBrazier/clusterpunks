@@ -101,7 +101,7 @@ namespace WarrenWarriorsGame
             attacker.IsAttacking = false;
 
             //add attack information to the battle log
-            BattleLog.AddPlayerAttack(attacker.Name, attackTarget.Name, attacker.Atk.damage);
+            BattleLog.AddPlayerAttackEnd(attacker.Name, attackTarget.Name, attacker.Atk.damage);
 
             //reset attack timer
             ResetAttack(attacker, "Player");
@@ -114,6 +114,9 @@ namespace WarrenWarriorsGame
 
             //damage the chosen player
             playerParty[attackedPlayer].Health = playerParty[attackedPlayer].Health - enemy.Atk.Damage;
+
+            //add info to battle log about the enemy's attack
+            BattleLog.AddEnemyAttackEnd(enemy.Name, playerParty[attackedPlayer].Name, enemy.Atk.damage);
 
             //set enemy's isAttacking to false
             enemy.IsAttacking = false;
