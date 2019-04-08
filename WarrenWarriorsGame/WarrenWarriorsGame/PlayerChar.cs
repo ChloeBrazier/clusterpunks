@@ -143,7 +143,7 @@ namespace WarrenWarriorsGame
                             //), 
                         //textPos, 
                         //Color.Black);
-                    sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 300), Color.White);
+                    sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.White);
                 }
                 else
                 {
@@ -158,7 +158,7 @@ namespace WarrenWarriorsGame
                             //),
                         //textPos, 
                         //Color.Red);
-                    sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 300), Color.PaleVioletRed);
+                    sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.PaleVioletRed);
                 }
             }
             else
@@ -169,7 +169,7 @@ namespace WarrenWarriorsGame
                     //string.Format("{0}/{1}", name, "Dead"),
                     //textPos, 
                     //Color.Black);
-                sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 300), Color.Gray);
+                sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.Gray);
             }
             
 		}

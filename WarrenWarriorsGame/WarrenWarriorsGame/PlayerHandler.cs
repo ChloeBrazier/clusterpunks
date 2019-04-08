@@ -171,7 +171,7 @@ namespace WarrenWarriorsGame
             //draw the health icon
             for (int j = 0; j < 3; j++)
             {
-                spriteBatch.Draw(GameUI.GameUI[0], new Rectangle(10 +130*j, 240, 50, 50), Color.White);
+                spriteBatch.Draw(GameUI.GameUI[0], new Rectangle(Config.INV_BUTTON_X_LOC +Config.PLAYER_BTN_SPACING*j, Config.PLAYER_BTN_Y_POS, 50, 50), Color.White);
             }
 
             //draws the players numbers
@@ -186,7 +186,7 @@ namespace WarrenWarriorsGame
 					drawcolor = Color.MonoGameOrange;
 				}
 
-				spriteBatch.DrawString(text, string.Format("{0}:   ", j + 1), j * 5 * Config.LineSpacing, drawcolor);
+				spriteBatch.DrawString(text, string.Format("{0}: {1}  ", j + 1,Units[j].Name), j * 5 * Config.LineSpacing, drawcolor);
                 spriteBatch.DrawString(text, (j + 1).ToString(), new Vector2(95 + j * 130, 265), drawcolor);
 
 			}
