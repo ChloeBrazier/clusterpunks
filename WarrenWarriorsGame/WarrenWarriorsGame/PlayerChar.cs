@@ -128,7 +128,7 @@ namespace WarrenWarriorsGame
             if (this.Health > 0)
             {
 
-                sb.DrawString(font, health.ToString(), new Vector2(25 + 130 * position, 255), Color.Black);
+                sb.DrawString(font, health.ToString(), new Vector2(Config.HEALTH_X_POS + Config.HEALTH_SPACING * position, Config.HEALTH_Y_POS), Color.Black);
                 
                 if (isAttacking != true)
                 {

@@ -125,6 +125,10 @@ namespace WarrenWarriorsGame
 		public const int PLAYER_AVATAR_Y_LOC = 20;
 		public const int PLAYER_AVATAR_SPACING = 20;
 
+		public const int HEALTH_X_POS = 25;
+		public const int HEALTH_Y_POS = 255;
+		public const int HEALTH_SPACING = 140;
+
 		#endregion
 
 
