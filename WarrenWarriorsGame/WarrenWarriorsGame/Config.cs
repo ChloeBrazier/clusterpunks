@@ -72,14 +72,43 @@ namespace WarrenWarriorsGame
         Boss
     }
 
-    /// <summary>
-    /// Warren Warriors
-    /// John Bateman
-    /// Config is a static class that holds several generic methods and items
-    /// 3/8/2019
-    /// </summary>
+	
+
+	/// <summary>
+	/// Warren Warriors
+	/// John Bateman
+	/// Config is a static class that holds several generic methods and items
+	/// 3/8/2019
+	/// </summary>
 	public static class Config
 	{
+
+		#region Inventory Buttons
+
+		public const int INV_BUTTON_SIZE = 50;
+		public const int INV_BUTTON_SPACE = 10;
+		public const int INV_BUTTON_X_LOC = 10;
+		public const int INV_BUTTON_Y_LOC = 300;
+
+		public const string INV_BUTTON_NORMAL = "btnNormal";
+		public const string INV_BUTTON_HOVERED = "btnHovered";
+		public const string INV_BUTTON_CLICKED = "btnClicked";
+
+
+		#endregion
+
+		#region Crafting Button
+		public const int CRAFT_BUTTON_X = 10;
+		public const int CRAFT_BUTTON_Y = 420;
+		public const int CRAFT_BUTTON_WIDTH = 390;
+		public const int CRAFT_BUTTON_HEIGHT = 50;
+
+		public const string CRAFT_BUTTON_NORMAL = "btnNormal";
+		public const string CRAFT_BUTTON_HOVERED = "btnHovered";
+		public const string CRAFT_BUTTON_CLICKED = "btnClicked";
+		#endregion
+
+
 
 		//random used for random generation
 		private static Random rand = new Random();

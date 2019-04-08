@@ -42,18 +42,24 @@ namespace WarrenWarriorsGame
 				{
 					if (k < 2) //determines if the button is in the first row and initializes
 					{
-						invButtons[j, k] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(10 + 60*k +j*130,300,50,50));
+						invButtons[j, k] = new Button(g.Content.Load<Texture2D>(Config.INV_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.INV_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.INV_BUTTON_CLICKED),
+							new Rectangle(Config.INV_BUTTON_X_LOC + (Config.INV_BUTTON_SIZE + Config.INV_BUTTON_SPACE) * k + j * 2 * (2 * Config.INV_BUTTON_SPACE + Config.INV_BUTTON_SIZE), //x position
+							Config.INV_BUTTON_Y_LOC, //y position
+							Config.INV_BUTTON_SIZE, Config.INV_BUTTON_SIZE)); //width and height
 					}
 					else
 					{
-						invButtons[j, k] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(10 + 60 * (k-2) + j*130, 360, 50, 50));
+						invButtons[j, k] = new Button(g.Content.Load<Texture2D>(Config.INV_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.INV_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.INV_BUTTON_CLICKED),
+							new Rectangle(Config.INV_BUTTON_X_LOC + (Config.INV_BUTTON_SIZE + Config.INV_BUTTON_SPACE) * (k-2) + j* 2 * (2 * Config.INV_BUTTON_SPACE + Config.INV_BUTTON_SIZE), //x position
+							Config.INV_BUTTON_Y_LOC + (Config.INV_BUTTON_SIZE+Config.INV_BUTTON_SPACE), //y position
+							Config.INV_BUTTON_SIZE, Config.INV_BUTTON_SIZE)); //widht and height
 					}
                     
 				}
 			}
 
 
-			craftButton = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(10,420,390,50));
+			craftButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(10,420,390,50));
 		}
 
 
