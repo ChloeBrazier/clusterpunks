@@ -51,10 +51,13 @@ namespace WarrenWarriorsGame
 			Units[2] = new PlayerChar(font, g, CharType.Light);
 
 
-            //initializes buttons for player controls
-            playerButtons[0] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(70,240,50,50));
-            playerButtons[1] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(200, 240, 50, 50));
-            playerButtons[2] = new Button(g.Content.Load<Texture2D>("btnNormal"), g.Content.Load<Texture2D>("btnHovered"), g.Content.Load<Texture2D>("btnClicked"), new Rectangle(330, 240, 50, 50));
+			//initializes buttons for player controls
+			for (int j = 0; j < playerButtons.Length; j++) 
+			{
+				playerButtons[j] = new Button(g.Content.Load<Texture2D>(Config.PLAYER_BTN_NORMAL), g.Content.Load<Texture2D>(Config.PLAYER_BTN_HOVERED), g.Content.Load<Texture2D>(Config.PLAYER_BTN_CLICKED),
+				new Rectangle(Config.PLAYER_BTN_X_POS + j* Config.PLAYER_BTN_SPACING, Config.PLAYER_BTN_Y_POS, Config.PLAYER_BTN_SIZE, Config.PLAYER_BTN_SIZE));
+			}
+
             //*Temporary*
             text = font;
 		}

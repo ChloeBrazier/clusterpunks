@@ -108,6 +108,17 @@ namespace WarrenWarriorsGame
 		public const string CRAFT_BUTTON_CLICKED = "btnClicked";
 		#endregion
 
+		#region Player Characters
+		public const int PLAYER_BTN_X_POS = 70;
+		public const int PLAYER_BTN_Y_POS = 240;
+		public const int PLAYER_BTN_SPACING = 130;
+		public const int PLAYER_BTN_SIZE = 50;
+
+		public const string PLAYER_BTN_NORMAL = "btnNormal";
+		public const string PLAYER_BTN_HOVERED = "btnHovered";
+		public const string PLAYER_BTN_CLICKED = "btnClicked";
+
+		#endregion
 
 
 		//random used for random generation
