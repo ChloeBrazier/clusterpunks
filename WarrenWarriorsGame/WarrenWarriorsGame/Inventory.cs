@@ -32,8 +32,7 @@ namespace WarrenWarriorsGame
 
 		public Inventory(Game g)
 		{
-            //drops items for the players
-            DropItems();
+            
            
 			//initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
 			for (int j = 0; j < 3; j++)
@@ -54,10 +53,16 @@ namespace WarrenWarriorsGame
 							Config.INV_BUTTON_Y_LOC + (Config.INV_BUTTON_SIZE+Config.INV_BUTTON_SPACE), //y position
 							Config.INV_BUTTON_SIZE, Config.INV_BUTTON_SIZE)); //widht and height
 					}
-                    
+
+
+					items[j, k] = new CraftItem(Item.Empty); //initialize the array
+
 				}
 			}
 
+
+			//drops items for the players
+			DropItems(5, 8);
 
 			craftButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(10,420,390,50));
 		}
@@ -71,7 +76,7 @@ namespace WarrenWarriorsGame
             //refills the players inventory
             if(Config.SingleKeyPress(Keys.Down,kbState,PrevkbState))
             {
-                DropItems();
+                DropItems(5,8);
 
             }
 
@@ -511,51 +516,80 @@ namespace WarrenWarriorsGame
 		}
 
         /// <summary>
-        /// drops items to the player
-        /// </summary>
-        public void DropItems()
+		/// drops items into the players inventory
+		/// </summary>
+		/// <param name="min">inclusive minimum number of items to drop</param>
+		/// <param name="max">exclusive maximum number of items to drop</param>
+        public void DropItems(int min, int max)
         {
-            int itemdrops;
+            int itemdrops =0;
+			int fullSlots;
 
-            bool dropstick;
+			bool dropstick;
             bool dropmatch;
-            bool dropnail;
-            do //drops between 5 and 8 total items and at least one of the three generic items implemented for testing
-            { //--temporary--//
-                itemdrops = 0;
-                dropstick = false;
-                dropnail = false;
-                dropmatch = false;
-                for (int j = 0; j < 3; j++)
-                {
-                    for (int k = 0; k < 4; k++)
-                    {
-                        int r = Config.GetRandom(0, 10);
-                        Item temp = Item.Empty;
+			bool dropnail;
+           
+            
+			fullSlots = 0;
 
-                        switch (r) //randomly generates items for the players to have as starting items
-                        {
-                            case 0:
-                                temp = Item.Stick;
-                                itemdrops += 1;
-                                dropstick = true;
-                                break;
-                            case 1:
-                                temp = Item.Nails;
-                                dropnail = true;
-                                itemdrops += 1;
-                                break;
-                            case 2:
-                                temp = Item.Matches;
-                                itemdrops += 1;
-                                dropmatch = true;
-                                break;
-                        }
+			int numToDrop = Config.GetRandom(min, max);
+			List<CraftItem> tempItems;
 
-                        items[j, k] = new CraftItem(temp);
-                    }
-                }
-            } while (!(itemdrops > 5 && itemdrops < 8) || (!dropstick || !dropnail || !dropmatch));
+			do
+			{
+				tempItems = new List<CraftItem>(); //set/reset variables 
+
+				dropstick = false;
+				dropnail = false;
+				dropmatch = false;
+
+				for (int i = 0; i < numToDrop; i++) //loop through and drop the randomly generated number of items to drop
+				{
+					int r = Config.GetRandom(0, 3);
+					Item temp = Item.Empty;
+
+					switch (r) //randomly generates a list of items to be dropped into the players inventory
+					{
+						case 0:
+							temp = Item.Stick;
+							dropstick = true;
+							break;
+						case 1:
+							temp = Item.Nails;
+							dropnail = true;
+							break;
+						case 2:
+							temp = Item.Matches;
+							dropmatch = true;
+							break;
+					}
+
+					tempItems.Add(new CraftItem(temp));
+
+				}
+			} while ((!dropmatch || !dropstick || !dropnail) && numToDrop >3); //loop if one of the basic components is not in the drop pool 
+																			   // does not loop if the number of items to drop is less than three (because then you couldn't get all three
+
+			int j = 0;
+			int k = 0; //add the items to the players inventorys
+			do
+			{
+				if (items[j, k].ItemType == Item.Empty)
+				{
+					items[j, k] = tempItems[itemdrops];
+					itemdrops++;
+				}
+				
+				fullSlots++;
+				j++;
+				if (j > 2)
+				{
+					j = 0;
+					k++;
+				}
+
+			} while (itemdrops < tempItems.Count && fullSlots < 10);
+            
         }
     }
 }
