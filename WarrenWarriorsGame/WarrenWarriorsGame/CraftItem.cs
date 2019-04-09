@@ -12,6 +12,7 @@ namespace WarrenWarriorsGame
     /// <summary>
     /// Warren Warriors
     /// John Bateman
+    /// Noah Hulick
     /// items held in player inventory. hold an attack 
     /// 3/8/2019
     /// </summary>
@@ -25,6 +26,10 @@ namespace WarrenWarriorsGame
         //string to hold an item's name
         string itemName;
 
+        //string to hold an item's information (for later tooltips).
+
+        private string itemInfo;
+        
         //accessor for item damage
         public Attack Dmg
         {
@@ -51,6 +56,15 @@ namespace WarrenWarriorsGame
                 return itemName;
             }
         }
+
+        //accessor for item information
+        public string ItemInfo
+        {
+            get
+            {
+                return itemInfo;
+            }
+        }
 		
         public CraftItem(Item Type) //create generic item generation
         {
@@ -70,34 +84,40 @@ namespace WarrenWarriorsGame
                     itemName = "a stick";
                     Components.Add(Item.Stick);
                     dmg = new Attack(3, 4);
-                    break;
+                    itemInfo = "Tier 1 item, deals 3 damage.";
+                    break; 
                 case Item.Nails:
                     itemName = "a blade";
                     Components.Add(Item.Nails);
                     dmg = new Attack(3, 4);
+                    itemInfo = "Tier 1 item, deals 3 damage.";
                     break;
                 case Item.Matches:
                     itemName = "some matches";
                     Components.Add(Item.Matches);
                     dmg = new Attack(3, 4);
+                    itemInfo = "Tier 1 item, deals 3 damage,";
                     break;
                 case Item.Torch:
                     itemName = "a torch";
                     Components.Add(Item.Stick);
                     Components.Add(Item.Matches);
                     dmg = new Attack(5, 5);
+                    itemInfo = "Tier 2 item, deals 5 damage.";
                     break;
                 case Item.SpikeBat:
-                    itemName = "a knige";
+                    itemName = "a knife";
                     Components.Add(Item.Stick);
                     Components.Add(Item.Nails);
                     dmg = new Attack(5, 5);
+                    itemInfo = "Tier 2 item, deals 5 damage.";
                     break;
                 case Item.HotNails:
                     itemName = "a heated blade";
                     Components.Add(Item.Nails);
                     Components.Add(Item.Matches);
                     dmg = new Attack(5, 5);
+                    itemInfo = "Tier 2 item, deal 5 damage.";
                     break;
                 case Item.SpikeTorch:
                     itemName = "a hot knife";
@@ -105,6 +125,7 @@ namespace WarrenWarriorsGame
                     Components.Add(Item.Matches);
                     Components.Add(Item.Stick);
                     dmg = new Attack(7, 6);
+                    itemInfo = "Tier 3 item, deals 7 damage.";
                     break;
 
             }
