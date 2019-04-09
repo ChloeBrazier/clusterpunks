@@ -129,11 +129,17 @@ namespace WarrenWarriorsGame
 		public const int HEALTH_Y_POS = 255;
 		public const int HEALTH_SPACING = 140;
 
-		#endregion
+        #endregion
+
+        #region item Use Icon
+        public const int USE_ICON_SIZE = 5;
+        public const int USE_ICON_SPACING = 3;
+        public const string USE_ICON = "itemUseIcon";
+        #endregion
 
 
-		//random used for random generation
-		private static Random rand = new Random();
+        //random used for random generation
+        private static Random rand = new Random();
 
 		public static Vector2 LineSpacing = new Vector2(30, 0);
 

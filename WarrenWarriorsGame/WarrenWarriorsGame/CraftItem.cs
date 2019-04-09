@@ -21,7 +21,7 @@ namespace WarrenWarriorsGame
         private Attack dmg; // holds how much damage the attack should do
         List<Item> Components = new List<Item>(); //holds what components an item has. is used for crafting
         Item itemType;
-        int Duration; //item durability
+        int duration; //item durability
 
         //string to hold an item's name
         string itemName;
@@ -29,7 +29,7 @@ namespace WarrenWarriorsGame
         //string to hold an item's information (for later tooltips).
 
         private string itemInfo;
-        
+
         //accessor for item damage
         public Attack Dmg
         {
@@ -65,6 +65,18 @@ namespace WarrenWarriorsGame
                 return itemInfo;
             }
         }
+
+        public int Duration
+        {
+            get
+            {
+                return duration;
+            }
+            set
+            {
+                duration = value;
+            }
+        }
 		
         public CraftItem(Item Type) //create generic item generation
         {
@@ -78,31 +90,37 @@ namespace WarrenWarriorsGame
                 case Item.Empty:
 
                     itemName = "unarmed";
-
+                    duration = 0;
                     break;
                 case Item.Stick: //individual values can be read in or changed later
                     itemName = "a stick";
                     Components.Add(Item.Stick);
                     dmg = new Attack(3, 4);
+                    duration = 3;
                     itemInfo = "Tier 1 item, deals 3 damage.";
                     break; 
                 case Item.Nails:
                     itemName = "a blade";
                     Components.Add(Item.Nails);
                     dmg = new Attack(3, 4);
+                    duration = 3;
                     itemInfo = "Tier 1 item, deals 3 damage.";
                     break;
                 case Item.Matches:
                     itemName = "some matches";
                     Components.Add(Item.Matches);
                     dmg = new Attack(3, 4);
+                    duration = 3;
                     itemInfo = "Tier 1 item, deals 3 damage,";
                     break;
+
+
                 case Item.Torch:
                     itemName = "a torch";
                     Components.Add(Item.Stick);
                     Components.Add(Item.Matches);
                     dmg = new Attack(5, 5);
+                    duration = 4;
                     itemInfo = "Tier 2 item, deals 5 damage.";
                     break;
                 case Item.SpikeBat:
@@ -110,6 +128,7 @@ namespace WarrenWarriorsGame
                     Components.Add(Item.Stick);
                     Components.Add(Item.Nails);
                     dmg = new Attack(5, 5);
+                    duration = 4;
                     itemInfo = "Tier 2 item, deals 5 damage.";
                     break;
                 case Item.HotNails:
@@ -117,14 +136,17 @@ namespace WarrenWarriorsGame
                     Components.Add(Item.Nails);
                     Components.Add(Item.Matches);
                     dmg = new Attack(5, 5);
+                    duration = 4;
                     itemInfo = "Tier 2 item, deal 5 damage.";
                     break;
+
                 case Item.SpikeTorch:
                     itemName = "a hot knife";
                     Components.Add(Item.Nails);
                     Components.Add(Item.Matches);
                     Components.Add(Item.Stick);
                     dmg = new Attack(7, 6);
+                    duration = 5;
                     itemInfo = "Tier 3 item, deals 7 damage.";
                     break;
 
@@ -177,6 +199,7 @@ namespace WarrenWarriorsGame
                     //finish the creation of the item
                     dmg = i.dmg;
                     itemType = i.itemType;
+                    duration = i.Duration;
 
                     //add crafting notification to battle log
                     BattleLog.AddCraft(this);

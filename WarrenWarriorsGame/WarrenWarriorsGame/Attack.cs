@@ -82,9 +82,14 @@ namespace WarrenWarriorsGame
                 damage = usedItem.Dmg.damage;
                 length = usedItem.Dmg.Length;
             }
-            
+
+            usedItem.Duration--;
+
             //remove used item from inventory
-            inventory[x, y] = new CraftItem(Item.Empty);
+            if (usedItem.Duration == 0)
+            {
+                inventory[x, y] = new CraftItem(Item.Empty);
+            }
 
             //return true to change isAttacking
             return true;

@@ -28,6 +28,7 @@ namespace WarrenWarriorsGame
         private CraftItem selectedToCraft;
         private Button craftButton;
 		private SelectedState craftState = SelectedState.deselected;
+        private Texture2D useIcon;
 		
 
 		public Inventory(Game g)
@@ -59,6 +60,8 @@ namespace WarrenWarriorsGame
 
 				}
 			}
+
+            useIcon = g.Content.Load<Texture2D>(Config.USE_ICON);
 
 
 			//drops items for the players
@@ -386,6 +389,12 @@ namespace WarrenWarriorsGame
                     Rectangle drawpos = new Rectangle(invButtons[j, k].Location.Left+5, invButtons[j, k].Location.Top+5, invButtons[j, k].Location.Width-10, invButtons[j, k].Location.Height-10);
                     sb.Draw(uI.IconStorage[items[j, k].ItemType],drawpos , Color.White);
 
+                    for (int i = 0; i < items[j, k].Duration; i++)
+                    {
+                        sb.Draw(useIcon,
+                            new Rectangle(drawpos.X + 1 + (Config.USE_ICON_SPACING+Config.USE_ICON_SIZE)*i,drawpos.Y + 33,Config.USE_ICON_SIZE,Config.USE_ICON_SIZE)
+                            , Color.White);
+                    }
 				}
 			}
             
