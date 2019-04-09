@@ -93,10 +93,14 @@ namespace WarrenWarriorsGame
 
                     for (int i = 0; i < playerButtons.Length; i++) //handles button conrols
                     {
-                        if(playerButtons[i].Update(mState) && Units[i].IsAttacking == false && Units[i].Health > 0)
+                        if( Units[i].IsAttacking == false && Units[i].Health > 0)
                         {
-                            selectedChar = i;
-                            Swap = SelectedState.selected;
+							if (playerButtons[i].Update(mState)) //only update the button if you should be able to
+							{
+								selectedChar = i;
+								Swap = SelectedState.selected;
+							}
+                            
 
                         }
 
@@ -128,14 +132,16 @@ namespace WarrenWarriorsGame
 
                     for (int i = 0; i < playerButtons.Length; i++) //handles button control
                     {
-                        if (playerButtons[i].Update(mState) && Units[i].IsAttacking == false && Units[i].Health > 0)
+                        if ( Units[i].IsAttacking == false && Units[i].Health > 0)
                         {
-                            SwapUnits(selectedChar,i);
-                            playerInv.CharSwap(selectedChar, i);
-                            playerButtons[i].Deselect();
-                            playerButtons[selectedChar].Deselect();
-                            Swap = SelectedState.deselected;
-
+							if (playerButtons[i].Update(mState)) //only update the button if the player exists
+							{
+								SwapUnits(selectedChar, i);
+								playerInv.CharSwap(selectedChar, i);
+								playerButtons[i].Deselect();
+								playerButtons[selectedChar].Deselect();
+								Swap = SelectedState.deselected;
+							}
                         }
 
                     }
