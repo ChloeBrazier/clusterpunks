@@ -59,7 +59,7 @@ namespace WarrenWarriorsGame
             iconStorage.Add(Item.Stick, coolGame.Content.Load<Texture2D>("NewHandleIcon"));
             iconStorage.Add(Item.SpikeBat, coolGame.Content.Load<Texture2D>("NewKnifeIcon"));
             iconStorage.Add(Item.SpikeTorch, coolGame.Content.Load<Texture2D>("NewHotKnifeSprite"));
-            iconStorage.Add(Item.Matches, coolGame.Content.Load<Texture2D>("NewMatchSprite"));
+            iconStorage.Add(Item.Matches, coolGame.Content.Load<Texture2D>("BasicMatchSprite"));
             iconStorage.Add(Item.Torch, coolGame.Content.Load<Texture2D>("NewTorchSprite"));
             iconStorage.Add(Item.HotNails, coolGame.Content.Load<Texture2D>("HotBladeIcon"));
             
