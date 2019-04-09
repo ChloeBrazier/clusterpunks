@@ -135,11 +135,18 @@ namespace WarrenWarriorsGame
         public const int USE_ICON_SIZE = 5;
         public const int USE_ICON_SPACING = 3;
         public const string USE_ICON = "itemUseIcon";
-        #endregion
+		#endregion
+
+		#region Main Menu Buttons
+		public static Point MAIN_MENU_BUTTON_WIDTH = new Point(128, 64);
+		public static Vector2 PLAY_BUTTON_XY = new Vector2(10,200);
 
 
-        //random used for random generation
-        private static Random rand = new Random();
+		#endregion
+
+
+		//random used for random generation
+		private static Random rand = new Random();
 
 		public static Vector2 LineSpacing = new Vector2(30, 0);
 
