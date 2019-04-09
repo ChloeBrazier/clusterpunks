@@ -218,6 +218,13 @@ namespace WarrenWarriorsGame
                     break;
                 case GameState.Combat:
 
+                    //draw background
+                    spriteBatch.Draw(
+                        gameUI.GameUI[7], 
+                        new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), 
+                        Color.White
+                        );
+
                     //draw characters and combat UI
                     handler.Draw(spriteBatch, gameUI);
 

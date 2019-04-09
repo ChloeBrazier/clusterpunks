@@ -73,6 +73,7 @@ namespace WarrenWarriorsGame
             gameUI.Add(coolGame.Content.Load<Texture2D>("btnNormal")); //4
             gameUI.Add(coolGame.Content.Load<Texture2D>("btnHovered")); //5
             gameUI.Add(coolGame.Content.Load<Texture2D>("timer_icon")); //6
+            gameUI.Add(coolGame.Content.Load<Texture2D>("game_background_prototype")); //7
         }
 
         public void DrawUI(SpriteBatch spriteBatch)
