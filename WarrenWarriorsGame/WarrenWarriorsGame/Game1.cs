@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System;
 
 namespace WarrenWarriorsGame
 {
@@ -33,7 +34,7 @@ namespace WarrenWarriorsGame
         CombatHandler combatHandler;
 
         //field for an enemy (spawning currently simplified for testing)
-        Enemy buckShot;
+        Enemy current;
 
         //field for the game's current state
         GameState gameState;
@@ -42,6 +43,9 @@ namespace WarrenWarriorsGame
         Song song;
         //temporary bool to make the song start only once
         bool songStart;
+
+        //field for random object
+        Random r;
 
         //field for the menu's spritefont
         SpriteFont menuFont;
@@ -86,11 +90,13 @@ namespace WarrenWarriorsGame
             //Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
 
             //initialize enemy for testing
-            buckShot = new Enemy(Content.Load<SpriteFont>("Arial-12"), EnemyType.Custom, handler.PlayerParty);
-            buckShot.LoadSprite(this, EnemyType.Custom);
+            r = new Random();
+            int randomEnemy = r.Next(0, 4);
+            current = new Enemy(Content.Load<SpriteFont>("Arial-12"), randomEnemy, handler.PlayerParty);
+            current.LoadSprite(this);
 
             //initialize combat handler using loaded players and enemy
-            combatHandler = new CombatHandler(handler.PlayerParty, buckShot);
+            combatHandler = new CombatHandler(handler.PlayerParty, current);
 
             song = Content.Load<Song>("Power Rangers");  // Put the name of your song here instead of "song_title"
 
@@ -151,17 +157,17 @@ namespace WarrenWarriorsGame
                     //}
                     
                     //now takes in gametime for use with the Attack classe's update method (also an enemy for temporary testing)
-                    handler.Update(kbState, PrevkbState, mState, prevMsState, gameTime, buckShot); //updates all of the keyboardhandler
+                    handler.Update(kbState, PrevkbState, mState, prevMsState, gameTime, current); //updates all of the keyboardhandler
 
                     //update enemy and handle combat
 
-                    if (buckShot.IsAttacking != true)
+                    if (current.IsAttacking != true)
                     {
-                        buckShot.CoolDown(gameTime);
+                        current.CoolDown(gameTime);
                     }
                     else
                     {
-                        buckShot.Update(kbState, PrevkbState, gameTime);
+                        current.Update(kbState, PrevkbState, gameTime);
                     }
 
                     //check party's health and enter GameOver state if it equals zero
@@ -231,7 +237,7 @@ namespace WarrenWarriorsGame
                     //gameUI.DrawUI(spriteBatch);
 
                     //draw the enemy
-                    buckShot.Draw(spriteBatch, 0);
+                    current.Draw(spriteBatch, 0);
 
                     //update battlelog and draw it to the screen
                     BattleLog.Draw(this, spriteBatch, menuFont);

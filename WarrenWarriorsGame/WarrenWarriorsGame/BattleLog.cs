@@ -103,7 +103,7 @@ namespace WarrenWarriorsGame
         public static void Draw(Game g, SpriteBatch sb, SpriteFont font)
         {
             //create a temporary vector to control spacing of log test
-            Vector2 logVector = new Vector2(400, (g.GraphicsDevice.Viewport.Height/3 * 2));
+            Vector2 logVector = new Vector2(460, (g.GraphicsDevice.Viewport.Height/3 * 2));
             Console.WriteLine(logVector);
 
             //run checkqueue to get rid of the oldest message in the log
@@ -114,7 +114,7 @@ namespace WarrenWarriorsGame
 
             //create log text color that changes depending on whether
             //the text is the latest in the log
-            Color logTextColor = Color.Black;
+            Color logTextColor = Color.White;
 
             //print all info in the log
             for(int i = 0; i < logArray.Length; i++)

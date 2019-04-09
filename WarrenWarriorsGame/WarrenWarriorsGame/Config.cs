@@ -59,8 +59,8 @@ namespace WarrenWarriorsGame
     {
         Buckshot,
         SewCrow,
-        Bandit,
-        Custom
+        Snotlek,
+        PunishedKevin
     }
 
     public enum Difficulty

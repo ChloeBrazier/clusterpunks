@@ -77,7 +77,7 @@ namespace WarrenWarriorsGame
             }
         }
 
-        public Enemy(SpriteFont enemyFont, EnemyType type, PlayerChar[] Units)
+        public Enemy(SpriteFont enemyFont, int type, PlayerChar[] Units)
         {
             //set font based on the spritefont that's passed in
             font = enemyFont;
@@ -88,34 +88,23 @@ namespace WarrenWarriorsGame
             //switch statement to determine enemy stats based on type
             switch (type)
             {
-                case EnemyType.Buckshot:
+                case 0:
 
                     //set non-randomized stats for buckshot, a set enemy type
-                    health = 100;
-                    atk = new Attack(10, 10);
-                    name = "Buckshot";
-                    cooldown = 10;
+                    enemySprite = LoadEnemy("../../../../Content/Buckshot.enemy");
 
                     break;
-                case EnemyType.SewCrow:
+                case 1:
 
                     //set non-randomized stats for sewcrow, a set enemy type
-                    health = 60;
-                    atk = new Attack(1, 3);
-                    name = "Sew Crow";
-                    cooldown = 3;
+                    enemySprite = LoadEnemy("../../../../Content/sew_crow.enemy");
 
                     break;
-                case EnemyType.Bandit:
-
-                    //set non-randomized stats for bandit, a set enemy type
-                    health = 75;
-                    atk = new Attack(8, 6);
-                    name = "Bandit";
-                    cooldown = 5;
+                case 2:
+                    enemySprite = LoadEnemy("../../../../Content/Snotlek.enemy");
 
                     break;
-                case EnemyType.Custom:
+                case 3:
                     enemySprite = LoadEnemy("../../../../Content/[PUNISHED]Kevin.enemy");
                     break;
             }
@@ -125,37 +114,14 @@ namespace WarrenWarriorsGame
         }
 
         /// <summary>
-        /// method to load in the correct sprite based on enemy type
+        /// method to load in the enemy sprite
         /// </summary>
         /// <param name="game"> 
         /// object of the Game1 class used to load sprite content
         /// </param>
-        public void LoadSprite(Game game, EnemyType type)
+        public void LoadSprite(Game game)
         {
-            //switch statement that loads a sprite based on enemy type
-            switch(type)
-            {
-                case EnemyType.Buckshot:
-
-                    sprite = game.Content.Load<Texture2D>("buckshot_fixed");
-
-                    break;
-                case EnemyType.SewCrow:
-
-                    //sprite = game.Content.Load<Texture2D>("SEWCROW SPRITE FILE NAME HERE");
-
-                    break;
-                case EnemyType.Bandit:
-
-                    //sprite = game.Content.Load<Texture2D>("BANDIT SPRITE FILE NAME HERE");
-
-                    break;
-                case EnemyType.Custom:
-
-                    sprite = game.Content.Load<Texture2D>(enemySprite);
-
-                    break;
-            }
+            sprite = game.Content.Load<Texture2D>(enemySprite);
         }
 
         //required methods based on unit parent class
