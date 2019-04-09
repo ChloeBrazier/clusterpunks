@@ -385,6 +385,11 @@ namespace WarrenWarriorsGame
 			}
             
 			craftButton.Draw(sb);
+
+			if (craftState == SelectedState.selected)
+			{
+				sb.Draw(uI.IconStorage[selectedToCraft.ItemType], new Rectangle(Config.CRAFT_BUTTON_X + Config.CRAFT_BUTTON_WIDTH / 2 - 20, Config.CRAFT_BUTTON_Y + 10, 40, 40), Color.White);
+			}
 		}
 
 		private void Swap(int x, int y) //swaps items in the items array with the item that is currently selected

@@ -72,7 +72,7 @@ namespace WarrenWarriorsGame
                     dmg = new Attack(3, 4);
                     break;
                 case Item.Nails:
-                    itemName = "some nails";
+                    itemName = "a blade";
                     Components.Add(Item.Nails);
                     dmg = new Attack(3, 4);
                     break;
@@ -88,19 +88,19 @@ namespace WarrenWarriorsGame
                     dmg = new Attack(5, 5);
                     break;
                 case Item.SpikeBat:
-                    itemName = "a spike bat";
+                    itemName = "a knige";
                     Components.Add(Item.Stick);
                     Components.Add(Item.Nails);
                     dmg = new Attack(5, 5);
                     break;
                 case Item.HotNails:
-                    itemName = "some hot nails";
+                    itemName = "a heated blade";
                     Components.Add(Item.Nails);
                     Components.Add(Item.Matches);
                     dmg = new Attack(5, 5);
                     break;
                 case Item.SpikeTorch:
-                    itemName = "a spike torch";
+                    itemName = "a hot knife";
                     Components.Add(Item.Nails);
                     Components.Add(Item.Matches);
                     Components.Add(Item.Stick);
@@ -175,17 +175,17 @@ namespace WarrenWarriorsGame
                 case Item.Matches:
                     return "Matches";
                 case Item.Nails:
-                    return "Nails";
+                    return "Blade";
                 case Item.Stick:
                     return "Stick";
                 case Item.SpikeBat:
-                    return "Spike Bat";
+                    return "Knife";
                 case Item.Torch:
                     return "Torch";
                 case Item.HotNails:
-                    return "Hot Nails";
+                    return "Heated Blade";
                 case Item.SpikeTorch:
-                    return "Spike Torch";
+                    return "Flaming Knife";
 
 
             }
