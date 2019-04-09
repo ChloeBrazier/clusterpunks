@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System;
+using System.Collections.Generic;
 
 namespace WarrenWarriorsGame
 {
@@ -49,6 +50,9 @@ namespace WarrenWarriorsGame
 
         //field for the menu's spritefont
         SpriteFont menuFont;
+
+		Texture2D TitleImage;
+		List<Button> titleButtons = new List<Button>();
 
 		public Game1()
         {
@@ -106,13 +110,30 @@ namespace WarrenWarriorsGame
             // TODO: use this.Content to load your game content here
             gameUI = new UI(this);
             gameUI.Load();
+
+			TitleImage = Content.Load<Texture2D>("titleImage");
+			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.PLAY_BUTTON_NORM),
+										Content.Load<Texture2D>(Config.PLAY_BUTTON_HOVERED), 
+										Content.Load<Texture2D>(Config.PLAY_BUTTON_CLICKED), 
+										new Rectangle(Config.PLAY_BUTTON_XY, Config.MAIN_MENU_BUTTON_WIDTH)));
+
+			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.CONTROLS_BUTTON_NORM), 
+										Content.Load<Texture2D>(Config.CONTROLS_BUTTON_HOVERED), 
+										Content.Load<Texture2D>(Config.CONTROLS_BUTTON_CLICKED), 
+										new Rectangle(Config.CONTROL_BUTTON_XY, Config.MAIN_MENU_BUTTON_WIDTH)));
+
+			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.EXIT_BUTTON_NORM), 
+										Content.Load<Texture2D>(Config.EXIT_BUTTON_HOVERED), 
+										Content.Load<Texture2D>(Config.EXIT_BUTTON_CLICKED), 
+										new Rectangle(Config.EXIT_BUTTON_XY, Config.MAIN_MENU_BUTTON_WIDTH)));
+
 		}
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent()
+		/// <summary>
+		/// UnloadContent will be called once per game and is the place to unload
+		/// game-specific content.
+		/// </summary>
+		protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
@@ -135,6 +156,25 @@ namespace WarrenWarriorsGame
             switch(gameState)
             {
                 case GameState.Menu:
+
+					for (int j = 0; j < titleButtons.Count; j++)
+					{
+						if (titleButtons[j].Update(mState))
+						{
+							switch(j)
+							{
+								case 0:
+									gameState = GameState.Combat;
+									break;
+								case 3:
+									Exit();
+									break;
+							}
+
+
+						}
+
+					}
 
                     //start game when the player presses enter
                     if (Config.SingleKeyPress(Keys.Enter, kbState, PrevkbState) == true)
@@ -211,15 +251,13 @@ namespace WarrenWarriorsGame
             switch (gameState)
             {
                 case GameState.Menu:
+					spriteBatch.Draw(TitleImage, new Vector2(0, 0), Color.White);
+					for (int j = 0; j < titleButtons.Count; j++)
+					{
+						titleButtons[j].Draw(spriteBatch);
+					}
 
-                    //temporary opening menu that informs the player to press enter to start the game
-                    spriteBatch.DrawString
-                        (
-                        menuFont, 
-                        "Press Enter to start the Game", 
-                        new Vector2(GraphicsDevice.Viewport.Width/2, GraphicsDevice.Viewport.Height/2),
-                        Color.Black
-                        );
+                    
 
                     break;
                 case GameState.Combat:

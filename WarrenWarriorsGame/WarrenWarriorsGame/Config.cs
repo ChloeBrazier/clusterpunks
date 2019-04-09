@@ -138,9 +138,25 @@ namespace WarrenWarriorsGame
 		#endregion
 
 		#region Main Menu Buttons
-		public static Point MAIN_MENU_BUTTON_WIDTH = new Point(128, 64);
-		public static Vector2 PLAY_BUTTON_XY = new Vector2(10,200);
+		public static Point MAIN_MENU_BUTTON_WIDTH = new Point(192, 96);
 
+		public static Point PLAY_BUTTON_XY = new Point(10,100);
+		public static Point CONTROL_BUTTON_XY = new Point(10, 200);
+		public static Point EXIT_BUTTON_XY = new Point(10, 300);
+		
+
+
+		public const string PLAY_BUTTON_NORM = "btnPlayNormal";
+		public const string PLAY_BUTTON_HOVERED = "btnPlayHovered";
+		public const string PLAY_BUTTON_CLICKED = "btnPlayClicked";
+
+		public const string CONTROLS_BUTTON_NORM = "btnControlsNormal";
+		public const string CONTROLS_BUTTON_HOVERED = "btnControlsHovered";
+		public const string CONTROLS_BUTTON_CLICKED = "btnControlsSelected";
+
+		public const string EXIT_BUTTON_NORM = "btnExitNormal";
+		public const string EXIT_BUTTON_HOVERED = "btnExitHovered";
+		public const string EXIT_BUTTON_CLICKED = "btnExitSelected";
 
 		#endregion
 
