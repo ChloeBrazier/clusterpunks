@@ -166,7 +166,7 @@ namespace WarrenWarriorsGame
 								case 0:
 									gameState = GameState.Combat;
 									break;
-								case 3:
+								case 2:
 									Exit();
 									break;
 							}
