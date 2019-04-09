@@ -23,6 +23,7 @@ namespace WarrenWarriorsGame
         private Texture2D hovered;
         private Texture2D selected;
         private Rectangle location;
+		private Rectangle drawLocation;
         private MouseState prevMouseState;
 
         public Rectangle Location
@@ -46,15 +47,31 @@ namespace WarrenWarriorsGame
             hovered = hover;
             selected = click;
             location = position;
-
+			drawLocation = position;
         }
+
+		/// <summary>
+		/// creates a button with three states
+		/// </summary>
+		/// <param name="norm">the normal texture of the button </param>
+		/// <param name="hover">the texture of a button that has been hovered over</param>
+		/// <param name="click">the texture of a button that has been selected</param>
+		/// <param name="position">the size and position of the button</param>
+		public Button(Texture2D norm, Texture2D hover, Texture2D click, Rectangle hitbox, Rectangle drawLocation)
+		{
+			normal = norm;
+			hovered = hover;
+			selected = click;
+			location = hitbox;
+			this.drawLocation = drawLocation;
+		}
 
 		/// <summary>
 		/// returns true if the mouse is being clicked and changes what sprite it's using
 		/// </summary>
 		/// <param name="ms">the current mouse state</param>
 		/// <returns></returns>
-        public Boolean Update(MouseState ms)
+		public Boolean Update(MouseState ms)
         {
 			//don't worry about this it just works
             if (state != BtnState.Selected) //if the button is not selected
@@ -92,13 +109,13 @@ namespace WarrenWarriorsGame
             switch (state)
             {
                 case BtnState.Default:
-                    sb.Draw(normal, location, Color.White);
+                    sb.Draw(normal, drawLocation, Color.White);
                     break;
                 case BtnState.Hovered:
-                    sb.Draw(hovered, location, Color.White);
+                    sb.Draw(hovered, drawLocation, Color.White);
                     break;
                 case BtnState.Selected:
-                    sb.Draw(selected, location, Color.White);
+                    sb.Draw(selected, drawLocation, Color.White);
                     break;
             }
 
