@@ -103,9 +103,9 @@ namespace WarrenWarriorsGame
 		public const int CRAFT_BUTTON_WIDTH = 390;
 		public const int CRAFT_BUTTON_HEIGHT = 50;
 
-		public const string CRAFT_BUTTON_NORMAL = "btnNormal";
-		public const string CRAFT_BUTTON_HOVERED = "btnHovered";
-		public const string CRAFT_BUTTON_CLICKED = "btnClicked";
+		public const string CRAFT_BUTTON_NORMAL = "btnCraftNormal";
+		public const string CRAFT_BUTTON_HOVERED = "btnCraftHovered";
+		public const string CRAFT_BUTTON_CLICKED = "btnCraftSelected";
 		#endregion
 
 		#region Player Characters

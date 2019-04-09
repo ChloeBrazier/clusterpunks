@@ -177,7 +177,7 @@ namespace WarrenWarriorsGame
             //draws the players numbers
             for (int j = 0; j < Units.Length; j++)
 			{
-				Color drawcolor = Color.Black;
+				Color drawcolor = Color.White;
 
 				Units[j].Draw(spriteBatch, j);
 
