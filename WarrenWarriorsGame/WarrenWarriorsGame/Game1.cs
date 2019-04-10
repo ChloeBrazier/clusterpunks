@@ -240,6 +240,10 @@ namespace WarrenWarriorsGame
                 case GameState.ControlMenu:
                     if (titleButtons[2].Update(mState))
                     {
+                        for (int j = 0; j < titleButtons.Count; j++)
+                        {
+                            titleButtons[j].Deselect();
+                        }
                         gameState = GameState.Menu;
                     }
                     break;
