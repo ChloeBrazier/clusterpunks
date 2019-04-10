@@ -21,7 +21,6 @@ namespace WarrenWarriorsGame
         SpriteBatch spriteBatch;
 
 
-        UI gameUI;
 		KeyboardState kbState; //keyboard states for updating
 		KeyboardState PrevkbState;
 
@@ -42,6 +41,7 @@ namespace WarrenWarriorsGame
 
         //field for game music
         Song song;
+
         //temporary bool to make the song start only once
         bool songStart;
 
@@ -108,8 +108,8 @@ namespace WarrenWarriorsGame
             menuFont = Content.Load<SpriteFont>("Arial-12");
 
             // TODO: use this.Content to load your game content here
-            gameUI = new UI(this);
-            gameUI.Load();
+            UI.Initialize(this);
+            UI.Load();
 
 			TitleImage = Content.Load<Texture2D>("titleImage");
 			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.PLAY_BUTTON_NORM),
@@ -187,17 +187,6 @@ namespace WarrenWarriorsGame
 
                     break;
                 case GameState.Combat:
-
-                    //play background music (temp)
-
-                    //Eddie: commented out because it was driving me crazy while testing
-
-                    //if(songStart == false)
-                    //{
-                    //    MediaPlayer.Play(song);
-                    //    MediaPlayer.IsRepeating = true;
-                    //    songStart = true;
-                    //}
 
                     if(combatHandler.InEncounter != true)
                     {
@@ -283,13 +272,13 @@ namespace WarrenWarriorsGame
 
                     //draw background
                     spriteBatch.Draw(
-                        gameUI.GameUI[7],
-                        new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height),
+                        UI.GameUI[7], 
+                        new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), 
                         Color.White
                         );
 
                     //draw characters and combat UI
-                    handler.Draw(spriteBatch, gameUI);
+                    handler.Draw(spriteBatch);
                     
                     //draw the enemy
                     current.Draw(spriteBatch, 0);

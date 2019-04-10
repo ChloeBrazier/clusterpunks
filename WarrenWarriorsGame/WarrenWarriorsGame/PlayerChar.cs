@@ -79,8 +79,8 @@ namespace WarrenWarriorsGame
                     break;
 				case CharType.Medium:
 					health = Config.GetRandom(30, 41);
-					name = "Kevin's Dad";
-                    sprite = game.Content.Load<Texture2D>("player_char_ranger_blue");
+					name = "The Farmer";
+                    sprite = game.Content.Load<Texture2D>("farmer");
                     if (Config.GetRandom(1, 3) == 2)
 					{
 						atk = new Attack(Config.GetRandom(10, 16), Config.GetRandom(4, 6));
@@ -94,7 +94,7 @@ namespace WarrenWarriorsGame
 				case CharType.Light:
 					health = Config.GetRandom(20, 31);
 					atk = new Attack(Config.GetRandom(5, 11), Config.GetRandom(1, 3));
-					name = "Kevin";
+					name = "Kevin (Heroic)";
                     sprite = game.Content.Load<Texture2D>("player_char_ranger_fixed");
 
                     break;
@@ -132,43 +132,18 @@ namespace WarrenWarriorsGame
                 
                 if (isAttacking != true)
                 {
-                    //sb.DrawString(
-                        //font, 
-                        //string.Format
-                            //("{0}/{1}/{2}", 
-                            //name, 
-                            //health, 
-                            //"Attack time: " + string.Format
-                                //("{0: 0.00}", atk.Length)
-                            //), 
-                        //textPos, 
-                        //Color.Black);
+                    //player is normally colored when not attacking
                     sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.White);
                 }
                 else
                 {
-                    //sb.DrawString(
-                        //font, 
-                        //string.Format
-                            //("{0}/{1}/{2}", 
-                            //name, 
-                            //health, 
-                            //"Attack time: " + string.Format
-                                //("{0: 0.00}", atk.Length)
-                            //),
-                        //textPos, 
-                        //Color.Red);
+                    //player is red when attacking
                     sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.PaleVioletRed);
                 }
             }
             else
             {
                 //player is grayed out when dead
-                //sb.DrawString(
-                    //font, 
-                    //string.Format("{0}/{1}", name, "Dead"),
-                    //textPos, 
-                    //Color.Black);
                 sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.Gray);
             }
             
