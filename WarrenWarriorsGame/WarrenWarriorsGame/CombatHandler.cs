@@ -27,7 +27,16 @@ namespace WarrenWarriorsGame
         //field for enemy
         private Enemy enemy;
 
-        public CombatHandler(PlayerChar[] Units, Enemy nme)
+		//accessor for inEncounter
+		public bool InEncounter
+		{
+			get
+			{
+				return inEncounter;
+			}
+		}
+
+		public CombatHandler(PlayerChar[] Units, Enemy nme)
         {
             //initialize player party
             playerParty = Units;

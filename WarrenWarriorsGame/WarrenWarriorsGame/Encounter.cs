@@ -3,59 +3,114 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+
+//Encounter Class
+//Liam Perry
+//Generates Combat per each room
 
 namespace WarrenWarriorsGame
 {
-    public class Encounter
-    {
-        Difficulty roomDifficulty; //the difficulty of the encounter
-        Enemy[] enemy; //the enemies that you will fight in the room
+	public class Encounter
+	{
+		//field for random object
+		Random r;
 
-        public Encounter(Difficulty dif) //build the room based on difficulty
-        {
-            roomDifficulty = dif;
-            switch (roomDifficulty)
-            {
-
-
-
-            }
-
-        }
-
-        //this will likely be used in the building of the dungeon but will not be called directly
+		//holds all of the player interaction
+		private PlayerHandler handler;
+		public PlayerHandler Handler
+		{
+			get { return handler; }
+		}
 
 
-        /// <summary>
-        /// WILL REMOVE WHEN FEATURES DESCRIBED HAVE ALL BEEN IMPLEMENTED
-        /// </summary>
-        public void CombatEncounter()
-        {
-            //temporary code for reference
+		//field for the combat handler
+		private CombatHandler combatHandler;
+		public CombatHandler CombatHandler
+		{
+			get { return combatHandler; }
+		}
+		//field for an enemy (spawning currently simplified for testing)
+		Enemy current;
 
-            //encounter begins if (entire enemy sprite is on screen?)
-            //(a timer counts down and an enemy is spawned?)
+		Difficulty roomDifficulty; //the difficulty of the encounter
+		Enemy[] enemy; //the enemies that you will fight in the room
 
-            //if the game ends up having any sort of player movement, lock player characters 
-            //and the game screen in place until the encounter is over
+		public Encounter(Game g, Difficulty dif) //build the room based on difficulty
+		{
+			//create playerhandler, which in turn initializes player units
+			handler = new PlayerHandler(g.Content.Load<SpriteFont>("Arial-12"), g); //initializes the player handler
 
-            //bool inEncounter = true;
+			roomDifficulty = dif;
+			//initialize enemy for testing
+			r = new Random();
+			int randomEnemy = r.Next(0, 4);
+			current = new Enemy(g.Content.Load<SpriteFont>("Arial-12"), randomEnemy, handler.PlayerParty);
+			current.LoadSprite(g);
 
-            //enemy attacks repeatedly until they die
+			//initialize combat handler using loaded players and enemy
+			combatHandler = new CombatHandler(handler.PlayerParty, current);
 
-            //player characters attack based on player input (duh)
-            //once a player selects a weapon to attack with and chooses to attack,
-            //a player attack is initiated on a timer based on weapon type and base player
-            //attack speed
+		}
 
-            //players and enemy take damage when a given attack timer ends
-            //when a player character attacks the selected item is removed from their inventory
-
-            //encounter ends when enemy health is 0
-        }
-
-        //instead this will be used to feed stuff into the combat handler when the time comes
+		//this will likely be used in the building of the dungeon but will not be called directly
 
 
-    }
+		/// <summary>
+		/// Handles the Combat in the room
+		/// Most of this code is just moved from the Game1
+		/// </summary>
+		/// <param name="g"></param>
+		/// <param name="kbState"></param>
+		/// <param name="PrevkbState"></param>
+		/// <param name="mState"></param>
+		/// <param name="prevMsState"></param>
+		/// <param name="gameTime"></param>
+		public void CombatEncounter(Game g, KeyboardState kbState, KeyboardState PrevkbState, MouseState mState, MouseState prevMsState, GameTime gameTime)
+		{
+			//play background music (temp)
+
+			//Eddie: commented out because it was driving me crazy while testing
+
+			//if(songStart == false)
+			//{
+			//    MediaPlayer.Play(song);
+			//    MediaPlayer.IsRepeating = true;
+			//    songStart = true;
+			//}
+
+			if (combatHandler.InEncounter != true)
+			{
+				//enter encounter using combat handler (move to dungeon nav-based class later)
+				combatHandler.EnterEncounter();
+			}
+
+			//now takes in gametime for use with the Attack classe's update method (also an enemy for temporary testing)
+			handler.Update(kbState, PrevkbState, mState, prevMsState, gameTime, current); //updates all of the keyboardhandler
+
+			//update enemy and handle combat
+
+			if (current.IsAttacking != true)
+			{
+				current.CoolDown(gameTime);
+			}
+			else
+			{
+				current.Update(kbState, PrevkbState, gameTime);
+			}
+
+
+		}
+
+		//Draws enemy sprite
+		public void EnemyDraw(Game g, SpriteBatch sb, int pos)
+		{
+			current.Draw(sb, pos);
+		}
+
+
+	}
 }
