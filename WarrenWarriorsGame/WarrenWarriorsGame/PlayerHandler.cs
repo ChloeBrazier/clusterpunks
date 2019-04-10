@@ -171,7 +171,11 @@ namespace WarrenWarriorsGame
             //draws the  buttons
             for (int j = 0; j < playerButtons.Length; j++)
             {
-                playerButtons[j].Draw(spriteBatch);
+                //draw a character's movement button if they aren't attacking
+                if (Units[j].IsAttacking != true)
+                {
+                    playerButtons[j].Draw(spriteBatch);
+                }
             }
 
             //draw the health icon
