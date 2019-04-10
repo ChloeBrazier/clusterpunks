@@ -166,7 +166,7 @@ namespace WarrenWarriorsGame
             }
         }
 
-		public void Draw(SpriteBatch spriteBatch,UI GameUI)
+		public void Draw(SpriteBatch spriteBatch)
 		{
             //draws the  buttons
             for (int j = 0; j < playerButtons.Length; j++)
@@ -176,12 +176,17 @@ namespace WarrenWarriorsGame
                 {
                     playerButtons[j].Draw(spriteBatch);
                 }
+                else
+                {
+                    //draw timer icon when a player character is attacking
+                    spriteBatch.Draw(UI.GameUI[6], playerButtons[j].Location, Color.White);
+                }
             }
 
             //draw the health icon
             for (int j = 0; j < 3; j++)
             {
-                spriteBatch.Draw(GameUI.GameUI[0], new Rectangle(Config.INV_BUTTON_X_LOC +Config.PLAYER_BTN_SPACING*j, Config.PLAYER_BTN_Y_POS, 50, 50), Color.White);
+                spriteBatch.Draw(UI.GameUI[0], new Rectangle(Config.INV_BUTTON_X_LOC +Config.PLAYER_BTN_SPACING*j, Config.PLAYER_BTN_Y_POS, 50, 50), Color.White);
             }
 
             //draws the players numbers
@@ -203,7 +208,7 @@ namespace WarrenWarriorsGame
 
 
 
-			playerInv.Draw(spriteBatch, text,GameUI);
+			playerInv.Draw(spriteBatch, text);
 		}
 
 

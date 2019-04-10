@@ -378,7 +378,7 @@ namespace WarrenWarriorsGame
 
         }
 
-        public void Draw(SpriteBatch sb,SpriteFont font,UI uI)
+        public void Draw(SpriteBatch sb,SpriteFont font)
         {
 			for (int j = 0; j < 3; j++)
 			{
@@ -388,7 +388,7 @@ namespace WarrenWarriorsGame
 
                     //draws the ui icons to their resepective buttons
                     Rectangle drawpos = new Rectangle(invButtons[j, k].Location.Left+5, invButtons[j, k].Location.Top+5, invButtons[j, k].Location.Width-10, invButtons[j, k].Location.Height-10);
-                    sb.Draw(uI.IconStorage[items[j, k].ItemType],drawpos , Color.White);
+                    sb.Draw(UI.IconStorage[items[j, k].ItemType],drawpos , Color.White);
 
                     for (int i = 0; i < items[j, k].Duration; i++)
                     {
@@ -418,7 +418,7 @@ namespace WarrenWarriorsGame
             }
 			if (craftState == SelectedState.selected)
 			{
-				sb.Draw(uI.IconStorage[selectedToCraft.ItemType], new Rectangle(Config.CRAFT_BUTTON_X + Config.CRAFT_BUTTON_WIDTH / 2 - 20, Config.CRAFT_BUTTON_Y + 10, 40, 40), Color.White);
+				sb.Draw(UI.IconStorage[selectedToCraft.ItemType], new Rectangle(Config.CRAFT_BUTTON_X + Config.CRAFT_BUTTON_WIDTH / 2 - 20, Config.CRAFT_BUTTON_Y + 10, 40, 40), Color.White);
 			}
 		}
 

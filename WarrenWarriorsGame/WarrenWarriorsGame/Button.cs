@@ -89,7 +89,7 @@ namespace WarrenWarriorsGame
                 }
                 else
                 {
-                    //if it is not being hoevered over draw it as it's default
+                    //if it is not being hovered over draw it as it's default
                     state = BtnState.Default;
 					prevMouseState = ms;
 

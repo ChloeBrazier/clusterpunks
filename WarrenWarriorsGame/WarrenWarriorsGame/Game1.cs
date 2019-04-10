@@ -21,7 +21,6 @@ namespace WarrenWarriorsGame
         SpriteBatch spriteBatch;
 
 
-        UI gameUI;
 		KeyboardState kbState; //keyboard states for updating
 		KeyboardState PrevkbState;
 
@@ -108,8 +107,8 @@ namespace WarrenWarriorsGame
             menuFont = Content.Load<SpriteFont>("Arial-12");
 
             // TODO: use this.Content to load your game content here
-            gameUI = new UI(this);
-            gameUI.Load();
+            UI.Initialize(this);
+            UI.Load();
 
 			TitleImage = Content.Load<Texture2D>("titleImage");
 			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.PLAY_BUTTON_NORM),
@@ -270,13 +269,13 @@ namespace WarrenWarriorsGame
 
                     //draw background
                     spriteBatch.Draw(
-                        gameUI.GameUI[7], 
+                        UI.GameUI[7], 
                         new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), 
                         Color.White
                         );
 
                     //draw characters and combat UI
-                    handler.Draw(spriteBatch, gameUI);
+                    handler.Draw(spriteBatch);
 
                     
 
