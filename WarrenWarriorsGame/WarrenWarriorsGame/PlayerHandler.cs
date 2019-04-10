@@ -207,8 +207,7 @@ namespace WarrenWarriorsGame
                     {
                         drawcolor = Color.MonoGameOrange;
                     }
-
-                    spriteBatch.DrawString(text, string.Format("{0}: {1}  ", j + 1, Units[j].Name), j * 5 * Config.LineSpacing, drawcolor);
+                    
                     spriteBatch.DrawString(text, (j + 1).ToString(), new Vector2(95 + j * 130, 265), drawcolor);
                 }
 			}
