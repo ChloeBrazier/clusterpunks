@@ -26,7 +26,7 @@ namespace WarrenWarriorsGame
         //string to hold an item's name
         string itemName;
 
-        //string to hold an item's information (for later tooltips).
+       //stringt to hold an item's information
 
         private string itemInfo;
 
@@ -91,6 +91,7 @@ namespace WarrenWarriorsGame
 
                     itemName = "unarmed";
                     duration = 0;
+                    itemInfo = "Default attack, deals 2 damage.";
                     break;
                 case Item.Stick: //individual values can be read in or changed later
                     itemName = "a stick";
@@ -113,15 +114,13 @@ namespace WarrenWarriorsGame
                     duration = 3;
                     itemInfo = "Tier 1 item, deals 3 damage,";
                     break;
-
-
                 case Item.Torch:
                     itemName = "a torch";
+                    itemInfo = "Tier 2 item, deals 5 damage.";
                     Components.Add(Item.Stick);
                     Components.Add(Item.Matches);
                     dmg = new Attack(5, 5);
                     duration = 4;
-                    itemInfo = "Tier 2 item, deals 5 damage.";
                     break;
                 case Item.SpikeBat:
                     itemName = "a knife";
@@ -186,6 +185,7 @@ namespace WarrenWarriorsGame
                 CraftItem temp = new CraftItem(Item.Empty);
                 dmg = temp.dmg;
                 itemType = temp.ItemType;
+                itemInfo = temp.ItemInfo;
             }
 
             Components.Sort();
@@ -200,6 +200,7 @@ namespace WarrenWarriorsGame
                     dmg = i.dmg;
                     itemType = i.itemType;
                     duration = i.Duration;
+                    itemInfo = i.itemInfo;
 
                     //add crafting notification to battle log
                     BattleLog.AddCraft(this);

@@ -272,7 +272,7 @@ namespace WarrenWarriorsGame
                     //draw characters and combat UI
                     handler.Draw(spriteBatch, gameUI);
 
-                    //gameUI.DrawUI(spriteBatch);
+                    
 
                     //draw the enemy
                     current.Draw(spriteBatch, 0);

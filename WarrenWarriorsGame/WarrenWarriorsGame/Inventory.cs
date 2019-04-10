@@ -34,9 +34,9 @@ namespace WarrenWarriorsGame
 		public Inventory(Game g)
 		{
             
-           
-			//initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
-			for (int j = 0; j < 3; j++)
+
+            //initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
+            for (int j = 0; j < 3; j++)
 			{
 				for (int k = 0; k < 4; k++)
 				{
@@ -67,10 +67,10 @@ namespace WarrenWarriorsGame
 			//drops items for the players
 			DropItems(5, 8);
 
-			craftButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(10,420,390,50));
+			craftButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(10,425,390,50));
 		}
 
-
+        
         public void Update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, MouseState prevMsState, PlayerChar[] Units)
         {
             Boolean madeSelection = false;
@@ -307,6 +307,7 @@ namespace WarrenWarriorsGame
 
 					}
 
+
                     //initiate an attack with a selected item if the space bar is pressed
                     //or if the right mouse button is clicked
                     if (Config.SingleKeyPress(Keys.Space, kbState, PrevkbState) || Config.SingleRightMouseClick(mState, prevMsState))
@@ -397,9 +398,24 @@ namespace WarrenWarriorsGame
                     }
 				}
 			}
+            craftButton.Draw(sb);
             
-			craftButton.Draw(sb);
-
+            //If the mouse is hovered over an inventory slot, draw a tooltip.
+            MouseState ms = Mouse.GetState();
+            Rectangle mouseRect = new Rectangle(ms.X, ms.Y, 1, 1);
+			
+            for(int j = 0; j < 3; j++)
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    if (invButtons[j, k].Location.Intersects(mouseRect))
+                    {
+                        
+                            sb.DrawString(font, items[j,k].ItemInfo, new Vector2(0, 405), Color.White);
+                        
+                    } 
+                }
+            }
 			if (craftState == SelectedState.selected)
 			{
 				sb.Draw(uI.IconStorage[selectedToCraft.ItemType], new Rectangle(Config.CRAFT_BUTTON_X + Config.CRAFT_BUTTON_WIDTH / 2 - 20, Config.CRAFT_BUTTON_Y + 10, 40, 40), Color.White);
