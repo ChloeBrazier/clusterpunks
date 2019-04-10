@@ -52,6 +52,10 @@ namespace WarrenWarriorsGame
 		Texture2D TitleImage;
 		List<Button> titleButtons = new List<Button>();
 
+		List<Texture2D> ControlsSheet = new List<Texture2D>();
+		Button[] controlsIncrementer = new Button[2];
+		int controlspage = 0;
+
 		public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -88,7 +92,18 @@ namespace WarrenWarriorsGame
 			//Creates Dungeon
 			mainDungeon = new Dungeon(this);
 
+			controlsIncrementer[0] = new Button(Content.Load<Texture2D>("btnNextNormal"),
+												Content.Load<Texture2D>("btnNextHovered"),
+												Content.Load<Texture2D>("btnNextClicked"),
+												new Rectangle(Config.EXIT_BUTTON_XY.X + 660, Config.EXIT_BUTTON_XY.Y + 50, 50, 50));
+			controlsIncrementer[1] = new Button(Content.Load<Texture2D>("btnPrevNormal"),
+												Content.Load<Texture2D>("btnPrevHovered"),
+												Content.Load<Texture2D>("btnPrevClicked"),
+												new Rectangle(Config.EXIT_BUTTON_XY.X + 600, Config.EXIT_BUTTON_XY.Y + 50, 50, 50));
 
+			ControlsSheet.Add(Content.Load<Texture2D>("btnCraftNormal"));
+			ControlsSheet.Add(Content.Load<Texture2D>("btnCraftHovered"));
+			ControlsSheet.Add(Content.Load<Texture2D>("itemUseIcon"));
 
 			//load in texture2D for enemy (when implemented), may change later
 			//Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
@@ -221,6 +236,27 @@ namespace WarrenWarriorsGame
 
                     break;
                 case GameState.ControlMenu:
+
+					if (controlsIncrementer[0].Update(mState))
+					{
+						controlsIncrementer[0].Deselect();
+						controlspage++;
+						if (controlspage == 3)
+						{
+							controlspage = 0;
+						}
+					}
+					else if (controlsIncrementer[1].Update(mState))
+					{
+						controlsIncrementer[1].Deselect();
+						controlspage--;
+						if (controlspage == -1)
+						{
+							controlspage = 2;
+						}
+					}
+
+
                     if (titleButtons[2].Update(mState))
                     {
                         for (int j = 0; j < titleButtons.Count; j++)
@@ -249,56 +285,61 @@ namespace WarrenWarriorsGame
 			// TODO: Add your drawing code here
 			spriteBatch.Begin();
 
-            //switch statement to determine which state the game is in and run draw methods accordingly
-            switch (gameState)
-            {
-                case GameState.Menu:
-                    spriteBatch.Draw(TitleImage, new Vector2(0, 0), Color.White);
-                    for (int j = 0; j < titleButtons.Count; j++)
-                    {
-                        titleButtons[j].Draw(spriteBatch);
-                    }
+			//switch statement to determine which state the game is in and run draw methods accordingly
+			switch (gameState)
+			{
+				case GameState.Menu:
+					spriteBatch.Draw(TitleImage, new Vector2(0, 0), Color.White);
+					for (int j = 0; j < titleButtons.Count; j++)
+					{
+						titleButtons[j].Draw(spriteBatch);
+					}
 
 
 
-                    break;
+					break;
 				case GameState.RoomSelect:
 					mainDungeon.Draw(spriteBatch);
 					break;
 				case GameState.Combat:
 
-                    //draw background
-                    spriteBatch.Draw(
-                        UI.GameUI[7], 
-                        new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), 
-                        Color.White
-                        );
+					//draw background
+					spriteBatch.Draw(
+						UI.GameUI[7],
+						new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height),
+						Color.White
+						);
 
-                    //draw characters and combat UI
-                    current.Handler.Draw(spriteBatch);
-                    
-                    //draw the enemy
-                    current.EnemyDraw(this,spriteBatch, 0);
+					//draw characters and combat UI
+					current.Handler.Draw(spriteBatch);
 
-                    //update battlelog and draw it to the screen
-                    BattleLog.Draw(this, spriteBatch, menuFont);
+					//draw the enemy
+					current.EnemyDraw(this, spriteBatch, 0);
 
-                    break;
-                case GameState.GameOver:
+					//update battlelog and draw it to the screen
+					BattleLog.Draw(this, spriteBatch, menuFont);
 
-                    //temporary game over screen that informs the player to press enter to return to the menu
-                    spriteBatch.DrawString
-                        (
-                        menuFont,
-                        "Press Enter to return to the menu",
-                        new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2),
-                        Color.Black
-                        );
+					break;
+				case GameState.GameOver:
 
-                    break;
+					//temporary game over screen that informs the player to press enter to return to the menu
+					spriteBatch.DrawString
+						(
+						menuFont,
+						"Press Enter to return to the menu",
+						new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2),
+						Color.Black
+						);
 
-                case GameState.ControlMenu:
-                    titleButtons[2].Draw(spriteBatch);
+					break;
+
+				case GameState.ControlMenu:
+					titleButtons[2].Draw(spriteBatch);
+					foreach (Button b in controlsIncrementer)
+					{
+						b.Draw(spriteBatch);
+					}
+					spriteBatch.Draw(ControlsSheet[controlspage], new Vector2(0, 0), Color.White);
                     break;
 
                 
