@@ -79,8 +79,8 @@ namespace WarrenWarriorsGame
                     break;
 				case CharType.Medium:
 					health = Config.GetRandom(30, 41);
-					name = "Kevin's Dad";
-                    sprite = game.Content.Load<Texture2D>("player_char_ranger_blue");
+					name = "Farmer";
+                    sprite = game.Content.Load<Texture2D>("farmer");
                     if (Config.GetRandom(1, 3) == 2)
 					{
 						atk = new Attack(Config.GetRandom(10, 16), Config.GetRandom(4, 6));
