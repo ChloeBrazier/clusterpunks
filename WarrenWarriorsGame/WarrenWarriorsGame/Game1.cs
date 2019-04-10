@@ -28,16 +28,14 @@ namespace WarrenWarriorsGame
         MouseState mState;
         MouseState prevMsState;
 
-		PlayerHandler handler; //holds all of the player interaction
+		//field for dungeon
+		Dungeon mainDungeon;
 
-        //field for the combat handler
-        CombatHandler combatHandler;
+		//field for encounter
+		Encounter current;
 
-        //field for an enemy (spawning currently simplified for testing)
-        Enemy current;
-
-        //field for the game's current state
-        GameState gameState;
+		//field for the game's current state
+		GameState gameState;
 
         //field for game music
         Song song;
@@ -78,53 +76,48 @@ namespace WarrenWarriorsGame
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected override void LoadContent()
-        {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+		/// <summary>
+		/// LoadContent will be called once per game and is the place to load
+		/// all of your content.
+		/// </summary>
+		protected override void LoadContent()
+		{
+			// Create a new SpriteBatch, which can be used to draw textures.
+			spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //create playerhandler, which in turn initializes player units
-			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"),this); //initializes the player handler
+			//Creates Dungeon
+			mainDungeon = new Dungeon(this);
 
-            //load in texture2D for enemy (when implemented), may change later
-            //Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
 
-            //initialize enemy for testing
-            r = new Random();
-            int randomEnemy = r.Next(0, 4);
-            current = new Enemy(Content.Load<SpriteFont>("Arial-12"), randomEnemy, handler.PlayerParty);
-            current.LoadSprite(this);
 
-            //initialize combat handler using loaded players and enemy
-            combatHandler = new CombatHandler(handler.PlayerParty, current);
+			//load in texture2D for enemy (when implemented), may change later
+			//Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
 
-            song = Content.Load<Song>("Power Rangers");  // Put the name of your song here instead of "song_title"
 
-            //load temporary menu font
-            menuFont = Content.Load<SpriteFont>("Arial-12");
 
-            // TODO: use this.Content to load your game content here
-            UI.Initialize(this);
-            UI.Load();
+			song = Content.Load<Song>("Power Rangers");  // Put the name of your song here instead of "song_title"
+
+			//load temporary menu font
+			menuFont = Content.Load<SpriteFont>("Arial-12");
+
+			// TODO: use this.Content to load your game content here
+			UI.Initialize(this);
+			UI.Load();
 
 			TitleImage = Content.Load<Texture2D>("titleImage");
 			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.PLAY_BUTTON_NORM),
-										Content.Load<Texture2D>(Config.PLAY_BUTTON_HOVERED), 
-										Content.Load<Texture2D>(Config.PLAY_BUTTON_CLICKED), 
+										Content.Load<Texture2D>(Config.PLAY_BUTTON_HOVERED),
+										Content.Load<Texture2D>(Config.PLAY_BUTTON_CLICKED),
 										new Rectangle(Config.PLAY_BUTTON_XY, Config.MAIN_MENU_BUTTON_WIDTH)));
 
-			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.CONTROLS_BUTTON_NORM), 
-										Content.Load<Texture2D>(Config.CONTROLS_BUTTON_HOVERED), 
-										Content.Load<Texture2D>(Config.CONTROLS_BUTTON_CLICKED), 
+			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.CONTROLS_BUTTON_NORM),
+										Content.Load<Texture2D>(Config.CONTROLS_BUTTON_HOVERED),
+										Content.Load<Texture2D>(Config.CONTROLS_BUTTON_CLICKED),
 										new Rectangle(Config.CONTROL_BUTTON_XY, Config.MAIN_MENU_BUTTON_WIDTH)));
 
-			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.EXIT_BUTTON_NORM), 
-										Content.Load<Texture2D>(Config.EXIT_BUTTON_HOVERED), 
-										Content.Load<Texture2D>(Config.EXIT_BUTTON_CLICKED), 
+			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.EXIT_BUTTON_NORM),
+										Content.Load<Texture2D>(Config.EXIT_BUTTON_HOVERED),
+										Content.Load<Texture2D>(Config.EXIT_BUTTON_CLICKED),
 										new Rectangle(Config.EXIT_BUTTON_XY, Config.MAIN_MENU_BUTTON_WIDTH)));
 
 		}
@@ -164,7 +157,7 @@ namespace WarrenWarriorsGame
 							switch(j)
 							{
 								case 0:
-									gameState = GameState.Combat;
+									gameState = GameState.RoomSelect;
 									break;
                                 case 1:
                                     gameState = GameState.ControlMenu;
@@ -182,42 +175,43 @@ namespace WarrenWarriorsGame
                     //start game when the player presses enter
                     if (Config.SingleKeyPress(Keys.Enter, kbState, PrevkbState) == true)
                     {
-                        gameState = GameState.Combat;
+                        gameState = GameState.RoomSelect;
                     }
 
                     break;
-                case GameState.Combat:
 
-                    if(combatHandler.InEncounter != true)
-                    {
-                        //enter encounter using combat handler (move to dungeon nav-based class later)
-                        combatHandler.EnterEncounter();
-                    }
-                    
-                    //now takes in gametime for use with the Attack classe's update method (also an enemy for temporary testing)
-                    handler.Update(kbState, PrevkbState, mState, prevMsState, gameTime, current); //updates all of the keyboardhandler
+				case GameState.RoomSelect:
+					//Lets Player select a room to go to
+					current = mainDungeon.Update(mState, prevMsState);
 
-                    //update enemy and handle combat
+					if (current != null)
+					{
+						gameState = GameState.Combat;
+					}
+					break;
+				case GameState.Combat:
 
-                    if (current.IsAttacking != true)
-                    {
-                        current.CoolDown(gameTime);
-                    }
-                    else
-                    {
-                        current.Update(kbState, PrevkbState, gameTime);
-                    }
+					//Initiates combat in the current room, with the encounter generated
+					current.CombatEncounter(this, kbState, PrevkbState, mState, prevMsState, gameTime);
 
-                    //check party's health and enter GameOver state if it equals zero
-                    int partyHealth = combatHandler.PartyHealth();
-                    if(partyHealth == 0)
-                    {
-                        MediaPlayer.Stop();
-                        gameState = GameState.GameOver;
-                    }
+					//check party's health and enter GameOver state if it equals zero
+					int partyHealth = current.CombatHandler.PartyHealth();
+					if (partyHealth == 0)
+					{
+						MediaPlayer.Stop();
+						gameState = GameState.GameOver;
+					}
 
-                    break;
-                case GameState.GameOver:
+					//checks enemy's health. when it hits zero, drops loot and returns to room select
+					int enemyHealth = current.CombatHandler.EnemyHealth();
+					if (enemyHealth == 0)
+					{
+						gameState = GameState.RoomSelect;
+						current.Handler.PlayerInv.DropItems(0, 10);
+					}
+
+					break;
+				case GameState.GameOver:
 
                     //return to menu when player presses Enter
                     if (Config.SingleKeyPress(Keys.Enter, kbState, PrevkbState) == true)
@@ -268,7 +262,10 @@ namespace WarrenWarriorsGame
 
 
                     break;
-                case GameState.Combat:
+				case GameState.RoomSelect:
+					mainDungeon.Draw(spriteBatch);
+					break;
+				case GameState.Combat:
 
                     //draw background
                     spriteBatch.Draw(
@@ -278,10 +275,10 @@ namespace WarrenWarriorsGame
                         );
 
                     //draw characters and combat UI
-                    handler.Draw(spriteBatch);
+                    current.Handler.Draw(spriteBatch);
                     
                     //draw the enemy
-                    current.Draw(spriteBatch, 0);
+                    current.EnemyDraw(this,spriteBatch, 0);
 
                     //update battlelog and draw it to the screen
                     BattleLog.Draw(this, spriteBatch, menuFont);

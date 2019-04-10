@@ -16,7 +16,7 @@ namespace WarrenWarriorsGame
     /// Handles the players inventory as well as crafting
     /// 3/8/2019
     /// </summary>
-    class Inventory
+    public class Inventory
     {
 		private CraftItem[,] items = new CraftItem[3,4]; 
 		private SelectedState selected = SelectedState.deselected;

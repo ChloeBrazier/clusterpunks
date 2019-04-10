@@ -81,5 +81,11 @@ namespace WarrenWarriorsGame
 
             return partyHealth;
         }
-    }
+
+		public int EnemyHealth()
+		{
+			int enemyHealth = enemy.Health;
+			return enemyHealth;
+		}
+	}
 }

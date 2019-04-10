@@ -27,8 +27,16 @@ namespace WarrenWarriorsGame
 
         //the players inventory
 		Inventory playerInv;
-        //buttons that handle moveing players
-        Button[] playerButtons = new Button[3];
+
+		//Accessors for the inventory
+		public Inventory PlayerInv
+		{
+			get { return playerInv; }
+			set { playerInv = value; }
+		}
+
+		//buttons that handle moveing players
+		Button[] playerButtons = new Button[3];
 
         //accessor for player units
         public PlayerChar[] PlayerParty
