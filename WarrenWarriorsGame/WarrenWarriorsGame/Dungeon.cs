@@ -56,7 +56,7 @@ namespace WarrenWarriorsGame
         public void Update()
         {
             /*
-             used to select wich encounter the user will be fighting next
+             used to select which encounter the user will be fighting next
              */
         }
         public void Draw()
