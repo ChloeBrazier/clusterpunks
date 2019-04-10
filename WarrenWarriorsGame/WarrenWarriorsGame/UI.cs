@@ -14,27 +14,29 @@ using Microsoft.Xna.Framework.Input;
 /// </summary>
 namespace WarrenWarriorsGame
 {
-    public class UI
+    public static class UI
     {
         //Declare variables.
 
         //dictionary field for item UI
-        private Dictionary<Item, Texture2D> iconStorage;
+        static private Dictionary<Item, Texture2D> iconStorage;
 
         //separate List field for general game UI
-        private List<Texture2D> gameUI;
+        static private List<Texture2D> gameUI;
 
-        Game coolGame;
+        static private Game coolGame;
+
+        static private SpriteFont font;
 
         //Allow us to access the icon storage outside the class just in case.
 
-        public Dictionary<Item, Texture2D> IconStorage
+        public static Dictionary<Item, Texture2D> IconStorage
         {
             get { return iconStorage; }
         }
 
         //accessor for game UI list
-        public List<Texture2D> GameUI
+        public static List<Texture2D> GameUI
         {
             get
             {
@@ -42,15 +44,23 @@ namespace WarrenWarriorsGame
             }
         }
 
-        public UI(Game coolGame)
+        //accessor for font
+        public static SpriteFont Font
+        {
+            get
+            {
+                return font;
+            }
+        }
+
+        public static void Initialize(Game game)
         {
             iconStorage = new Dictionary<Item, Texture2D>();
-            gameUI = new List<Texture2D>();
-            this.coolGame = coolGame;
+            gameUI = new List<Texture2D>();            coolGame = game;
 
         }
         //Store Icon/UI loads in here to make Game1 less messy.
-        public void Load()
+        public static void Load()
         {
             //Load each item that will be loaded into inventory slots.
             //add each item to the icon storage dictionary with enum keys and texture values
@@ -62,8 +72,9 @@ namespace WarrenWarriorsGame
             iconStorage.Add(Item.Matches, coolGame.Content.Load<Texture2D>("BasicMatchSprite"));
             iconStorage.Add(Item.Torch, coolGame.Content.Load<Texture2D>("NewTorchSprite"));
             iconStorage.Add(Item.HotNails, coolGame.Content.Load<Texture2D>("HotBladeIcon"));
-            
-             
+
+            //load spritefont
+            font = coolGame.Content.Load<SpriteFont>("Arial-12");
 
             //Load important information that will be displayed in the UI.
             gameUI.Add(coolGame.Content.Load<Texture2D>("HealthIcon")); //0
@@ -76,34 +87,7 @@ namespace WarrenWarriorsGame
             gameUI.Add(coolGame.Content.Load<Texture2D>("game_background_prototype")); //7
         }
 
-        public void DrawUI(SpriteBatch spriteBatch)
-        {
-            //For player one.
-
-            //Draw the main background.
-            spriteBatch.Draw(gameUI[2], new Rectangle(0, 225, 128, 256), Color.White);
-
-            //Draw the heart icon, Dimensions of the heart are 16 width, 14 height initially, so alter the size ONLY by multiples of those.
-            spriteBatch.Draw(gameUI[0], new Rectangle(5, 300, 32, 28), Color.White);
-
-            //For player two.
-            //Main background
-            spriteBatch.Draw(gameUI[2], new Rectangle(128, 225, 128, 258), Color.White);
-
-            //Draw health icon.
-            spriteBatch.Draw(gameUI[0], new Rectangle(133, 300, 32, 28), Color.White);
-
-            
-
-            //For player 3.
-            //Main Background
-            spriteBatch.Draw(gameUI[2], new Rectangle(256, 225, 128, 256), Color.White);
-
-            //Heart Icon.
-            spriteBatch.Draw(gameUI[0], new Rectangle(261, 300, 32, 28), Color.White);
-
-            
-        }
+        
     }
 }
 

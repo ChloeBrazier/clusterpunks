@@ -166,40 +166,55 @@ namespace WarrenWarriorsGame
             }
         }
 
-		public void Draw(SpriteBatch spriteBatch,UI GameUI)
+		public void Draw(SpriteBatch spriteBatch)
 		{
             //draws the  buttons
             for (int j = 0; j < playerButtons.Length; j++)
             {
-                playerButtons[j].Draw(spriteBatch);
+                //draw a character's movement button if they aren't attacking
+                if (Units[j].IsAttacking != true)
+                {
+                    playerButtons[j].Draw(spriteBatch);
+                }
+                else
+                {
+                    //draw timer icon when a player character is attacking
+                    spriteBatch.Draw(UI.GameUI[6], playerButtons[j].Location, Color.White);
+                    spriteBatch.DrawString(
+                        UI.Font, 
+                        string.Format("{0:0.00}", Units[j].Atk.Length), 
+                        new Vector2(playerButtons[j].Location.X + (playerButtons[j].Location.Width/2) - 10, playerButtons[j].Location.Y + (playerButtons[j].Location.Height/2)), 
+                        Color.Red
+                        );
+                }
             }
 
             //draw the health icon
             for (int j = 0; j < 3; j++)
             {
-                spriteBatch.Draw(GameUI.GameUI[0], new Rectangle(Config.INV_BUTTON_X_LOC +Config.PLAYER_BTN_SPACING*j, Config.PLAYER_BTN_Y_POS, 50, 50), Color.White);
+                spriteBatch.Draw(UI.GameUI[0], new Rectangle(Config.INV_BUTTON_X_LOC +Config.PLAYER_BTN_SPACING*j, Config.PLAYER_BTN_Y_POS, 50, 50), Color.White);
+                Units[j].Draw(spriteBatch, j);
             }
 
-            //draws the players numbers
+            //draws the players numbers when not attacking
             for (int j = 0; j < Units.Length; j++)
 			{
-				Color drawcolor = Color.White;
-
-				Units[j].Draw(spriteBatch, j);
-
-				if (j == selectedChar && Swap == SelectedState.selected)
-				{
-					drawcolor = Color.MonoGameOrange;
-				}
-
-				spriteBatch.DrawString(text, string.Format("{0}: {1}  ", j + 1,Units[j].Name), j * 5 * Config.LineSpacing, drawcolor);
-                spriteBatch.DrawString(text, (j + 1).ToString(), new Vector2(95 + j * 130, 265), drawcolor);
-
+                if (Units[j].IsAttacking != true)
+                {
+                    Color drawcolor = Color.White;
+                    
+                    if (j == selectedChar && Swap == SelectedState.selected)
+                    {
+                        drawcolor = Color.MonoGameOrange;
+                    }
+                    
+                    spriteBatch.DrawString(text, (j + 1).ToString(), new Vector2(95 + j * 130, 265), drawcolor);
+                }
 			}
 
 
 
-			playerInv.Draw(spriteBatch, text,GameUI);
+			playerInv.Draw(spriteBatch, text);
 		}
 
 

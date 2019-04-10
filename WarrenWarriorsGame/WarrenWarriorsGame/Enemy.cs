@@ -185,7 +185,7 @@ namespace WarrenWarriorsGame
         public void CoolDown(GameTime time)
         {
             //enemy attacks periodically until it dies
-
+            
             //start the enemy on a cooldown of 15 seconds
             cooldown = cooldown - time.ElapsedGameTime.TotalSeconds;
 

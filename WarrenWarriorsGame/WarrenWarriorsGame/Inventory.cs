@@ -34,9 +34,9 @@ namespace WarrenWarriorsGame
 		public Inventory(Game g)
 		{
             
-           
-			//initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
-			for (int j = 0; j < 3; j++)
+
+            //initialize an array of buttons for mouse controls with the x and y of the buttons corresponding directly to their items
+            for (int j = 0; j < 3; j++)
 			{
 				for (int k = 0; k < 4; k++)
 				{
@@ -67,10 +67,10 @@ namespace WarrenWarriorsGame
 			//drops items for the players
 			DropItems(5, 8);
 
-			craftButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(10,420,390,50));
+			craftButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(10,425,390,50));
 		}
 
-
+        
         public void Update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, MouseState prevMsState, PlayerChar[] Units)
         {
             Boolean madeSelection = false;
@@ -84,228 +84,222 @@ namespace WarrenWarriorsGame
             }
 
 
-			switch(selected)
-			{
-				case SelectedState.deselected:
-					
-					//First characters inventory
-                    //cannot access when attacking
-					if(Config.SingleKeyPress(Keys.Q,kbState,PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
-					{
-						SelectedItemX = 0;
-						SelectedItemY = 0;
-                        madeSelection = true;
+            switch (selected)
+            {
+                //case SelectedState.deselected:
 
-						selected = SelectedState.selected;
-					}
+                //    #region player controls
+                //    //First characters inventory
+                //    //cannot access when attacking
+                //    if (Config.SingleKeyPress(Keys.Q, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
+                //    {
+                //        SelectedItemX = 0;
+                //        SelectedItemY = 0;
+                //        madeSelection = true;
 
-					if(Config.SingleKeyPress(Keys.W,kbState,PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
-					{
-						SelectedItemX = 0;
-						SelectedItemY = 1;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
+                //        selected = SelectedState.selected;
+                //    }
+                //    else if (Config.SingleKeyPress(Keys.W, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
+                //    {
+                //        SelectedItemX = 0;
+                //        SelectedItemY = 1;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
+                //    else if (Config.SingleKeyPress(Keys.A, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
+                //    {
+                //        SelectedItemX = 0;
+                //        SelectedItemY = 2;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
+                //    else if (Config.SingleKeyPress(Keys.S, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
+                //    {
+                //        SelectedItemX = 0;
+                //        SelectedItemY = 3;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
+                //    //second characters inventory
+                //    //cannot access while attacking
+                //    else if (Config.SingleKeyPress(Keys.E, kbState, PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
+                //    {
+                //        SelectedItemX = 1;
+                //        SelectedItemY = 0;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
+                //    else if (Config.SingleKeyPress(Keys.R, kbState, PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
+                //    {
+                //        SelectedItemX = 1;
+                //        SelectedItemY = 1;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
+                //    else if (Config.SingleKeyPress(Keys.D, kbState, PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
+                //    {
+                //        SelectedItemX = 1;
+                //        SelectedItemY = 2;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
+                //    else if (Config.SingleKeyPress(Keys.F, kbState, PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
+                //    {
+                //        SelectedItemX = 1;
+                //        SelectedItemY = 3;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
+                //    //third characters inventory
+                //    //cannot access while attacking
+                //    else if (Config.SingleKeyPress(Keys.T, kbState, PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
+                //    {
+                //        SelectedItemX = 2;
+                //        SelectedItemY = 0;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
+                //    else if (Config.SingleKeyPress(Keys.Y, kbState, PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
+                //    {
+                //        SelectedItemX = 2;
+                //        SelectedItemY = 1;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
+                //    else if (Config.SingleKeyPress(Keys.G, kbState, PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
+                //    {
+                //        SelectedItemX = 2;
+                //        SelectedItemY = 2;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
+                //    else if (Config.SingleKeyPress(Keys.H, kbState, PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
+                //    {
+                //        SelectedItemX = 2;
+                //        SelectedItemY = 3;
+                //        selected = SelectedState.selected;
+                //        madeSelection = true;
+                //    }
 
-					if(Config.SingleKeyPress(Keys.A,kbState,PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
-					{
-						SelectedItemX = 0;
-						SelectedItemY = 2;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
+                //    if (madeSelection)
+                //    {
+                //        invButtons[SelectedItemX, SelectedItemY].Select();
+                //    }
 
-					if(Config.SingleKeyPress(Keys.S,kbState,PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
-					{
-						SelectedItemX = 0;
-						SelectedItemY = 3;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
-
-					//second characters inventory
-                    //cannot access while attacking
-					if(Config.SingleKeyPress(Keys.E,kbState,PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
-					{
-						SelectedItemX = 1;
-						SelectedItemY = 0;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
-
-					if(Config.SingleKeyPress(Keys.R,kbState,PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
-					{
-						SelectedItemX = 1;
-						SelectedItemY = 1;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
-
-					if(Config.SingleKeyPress(Keys.D,kbState,PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
-					{
-						SelectedItemX = 1;
-						SelectedItemY = 2;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
-
-					if(Config.SingleKeyPress(Keys.F,kbState,PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
-					{
-						SelectedItemX = 1;
-						SelectedItemY = 3;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
-
-					//third characters inventory
-                    //cannot access while attacking
-					if(Config.SingleKeyPress(Keys.T,kbState,PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
-					{
-						SelectedItemX = 2;
-						SelectedItemY = 0;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
-
-					if(Config.SingleKeyPress(Keys.Y,kbState,PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
-					{
-						SelectedItemX = 2;
-						SelectedItemY = 1;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
-
-					if(Config.SingleKeyPress(Keys.G,kbState,PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
-					{
-						SelectedItemX = 2;
-						SelectedItemY = 2;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
-
-					if(Config.SingleKeyPress(Keys.H,kbState,PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
-					{
-						SelectedItemX = 2;
-						SelectedItemY = 3;
-						selected = SelectedState.selected;
-                        madeSelection = true;
-                    }
-
-                    if (madeSelection)
-                    {
-                        invButtons[SelectedItemX, SelectedItemY].Select();
-                    }
-
-					for (int j = 0; j < 3; j++)
-					{
-						for (int k = 0; k < 4; k++)
-						{
-							if (invButtons[j, k].Update(mState) == true)
-							{
-								selected = SelectedState.selected;
-								SelectedItemX = j;
-								SelectedItemY = k;
-							}
+                //    for (int j = 0; j < 3; j++)
+                //    {
+                //        for (int k = 0; k < 4; k++)
+                //        {
+                //            if (!Units[j].IsAttacking && invButtons[j, k].Update(mState) == true) //player inv is locked when attacking
+                //            {
+                //                selected = SelectedState.selected;
+                //                SelectedItemX = j;
+                //                SelectedItemY = k;
+                //            }
 
 
-						}
-					}
+                //        }
+                //    }
 
-					//dont call update for craft button because it cannot be used unless you have already selected an item
+                //    //dont call update for craft button because it cannot be used unless you have already selected an item
+                //    #endregion 
+                //    break;
 
-							break;
-				case SelectedState.selected:
+                case SelectedState.selected: 
+
+
 					//first char inv
-					if(Config.SingleKeyPress(Keys.Q,kbState,PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
-					{
-						Swap(0,0);
-						selected = SelectedState.deselected;
+					if (Config.SingleKeyPress(Keys.Q, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
+                    {
+                        Swap(0, 0);
+                        selected = SelectedState.deselected;
 
-					}
-					if (Config.SingleKeyPress(Keys.W,kbState,PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
-					{
-						Swap(0,1);
-						selected = SelectedState.deselected;
+                    }
+                    else if (Config.SingleKeyPress(Keys.W, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
+                    {
+                        Swap(0, 1);
+                        selected = SelectedState.deselected;
 
-					}
-					if (Config.SingleKeyPress(Keys.A,kbState,PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
-					{
-						Swap(0,2);
-						selected = SelectedState.deselected;
+                    }
+                    else if (Config.SingleKeyPress(Keys.A, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
+                    {
+                        Swap(0, 2);
+                        selected = SelectedState.deselected;
 
-					}
-					if (Config.SingleKeyPress(Keys.S,kbState,PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
-					{
-						Swap(0,3);
-						selected = SelectedState.deselected;
+                    }
+                    else if (Config.SingleKeyPress(Keys.S, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
+                    {
+                        Swap(0, 3);
+                        selected = SelectedState.deselected;
 
-					}
+                    }
 
 
-					//second char inv
-					if (Config.SingleKeyPress(Keys.E,kbState,PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
-					{
-						Swap(1,0);
-						selected = SelectedState.deselected;
+                    //second char inv
+                    else if (Config.SingleKeyPress(Keys.E, kbState, PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
+                    {
+                        Swap(1, 0);
+                        selected = SelectedState.deselected;
 
-					}
-					if (Config.SingleKeyPress(Keys.R,kbState,PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
-					{
-						Swap(1,1);
-						selected = SelectedState.deselected;
+                    }
+                    else if (Config.SingleKeyPress(Keys.R, kbState, PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
+                    {
+                        Swap(1, 1);
+                        selected = SelectedState.deselected;
 
-					}
-					if (Config.SingleKeyPress(Keys.D,kbState,PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
-					{
-						Swap(1,2);
-						selected = SelectedState.deselected;
+                    }
+                    else if (Config.SingleKeyPress(Keys.D, kbState, PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
+                    {
+                        Swap(1, 2);
+                        selected = SelectedState.deselected;
 
-					}
-					if (Config.SingleKeyPress(Keys.F,kbState,PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
-					{
-						Swap(1,3);
-						selected = SelectedState.deselected;
+                    }
+                    else if (Config.SingleKeyPress(Keys.F, kbState, PrevkbState) && Units[1].IsAttacking == false && Units[1].Health > 0)
+                    {
+                        Swap(1, 3);
+                        selected = SelectedState.deselected;
 
-					}
+                    }
 
-					//third char inv
+                    //third char inv
 
-					if (Config.SingleKeyPress(Keys.T,kbState,PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
-					{
-						Swap(2,0);
-						selected = SelectedState.deselected;
+                    else if (Config.SingleKeyPress(Keys.T, kbState, PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
+                    {
+                        Swap(2, 0);
+                        selected = SelectedState.deselected;
 
-					}
-					if (Config.SingleKeyPress(Keys.Y,kbState,PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
-					{
-						Swap(2,1);
-						selected = SelectedState.deselected;
+                    }
+                    else if (Config.SingleKeyPress(Keys.Y, kbState, PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
+                    {
+                        Swap(2, 1);
+                        selected = SelectedState.deselected;
 
-					}
-					if (Config.SingleKeyPress(Keys.G,kbState,PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
-					{
-						Swap(2,2);
-						selected = SelectedState.deselected;
+                    }
+                    else if (Config.SingleKeyPress(Keys.G, kbState, PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
+                    {
+                        Swap(2, 2);
+                        selected = SelectedState.deselected;
 
-					}
-					if (Config.SingleKeyPress(Keys.H,kbState,PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
-					{
-						Swap(2,3);
-						selected = SelectedState.deselected;
+                    }
+                    else if (Config.SingleKeyPress(Keys.H, kbState, PrevkbState) && Units[2].IsAttacking == false && Units[2].Health > 0)
+                    {
+                        Swap(2, 3);
+                        selected = SelectedState.deselected;
 
-					}
+                    }
 
                     //deselects any selected items?
-					if (Config.SingleKeyPress(Keys.Tab, kbState, PrevkbState))
-					{
-						invButtons[SelectedItemX, SelectedItemY].Deselect();
-						selected = SelectedState.deselected;
-						foreach (Button b in invButtons)
-						{
-							b.Deselect();
-						}
+                    if (Config.SingleKeyPress(Keys.Tab, kbState, PrevkbState))
+                    {
+                        invButtons[SelectedItemX, SelectedItemY].Deselect(); //player inv is locked when attacking
+                        selected = SelectedState.deselected;
+                        foreach (Button b in invButtons)
+                        {
+                            b.Deselect();
+                        }
 
-					}
+                    }
+
 
                     //initiate an attack with a selected item if the space bar is pressed
                     //or if the right mouse button is clicked
@@ -326,58 +320,62 @@ namespace WarrenWarriorsGame
                         BattleLog.AddPlayerAttackStart(Units[SelectedItemX]);
                     }
 
-					//handles mouse controls
-					for (int j = 0; j < 3; j++)
-					{
-						for (int k = 0; k < 4; k++)
-						{
-							if (invButtons[j, k].Update(mState) == true)
-							{
-
-								invButtons[j, k].Deselect();
-								invButtons[SelectedItemX, SelectedItemY].Deselect();
-								selected = SelectedState.deselected;
-								Swap(j, k);
-							}
+                    //handles mouse controls
+                    for (int j = 0; j < 3; j++)
+                    {
+                        for (int k = 0; k < 4; k++)
+                        {
+                            if (Units[j].IsAttacking == false)
+                            {
+                                if (invButtons[j, k].Update(mState) == true)
+                                {
 
 
-						}
-					}
+                                    invButtons[j, k].Deselect();
+                                    invButtons[SelectedItemX, SelectedItemY].Deselect();
+                                    selected = SelectedState.deselected;
+                                    Swap(j, k);
 
-					//Handles crafting controls
-					if(craftButton.Update(mState) || Config.SingleKeyPress(Keys.LeftShift,kbState,PrevkbState) || Config.SingleKeyPress(Keys.RightShift,kbState,PrevkbState))
-					{
-						switch (craftState)
-						{
-							case SelectedState.deselected:
-								selectedToCraft = items[SelectedItemX, SelectedItemY];
-								items[SelectedItemX, SelectedItemY] = new CraftItem(Item.Empty);
+                                }
+                            }
 
-								craftState = SelectedState.selected;
-								craftButton.Deselect();
+                        }
+                    }
 
-								break;
-							case SelectedState.selected:
-								items[SelectedItemX, SelectedItemY] = new CraftItem(items[SelectedItemX, SelectedItemY], selectedToCraft);
-								craftState = SelectedState.deselected;
-								craftButton.Deselect();
+                    //Handles crafting controls
+                    if (craftButton.Update(mState) || Config.SingleKeyPress(Keys.LeftShift, kbState, PrevkbState) || Config.SingleKeyPress(Keys.RightShift, kbState, PrevkbState))
+                    {
+                        switch (craftState)
+                        {
+                            case SelectedState.deselected:
+                                selectedToCraft = items[SelectedItemX, SelectedItemY];
+                                items[SelectedItemX, SelectedItemY] = new CraftItem(Item.Empty);
 
-								break;
+                                craftState = SelectedState.selected;
+                                craftButton.Deselect();
+
+                                break;
+                            case SelectedState.selected:
+                                items[SelectedItemX, SelectedItemY] = new CraftItem(items[SelectedItemX, SelectedItemY], selectedToCraft);
+                                craftState = SelectedState.deselected;
+                                craftButton.Deselect();
+
+                                break;
 
 
-						}
-						selected = SelectedState.deselected;
-						invButtons[SelectedItemX, SelectedItemY].Deselect();
+                        }
+                        selected = SelectedState.deselected;
+                        invButtons[SelectedItemX, SelectedItemY].Deselect();
 
-					}
+                    }
 
 
-					break;
-			}
+                    break;
+            }
 
         }
 
-        public void Draw(SpriteBatch sb,SpriteFont font,UI uI)
+        public void Draw(SpriteBatch sb,SpriteFont font)
         {
 			for (int j = 0; j < 3; j++)
 			{
@@ -387,7 +385,7 @@ namespace WarrenWarriorsGame
 
                     //draws the ui icons to their resepective buttons
                     Rectangle drawpos = new Rectangle(invButtons[j, k].Location.Left+5, invButtons[j, k].Location.Top+5, invButtons[j, k].Location.Width-10, invButtons[j, k].Location.Height-10);
-                    sb.Draw(uI.IconStorage[items[j, k].ItemType],drawpos , Color.White);
+                    sb.Draw(UI.IconStorage[items[j, k].ItemType],drawpos , Color.White);
 
                     for (int i = 0; i < items[j, k].Duration; i++)
                     {
@@ -397,19 +395,32 @@ namespace WarrenWarriorsGame
                     }
 				}
 			}
+            craftButton.Draw(sb);
             
-			craftButton.Draw(sb);
-
+            //If the mouse is hovered over an inventory slot, draw a tooltip.
+            MouseState ms = Mouse.GetState();
+            Rectangle mouseRect = new Rectangle(ms.X, ms.Y, 1, 1);
+			
+            for(int j = 0; j < 3; j++)
+            {
+                for (int k = 0; k < 4; k++)
+                {
+                    if (invButtons[j, k].Location.Intersects(mouseRect))
+                    {
+                        
+                            sb.DrawString(font, items[j,k].ItemInfo, new Vector2(0, 405), Color.White);
+                        
+                    } 
+                }
+            }
 			if (craftState == SelectedState.selected)
 			{
-				sb.Draw(uI.IconStorage[selectedToCraft.ItemType], new Rectangle(Config.CRAFT_BUTTON_X + Config.CRAFT_BUTTON_WIDTH / 2 - 20, Config.CRAFT_BUTTON_Y + 10, 40, 40), Color.White);
+				sb.Draw(UI.IconStorage[selectedToCraft.ItemType], new Rectangle(Config.CRAFT_BUTTON_X + Config.CRAFT_BUTTON_WIDTH / 2 - 20, Config.CRAFT_BUTTON_Y + 10, 40, 40), Color.White);
 			}
 		}
 
 		private void Swap(int x, int y) //swaps items in the items array with the item that is currently selected
 		{
-
-
             invButtons[SelectedItemX, SelectedItemY].Deselect();
             invButtons[x, y].Deselect();
 

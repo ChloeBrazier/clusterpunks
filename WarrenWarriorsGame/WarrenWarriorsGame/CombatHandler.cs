@@ -27,16 +27,16 @@ namespace WarrenWarriorsGame
         //field for enemy
         private Enemy enemy;
 
-		//accessor for inEncounter
-		public bool InEncounter
-		{
-			get
-			{
-				return inEncounter;
-			}
-		}
+        //accessor for inEncounter
+        public bool InEncounter
+        {
+            get
+            {
+                return inEncounter;
+            }
+        }
 
-		public CombatHandler(PlayerChar[] Units, Enemy nme)
+        public CombatHandler(PlayerChar[] Units, Enemy nme)
         {
             //initialize player party
             playerParty = Units;
@@ -50,7 +50,11 @@ namespace WarrenWarriorsGame
 
         public void EnterEncounter()
         {
-            //will handle locking the screen and setting inEncounter to true
+            //set inEncounter to true
+            inEncounter = true;
+
+            //send in enemy's encounter text
+            BattleLog.EnemySpawn(enemy.Name);
         }
 
         public void CheckEncounter()
