@@ -165,6 +165,9 @@ namespace WarrenWarriorsGame
 								case 0:
 									gameState = GameState.Combat;
 									break;
+                                case 1:
+                                    gameState = GameState.ControlMenu;
+                                    break;
 								case 2:
 									Exit();
 									break;
@@ -233,6 +236,12 @@ namespace WarrenWarriorsGame
                     }
 
                     break;
+                case GameState.ControlMenu:
+                    if (titleButtons[2].Update(mState))
+                    {
+                        gameState = GameState.Menu;
+                    }
+                    break;
             }
             
 			PrevkbState = kbState; //stores the previous keyboard state
@@ -256,13 +265,13 @@ namespace WarrenWarriorsGame
             switch (gameState)
             {
                 case GameState.Menu:
-					spriteBatch.Draw(TitleImage, new Vector2(0, 0), Color.White);
-					for (int j = 0; j < titleButtons.Count; j++)
-					{
-						titleButtons[j].Draw(spriteBatch);
-					}
+                    spriteBatch.Draw(TitleImage, new Vector2(0, 0), Color.White);
+                    for (int j = 0; j < titleButtons.Count; j++)
+                    {
+                        titleButtons[j].Draw(spriteBatch);
+                    }
 
-                    
+
 
                     break;
                 case GameState.Combat:
@@ -277,7 +286,7 @@ namespace WarrenWarriorsGame
                     //draw characters and combat UI
                     handler.Draw(spriteBatch);
 
-                    
+
 
                     //draw the enemy
                     current.Draw(spriteBatch, 0);
@@ -298,6 +307,12 @@ namespace WarrenWarriorsGame
                         );
 
                     break;
+
+                case GameState.ControlMenu:
+                    titleButtons[2].Draw(spriteBatch);
+                    break;
+
+                
             }
             
             spriteBatch.End();

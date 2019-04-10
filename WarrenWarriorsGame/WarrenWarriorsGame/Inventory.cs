@@ -200,7 +200,7 @@ namespace WarrenWarriorsGame
 					{
 						for (int k = 0; k < 4; k++)
 						{
-							if (invButtons[j, k].Update(mState) == true)
+							if ( !Units[j].IsAttacking && invButtons[j, k].Update(mState) == true) //player inv is locked when attacking
 							{
 								selected = SelectedState.selected;
 								SelectedItemX = j;
@@ -298,7 +298,7 @@ namespace WarrenWarriorsGame
                     //deselects any selected items?
 					if (Config.SingleKeyPress(Keys.Tab, kbState, PrevkbState))
 					{
-						invButtons[SelectedItemX, SelectedItemY].Deselect();
+						invButtons[SelectedItemX, SelectedItemY].Deselect(); //player inv is locked when attacking
 						selected = SelectedState.deselected;
 						foreach (Button b in invButtons)
 						{
@@ -332,15 +332,19 @@ namespace WarrenWarriorsGame
 					{
 						for (int k = 0; k < 4; k++)
 						{
-							if (invButtons[j, k].Update(mState) == true)
-							{
+                            if (Units[j].IsAttacking == false)
+                            {
+                                if (invButtons[j, k].Update(mState) == true)
+                                {
 
-								invButtons[j, k].Deselect();
-								invButtons[SelectedItemX, SelectedItemY].Deselect();
-								selected = SelectedState.deselected;
-								Swap(j, k);
-							}
 
+                                    invButtons[j, k].Deselect();
+                                    invButtons[SelectedItemX, SelectedItemY].Deselect();
+                                    selected = SelectedState.deselected;
+                                    Swap(j, k);
+
+                                }
+                            }
 
 						}
 					}
