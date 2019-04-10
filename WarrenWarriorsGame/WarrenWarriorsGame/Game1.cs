@@ -184,9 +184,9 @@ namespace WarrenWarriorsGame
 
                     break;
                 case GameState.Combat:
-                    
+
                     //play background music (temp)
-                    
+
                     //Eddie: commented out because it was driving me crazy while testing
 
                     //if(songStart == false)
@@ -195,6 +195,12 @@ namespace WarrenWarriorsGame
                     //    MediaPlayer.IsRepeating = true;
                     //    songStart = true;
                     //}
+
+                    if(combatHandler.InEncounter != true)
+                    {
+                        //enter encounter using combat handler (move to dungeon nav-based class later)
+                        combatHandler.EnterEncounter();
+                    }
                     
                     //now takes in gametime for use with the Attack classe's update method (also an enemy for temporary testing)
                     handler.Update(kbState, PrevkbState, mState, prevMsState, gameTime, current); //updates all of the keyboardhandler

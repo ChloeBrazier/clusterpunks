@@ -78,6 +78,27 @@ namespace WarrenWarriorsGame
         }
 
         /// <summary>
+        /// notifies player that the room they have entered has
+        /// no enemies and they will receive items
+        /// </summary>
+        public static void ItemDrops()
+        {
+            logQueue.Enqueue("Nobody's here... but there's a stash of ITEMS");
+            logQueue.Enqueue("~INVENTORY REFILLED~");
+        }
+
+        /// <summary>
+        /// informs player of the enemy they will face 
+        /// in the current room
+        /// </summary>
+        /// <param name="enemyName"> the name of the enemy in the current room</param>
+        public static void EnemySpawn(string enemyName)
+        {
+            logQueue.Enqueue(enemyName + " has appeared!");
+            logQueue.Enqueue("~TIME TO FIGHT~");
+        }
+
+        /// <summary>
         /// checks the size of the queue and removes the oldest
         /// string when count exceeds a certain number
         /// </summary>
@@ -90,7 +111,7 @@ namespace WarrenWarriorsGame
         }
 
         /// <summary>
-        /// clears the battle log
+        /// clears the battle log (used after an encounter)
         /// </summary>
         public static void ClearLog()
         {
@@ -102,7 +123,7 @@ namespace WarrenWarriorsGame
         /// </summary>
         public static void Draw(Game g, SpriteBatch sb, SpriteFont font)
         {
-            //create a temporary vector to control spacing of log test
+            //create a temporary vector to control spacing of log text
             Vector2 logVector = new Vector2(460, (g.GraphicsDevice.Viewport.Height/3 * 2));
             Console.WriteLine(logVector);
 
