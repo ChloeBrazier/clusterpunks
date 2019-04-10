@@ -124,7 +124,7 @@ namespace WarrenWarriorsGame
 		public const int PLAYER_AVATAR_HEIGHT = 170;
 
 		public const int PLAYER_AVATAR_X_LOC = 10;
-		public const int PLAYER_AVATAR_Y_LOC = 20;
+		public const int PLAYER_AVATAR_Y_LOC = 60;
 		public const int PLAYER_AVATAR_SPACING = 20;
 
 		public const int HEALTH_X_POS = 25;
