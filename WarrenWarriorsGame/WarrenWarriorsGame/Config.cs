@@ -19,6 +19,8 @@ namespace WarrenWarriorsGame
     public enum GameState
     {
         Menu,
+        Dungeon,
+        ControlMenu,
         Combat,
         GameOver
     }
