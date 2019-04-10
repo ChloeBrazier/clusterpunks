@@ -94,7 +94,7 @@ namespace WarrenWarriorsGame
 				case CharType.Light:
 					health = Config.GetRandom(20, 31);
 					atk = new Attack(Config.GetRandom(5, 11), Config.GetRandom(1, 3));
-					name = "Kevin";
+					name = "Kevin (Heroic)";
                     sprite = game.Content.Load<Texture2D>("player_char_ranger_fixed");
 
                     break;
