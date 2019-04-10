@@ -428,8 +428,6 @@ namespace WarrenWarriorsGame
 
 		private void Swap(int x, int y) //swaps items in the items array with the item that is currently selected
 		{
-
-
             invButtons[SelectedItemX, SelectedItemY].Deselect();
             invButtons[x, y].Deselect();
 

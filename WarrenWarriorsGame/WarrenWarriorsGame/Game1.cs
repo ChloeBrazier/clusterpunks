@@ -41,6 +41,7 @@ namespace WarrenWarriorsGame
 
         //field for game music
         Song song;
+
         //temporary bool to make the song start only once
         bool songStart;
 
@@ -187,17 +188,6 @@ namespace WarrenWarriorsGame
                     break;
                 case GameState.Combat:
 
-                    //play background music (temp)
-
-                    //Eddie: commented out because it was driving me crazy while testing
-
-                    //if(songStart == false)
-                    //{
-                    //    MediaPlayer.Play(song);
-                    //    MediaPlayer.IsRepeating = true;
-                    //    songStart = true;
-                    //}
-
                     if(combatHandler.InEncounter != true)
                     {
                         //enter encounter using combat handler (move to dungeon nav-based class later)
@@ -285,9 +275,7 @@ namespace WarrenWarriorsGame
 
                     //draw characters and combat UI
                     handler.Draw(spriteBatch);
-
-
-
+                    
                     //draw the enemy
                     current.Draw(spriteBatch, 0);
 

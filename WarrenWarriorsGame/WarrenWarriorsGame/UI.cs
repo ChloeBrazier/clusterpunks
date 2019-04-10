@@ -26,6 +26,8 @@ namespace WarrenWarriorsGame
 
         static private Game coolGame;
 
+        static private SpriteFont font;
+
         //Allow us to access the icon storage outside the class just in case.
 
         public static Dictionary<Item, Texture2D> IconStorage
@@ -42,11 +44,19 @@ namespace WarrenWarriorsGame
             }
         }
 
+        //accessor for font
+        public static SpriteFont Font
+        {
+            get
+            {
+                return font;
+            }
+        }
+
         public static void Initialize(Game game)
         {
             iconStorage = new Dictionary<Item, Texture2D>();
-            gameUI = new List<Texture2D>();
-            coolGame = game;
+            gameUI = new List<Texture2D>();            coolGame = game;
 
         }
         //Store Icon/UI loads in here to make Game1 less messy.
@@ -62,8 +72,9 @@ namespace WarrenWarriorsGame
             iconStorage.Add(Item.Matches, coolGame.Content.Load<Texture2D>("BasicMatchSprite"));
             iconStorage.Add(Item.Torch, coolGame.Content.Load<Texture2D>("NewTorchSprite"));
             iconStorage.Add(Item.HotNails, coolGame.Content.Load<Texture2D>("HotBladeIcon"));
-            
-             
+
+            //load spritefont
+            font = coolGame.Content.Load<SpriteFont>("Arial-12");
 
             //Load important information that will be displayed in the UI.
             gameUI.Add(coolGame.Content.Load<Texture2D>("HealthIcon")); //0
