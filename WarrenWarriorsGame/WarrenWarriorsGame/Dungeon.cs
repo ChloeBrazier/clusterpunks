@@ -101,5 +101,13 @@ namespace WarrenWarriorsGame
 			}
 		}
 
+        public bool GameWin()
+        {
+            if (dungeonlayout[19,19].CombatHandler.EnemyHealth() == 0)
+            {
+                return true;
+            }
+            return false;
+        }
 	}
 }

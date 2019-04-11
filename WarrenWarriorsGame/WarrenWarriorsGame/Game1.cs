@@ -219,10 +219,17 @@ namespace WarrenWarriorsGame
 
 					//checks enemy's health. when it hits zero, drops loot and returns to room select
 					int enemyHealth = current.CombatHandler.EnemyHealth();
-					if (enemyHealth == 0)
+					if (enemyHealth <= 0)
 					{
-						gameState = GameState.RoomSelect;
-						current.Handler.PlayerInv.DropItems(0, 10);
+                        if (mainDungeon.GameWin())
+                        {
+                            gameState = GameState.Win;
+                        }
+                        else
+                        {
+                            gameState = GameState.RoomSelect;
+                            current.Handler.PlayerInv.DropItems(0, 10);
+                        }
 					}
 
 					break;
@@ -232,6 +239,11 @@ namespace WarrenWarriorsGame
                     if (Config.SingleKeyPress(Keys.Enter, kbState, PrevkbState) == true)
                     {
                         gameState = GameState.Menu;
+
+                        foreach (Button b in titleButtons)
+                        {
+                            b.Deselect();
+                        }
                     }
 
                     break;
@@ -264,6 +276,17 @@ namespace WarrenWarriorsGame
                             titleButtons[j].Deselect();
                         }
                         gameState = GameState.Menu;
+                    }
+                    break;
+
+                case GameState.Win:
+                    if (Config.SingleKeyPress(Keys.Enter, kbState, PrevkbState))
+                    {
+                        gameState = GameState.Menu;
+                        foreach (Button b in titleButtons)
+                        {
+                            b.Deselect();
+                        }
                     }
                     break;
             }
@@ -340,6 +363,10 @@ namespace WarrenWarriorsGame
 						b.Draw(spriteBatch);
 					}
 					spriteBatch.Draw(ControlsSheet[controlspage], new Vector2(0, 0), Color.White);
+                    break;
+
+                case GameState.Win:
+                    spriteBatch.DrawString(menuFont, "You win, press enter to return to menu", new Vector2(50, 50), Color.White);
                     break;
 
                 

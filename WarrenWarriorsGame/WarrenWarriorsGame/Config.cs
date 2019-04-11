@@ -22,7 +22,8 @@ namespace WarrenWarriorsGame
         RoomSelect,
         ControlMenu,
         Combat,
-        GameOver
+        GameOver,
+        Win
     }
 
 	public enum CharType //used for generic character generation
