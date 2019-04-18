@@ -172,6 +172,7 @@ namespace WarrenWarriorsGame
 							switch(j)
 							{
 								case 0:
+                                    mainDungeon = new Dungeon(this);
 									gameState = GameState.RoomSelect;
 									break;
                                 case 1:
