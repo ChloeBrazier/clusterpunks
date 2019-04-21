@@ -69,7 +69,7 @@ namespace WarrenWarriorsGame
 			DropItems(5, 8);
 
 			craftButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(Config.CRAFT_BUTTON_X,Config.CRAFT_BUTTON_Y,Config.CRAFT_BUTTON_WIDTH,Config.CRAFT_BUTTON_HEIGHT));
-            AttackButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(Config.CRAFT_BUTTON_X + 5 + Config.CRAFT_BUTTON_WIDTH, Config.CRAFT_BUTTON_Y, Config.CRAFT_BUTTON_WIDTH, Config.CRAFT_BUTTON_HEIGHT));
+            AttackButton = new Button(g.Content.Load<Texture2D>(Config.ATTACK_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.ATTACK_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.ATTACK_BUTTON_CLICKED), new Rectangle(Config.CRAFT_BUTTON_X + 5 + Config.CRAFT_BUTTON_WIDTH, Config.CRAFT_BUTTON_Y, Config.CRAFT_BUTTON_WIDTH, Config.CRAFT_BUTTON_HEIGHT));
         }
 
         
