@@ -17,6 +17,9 @@ namespace WarrenWarriorsGame
 		//Random Attribute
 		Random rn = new Random();
 
+        //Dungeon Size Control
+        int DungeonDimension;
+
 		//Arrays of buttons and encounters
 		Button[,] roomButtons;
 		Encounter[,] dungeonlayout;
@@ -25,13 +28,16 @@ namespace WarrenWarriorsGame
 		public Dungeon(Game g)
 		{
 			int roller;
-			roomButtons = new Button[7, 7];
-			dungeonlayout = new Encounter[7, 7];
+
+            DungeonDimension = 7;
+
+			roomButtons = new Button[DungeonDimension, DungeonDimension];
+			dungeonlayout = new Encounter[DungeonDimension, DungeonDimension];
 
 			//Creates Buttons in Array
-			for (int x = 0; x < 7; x++)
+			for (int x = 0; x < DungeonDimension; x++)
 			{
-				for (int y = 0; y < 7; y++)
+				for (int y = 0; y < DungeonDimension; y++)
 				{
 					//Generates a random encounter difficulty for each room
 					roller = rn.Next(0, 5);
@@ -70,9 +76,9 @@ namespace WarrenWarriorsGame
 		//If it is, generates an encounter
 		public Encounter Update(MouseState ms, MouseState prev)
 		{
-			for (int x = 0; x < 7; x++)
+			for (int x = 0; x < DungeonDimension; x++)
 			{
-				for (int y = 0; y < 7; y++)
+				for (int y = 0; y < DungeonDimension; y++)
 				{
 					if (roomButtons[x, y] != null)
 					{
@@ -91,9 +97,9 @@ namespace WarrenWarriorsGame
 		//Draws the array of buttons
 		public void Draw(SpriteBatch sb)
 		{
-			for (int x = 0; x < 7; x++)
+			for (int x = 0; x < DungeonDimension; x++)
 			{
-				for (int y = 0; y < 7; y++)
+				for (int y = 0; y < DungeonDimension; y++)
 				{
 					if (roomButtons[x, y] != null)
 					{
