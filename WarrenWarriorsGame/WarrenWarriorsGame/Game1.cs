@@ -31,6 +31,9 @@ namespace WarrenWarriorsGame
 		//field for dungeon
 		Dungeon mainDungeon;
 
+        //Map Background Sprite
+        Texture2D MapBackground;
+
 		//field for encounter
 		Encounter current;
 
@@ -118,6 +121,8 @@ namespace WarrenWarriorsGame
 			// TODO: use this.Content to load your game content here
 			UI.Initialize(this);
 			UI.Load();
+
+            MapBackground = Content.Load<Texture2D>("MapBack");
 
 			TitleImage = Content.Load<Texture2D>("titleImage");
 			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.PLAY_BUTTON_NORM),
@@ -323,7 +328,8 @@ namespace WarrenWarriorsGame
 
 					break;
 				case GameState.RoomSelect:
-					mainDungeon.Draw(spriteBatch);
+                    spriteBatch.Draw(MapBackground, new Vector2(0, 0), Color.White);
+                    mainDungeon.Draw(spriteBatch);
 					break;
 				case GameState.Combat:
 
