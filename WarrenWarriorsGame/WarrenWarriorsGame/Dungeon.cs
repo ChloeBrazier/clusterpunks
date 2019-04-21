@@ -12,26 +12,28 @@ using Microsoft.Xna.Framework.Input;
 //Handles Arrays for the Dungeon and its navigation
 namespace WarrenWarriorsGame
 {
-	public class Dungeon
-	{
-		//Random Attribute
-		Random rn = new Random();
+    public class Dungeon
+    {
+        //Random Attribute
+        Random rn = new Random();
 
-		//Arrays of buttons and encounters
-		Button[,] roomButtons;
-		Encounter[,] dungeonlayout;
+        //Arrays of buttons and encounters
+        Button[,] roomButtons;
+        Encounter[,] dungeonlayout;
+
+        int DungeonDimension = 20;
 
 		//Constructor for the Dungeon
 		public Dungeon(Game g)
 		{
 			int roller;
-			roomButtons = new Button[20, 20];
-			dungeonlayout = new Encounter[20, 20];
+			roomButtons = new Button[DungeonDimension, DungeonDimension];
+			dungeonlayout = new Encounter[DungeonDimension, DungeonDimension];
 
 			//Creates Buttons in Array
-			for (int x = 0; x < 20; x++)
+			for (int x = 0; x < DungeonDimension; x++)
 			{
-				for (int y = 0; y < 20; y++)
+				for (int y = 0; y < DungeonDimension; y++)
 				{
 					//Generates a random encounter difficulty for each room
 					roller = rn.Next(0, 5);
@@ -68,9 +70,9 @@ namespace WarrenWarriorsGame
         //edit this to use a graph (? maybe) or use adjacency so that only the rooms that have adjacent rooms cleared are drawn
 		public Encounter Update(MouseState ms, MouseState prev)
 		{
-			for (int x = 0; x < 20; x++)
+			for (int x = 0; x < DungeonDimension; x++)
 			{
-				for (int y = 0; y < 20; y++)
+				for (int y = 0; y < DungeonDimension; y++)
 				{
 					if (roomButtons[x, y] != null)
 					{
@@ -89,9 +91,9 @@ namespace WarrenWarriorsGame
 		//Draws the array of buttons
 		public void Draw(SpriteBatch sb)
 		{
-			for (int x = 0; x < 20; x++)
+			for (int x = 0; x < DungeonDimension; x++)
 			{
-				for (int y = 0; y < 20; y++)
+				for (int y = 0; y < DungeonDimension; y++)
 				{
 					if (roomButtons[x, y] != null)
 					{
@@ -104,7 +106,7 @@ namespace WarrenWarriorsGame
 
         public bool GameWin()
         {
-            if (dungeonlayout[19,19].CombatHandler.EnemyHealth() <= 0)
+            if (dungeonlayout[DungeonDimension -1,DungeonDimension -1].CombatHandler.EnemyHealth() <= 0)
             {
                 return true;
             }
