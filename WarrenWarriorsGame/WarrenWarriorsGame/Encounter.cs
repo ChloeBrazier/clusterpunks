@@ -70,8 +70,8 @@ namespace WarrenWarriorsGame
 			current = new Enemy(g.Content.Load<SpriteFont>("Arial-12"), randomEnemy, handler.PlayerParty);
 			current.LoadSprite(g);
 
-			//initialize combat handler using loaded players and enemy
-			combatHandler = new CombatHandler(handler.PlayerParty, current);
+            //Intialize Combat Handler using loaded players and enemies
+            combatHandler = new CombatHandler(handler.PlayerParty, current);
 
 		}
 

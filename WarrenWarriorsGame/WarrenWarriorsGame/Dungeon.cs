@@ -40,13 +40,9 @@ namespace WarrenWarriorsGame
 				for (int y = 0; y < DungeonDimension; y++)
 				{
 					//Generates a random encounter difficulty for each room
-					roller = rn.Next(0, 4);
+					roller = rn.Next(1, 4);
 					switch (roller)
 					{
-						case 0:
-							dungeonlayout[x, y] = new Encounter(g, Difficulty.None);
-							roomButtons[x, y] = null;
-							break;
 						case 1:
 							dungeonlayout[x, y] = new Encounter(g, Difficulty.Easy);
 							roomButtons[x, y] = new Button(g.Content.Load<Texture2D>("RoomNormal"), g.Content.Load<Texture2D>("RoomNext"), g.Content.Load<Texture2D>("RoomCleared"), new Rectangle(x * 60, y * 60, 60, 60));
@@ -94,13 +90,11 @@ namespace WarrenWarriorsGame
 		//Draws the array of buttons
 		public void Draw(SpriteBatch sb)
 		{
-
-
 			for (int x = 0; x < DungeonDimension; x++)
 			{
-				for (int y = 0; y < DungeonDimension; y++)
+				for (int y = 1; y < DungeonDimension; y++)
 				{
-					if (roomButtons[x, y] != null)
+					if (roomButtons[x, y] != null && checkAdjacent(x,y))
 					{
 						roomButtons[x, y].Draw(sb);
 					}
@@ -117,5 +111,74 @@ namespace WarrenWarriorsGame
             }
             return false;
         }
+
+        private Boolean checkAdjacent(int x, int y)
+        {
+
+            if (x == 0)
+            {
+                if (y == 0)
+                {
+                    return true;
+                }
+                else if (y == DungeonDimension - 1)
+                {
+                    if (roomButtons[x, y - 1].State == BtnState.Selected || roomButtons[x + 1, y].State == BtnState.Selected)
+                    {
+                        return true;
+                    }
+                }
+                else if (roomButtons[x, y - 1].State == BtnState.Selected || roomButtons[x + 1, y].State == BtnState.Selected || roomButtons[x, y + 1].State == BtnState.Selected)
+                {
+                    return true;
+                }
+            }
+
+            else if (y == 0)
+            {
+                if (x == 0)
+                {
+                    return true;
+                }
+                else if (x == DungeonDimension - 1)
+                {
+                    if (roomButtons[x - 1, y ].State == BtnState.Selected || roomButtons[x , y + 1].State == BtnState.Selected)
+                    {
+                        return true;
+                    }
+                }
+                else if (roomButtons[x-1, y].State == BtnState.Selected || roomButtons[x + 1, y].State == BtnState.Selected || roomButtons[x, y + 1].State == BtnState.Selected)
+                {
+                    return true;
+                }
+            }
+            else if (x == DungeonDimension - 1)
+            {
+                if (y == DungeonDimension - 1)
+                {
+                    if (roomButtons[x, y - 1].State == BtnState.Selected || roomButtons[x - 1, y].State == BtnState.Selected)
+                    {
+                        return true;
+                    }
+                }
+            }
+            else if (y == DungeonDimension - 1)
+            {
+                if (x == DungeonDimension - 1)
+                {
+                    if (roomButtons[x, y - 1].State == BtnState.Selected || roomButtons[x - 1, y].State == BtnState.Selected)
+                    {
+                        return true;
+                    }
+                }
+            }
+            else if (roomButtons[x - 1, y].State == BtnState.Selected || roomButtons[x, y - 1].State == BtnState.Selected || roomButtons[x + 1, y].State == BtnState.Selected || roomButtons[x, y + 1].State == BtnState.Selected)
+            {
+                    return true;
+            }
+            return false;
+        }
+
+
 	}
 }

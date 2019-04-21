@@ -18,6 +18,10 @@ namespace WarrenWarriorsGame
     class Button
     {
         private BtnState state = BtnState.Default;
+        public BtnState State
+        {
+            get { return state; }
+        }
 
         private Texture2D normal;
         private Texture2D hovered;
