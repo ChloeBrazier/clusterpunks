@@ -102,8 +102,8 @@ namespace WarrenWarriorsGame
 
 		#region Crafting Button
 		public const int CRAFT_BUTTON_X = 10;
-		public const int CRAFT_BUTTON_Y = 420;
-		public const int CRAFT_BUTTON_WIDTH = 390;
+		public const int CRAFT_BUTTON_Y = 425;
+		public const int CRAFT_BUTTON_WIDTH = 195;
 		public const int CRAFT_BUTTON_HEIGHT = 50;
 
 		public const string CRAFT_BUTTON_NORMAL = "btnCraftNormal";

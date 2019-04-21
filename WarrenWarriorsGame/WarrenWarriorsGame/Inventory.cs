@@ -27,6 +27,7 @@ namespace WarrenWarriorsGame
 
         private CraftItem selectedToCraft;
         private Button craftButton;
+        private Button AttackButton;
 		private SelectedState craftState = SelectedState.deselected;
         private Texture2D useIcon;
 		
@@ -67,8 +68,9 @@ namespace WarrenWarriorsGame
 			//drops items for the players
 			DropItems(5, 8);
 
-			craftButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(10,425,390,50));
-		}
+			craftButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(Config.CRAFT_BUTTON_X,Config.CRAFT_BUTTON_Y,Config.CRAFT_BUTTON_WIDTH,Config.CRAFT_BUTTON_HEIGHT));
+            AttackButton = new Button(g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_NORMAL), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_HOVERED), g.Content.Load<Texture2D>(Config.CRAFT_BUTTON_CLICKED), new Rectangle(Config.CRAFT_BUTTON_X + 5 + Config.CRAFT_BUTTON_WIDTH, Config.CRAFT_BUTTON_Y, Config.CRAFT_BUTTON_WIDTH, Config.CRAFT_BUTTON_HEIGHT));
+        }
 
         
         public void Update(KeyboardState kbState, KeyboardState PrevkbState,MouseState mState, MouseState prevMsState, PlayerChar[] Units)
@@ -305,7 +307,7 @@ namespace WarrenWarriorsGame
 
                     //initiate an attack with a selected item if the space bar is pressed
                     //or if the right mouse button is clicked
-                    if (Config.SingleKeyPress(Keys.Space, kbState, PrevkbState) || Config.SingleRightMouseClick(mState, prevMsState))
+                    if (Config.SingleKeyPress(Keys.Space, kbState, PrevkbState) || Config.SingleRightMouseClick(mState, prevMsState) || AttackButton.Update(mState))
                     {
                         //create an item object to send to a given character's attack method
                         CraftItem usedItem = items[SelectedItemX, SelectedItemY];
@@ -320,6 +322,7 @@ namespace WarrenWarriorsGame
 
                         //send info for attack initiation to battle log
                         BattleLog.AddPlayerAttackStart(Units[SelectedItemX]);
+                        AttackButton.Deselect();
                     }
 
                     //handles mouse controls
@@ -345,7 +348,7 @@ namespace WarrenWarriorsGame
                     }
 
                     //Handles crafting controls
-                    if (craftButton.Update(mState) || Config.SingleKeyPress(Keys.LeftShift, kbState, PrevkbState) || Config.SingleKeyPress(Keys.RightShift, kbState, PrevkbState))
+                    if (items[SelectedItemX, SelectedItemY].ItemType != Item.Empty && (craftButton.Update(mState) || Config.SingleKeyPress(Keys.LeftShift, kbState, PrevkbState) || Config.SingleKeyPress(Keys.RightShift, kbState, PrevkbState)))
                     {
                         switch (craftState)
                         {
@@ -398,6 +401,7 @@ namespace WarrenWarriorsGame
 				}
 			}
             craftButton.Draw(sb);
+            AttackButton.Draw(sb);
             
             //If the mouse is hovered over an inventory slot, draw a tooltip.
             MouseState ms = Mouse.GetState();
