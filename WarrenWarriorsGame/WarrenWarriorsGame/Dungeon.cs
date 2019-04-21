@@ -12,22 +12,23 @@ using Microsoft.Xna.Framework.Input;
 //Handles Arrays for the Dungeon and its navigation
 namespace WarrenWarriorsGame
 {
-	public class Dungeon
-	{
-		//Random Attribute
-		Random rn = new Random();
-
-        //Dungeon Size Control
-        int DungeonDimension;
+    public class Dungeon
+    {
+        //Random Attribute
+        Random rn = new Random();
 
 		//Arrays of buttons and encounters
 		Button[,] roomButtons;
 		Encounter[,] dungeonlayout;
 
+        int DungeonDimension = 20;
+
 		//Constructor for the Dungeon
 		public Dungeon(Game g)
 		{
 			int roller;
+			roomButtons = new Button[20, 20];
+			dungeonlayout = new Encounter[20, 20];
 
             DungeonDimension = 7;
 
@@ -74,6 +75,7 @@ namespace WarrenWarriorsGame
 		//Update Method
 		//Checks if a button is clicked
 		//If it is, generates an encounter
+        //edit this to use a graph (? maybe) or use adjacency so that only the rooms that have adjacent rooms cleared are drawn
 		public Encounter Update(MouseState ms, MouseState prev)
 		{
 			for (int x = 0; x < DungeonDimension; x++)
@@ -112,7 +114,7 @@ namespace WarrenWarriorsGame
 
         public bool GameWin()
         {
-            if (dungeonlayout[6,6].CombatHandler.EnemyHealth() == 0)
+            if (dungeonlayout[19,19].CombatHandler.EnemyHealth() == 0)
             {
                 return true;
             }
