@@ -47,7 +47,26 @@ namespace WarrenWarriorsGame
 			roomDifficulty = dif;
 			//initialize enemy for testing
 			r = new Random();
-			int randomEnemy = r.Next(0, 4);
+            int randomEnemy = 0;            
+
+            //Randomizes Enemy based on room difficulty
+            switch(dif)
+            {
+                case Difficulty.Easy:
+                    randomEnemy = r.Next(0, 3);
+                    break;
+                case Difficulty.Medium:
+                    randomEnemy = r.Next(0, 3);
+                    break;
+                case Difficulty.Hard:
+                    randomEnemy = r.Next(2, 3);
+                    break;
+                case Difficulty.Boss:
+                    randomEnemy = 3;
+                    break;
+            }
+
+			
 			current = new Enemy(g.Content.Load<SpriteFont>("Arial-12"), randomEnemy, handler.PlayerParty);
 			current.LoadSprite(g);
 
