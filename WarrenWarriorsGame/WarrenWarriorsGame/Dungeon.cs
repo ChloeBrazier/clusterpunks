@@ -65,6 +65,7 @@ namespace WarrenWarriorsGame
 		//Update Method
 		//Checks if a button is clicked
 		//If it is, generates an encounter
+        //edit this to use a graph (? maybe) or use adjacency so that only the rooms that have adjacent rooms cleared are drawn
 		public Encounter Update(MouseState ms, MouseState prev)
 		{
 			for (int x = 0; x < 20; x++)
@@ -103,7 +104,7 @@ namespace WarrenWarriorsGame
 
         public bool GameWin()
         {
-            if (dungeonlayout[19,19].CombatHandler.EnemyHealth() == 0)
+            if (dungeonlayout[19,19].CombatHandler.EnemyHealth() <= 0)
             {
                 return true;
             }
