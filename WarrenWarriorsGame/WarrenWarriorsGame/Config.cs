@@ -102,17 +102,23 @@ namespace WarrenWarriorsGame
 
 		#region Crafting Button
 		public const int CRAFT_BUTTON_X = 10;
-		public const int CRAFT_BUTTON_Y = 420;
-		public const int CRAFT_BUTTON_WIDTH = 390;
+		public const int CRAFT_BUTTON_Y = 425;
+		public const int CRAFT_BUTTON_WIDTH = 195;
 		public const int CRAFT_BUTTON_HEIGHT = 50;
 
-		public const string CRAFT_BUTTON_NORMAL = "btnCraftNormal";
-		public const string CRAFT_BUTTON_HOVERED = "btnCraftHovered";
-		public const string CRAFT_BUTTON_CLICKED = "btnCraftSelected";
-		#endregion
+        public const string CRAFT_BUTTON_NORMAL = "btnCraftNormal";
+        public const string CRAFT_BUTTON_HOVERED = "btnCraftHovered";
+        public const string CRAFT_BUTTON_CLICKED = "btnCraftSelected";
 
-		#region Player Characters
-		public const int PLAYER_BTN_X_POS = 70;
+        public const string ATTACK_BUTTON_NORMAL = "btnCraftNormal";
+        public const string ATTACK_BUTTON_HOVERED = "btnCraftHovered";
+        public const string ATTACK_BUTTON_CLICKED = "btnCraftSelected";
+
+
+        #endregion
+
+        #region Player Characters
+        public const int PLAYER_BTN_X_POS = 70;
 		public const int PLAYER_BTN_Y_POS = 240;
 		public const int PLAYER_BTN_SPACING = 140;
 		public const int PLAYER_BTN_SIZE = 50;

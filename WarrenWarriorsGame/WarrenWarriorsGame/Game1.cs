@@ -235,6 +235,7 @@ namespace WarrenWarriorsGame
                         {
                             gameState = GameState.RoomSelect;
                             current.Handler.PlayerInv.DropItems(0, 10);
+                            BattleLog.ClearLog();
                         }
 					}
 
