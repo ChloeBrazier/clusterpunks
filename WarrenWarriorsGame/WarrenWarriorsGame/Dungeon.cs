@@ -17,18 +17,17 @@ namespace WarrenWarriorsGame
         //Random Attribute
         Random rn = new Random();
 
+        //Dungeon Size Control
+        int DungeonDimension;
+
 		//Arrays of buttons and encounters
 		Button[,] roomButtons;
 		Encounter[,] dungeonlayout;
-
-        int DungeonDimension = 20;
 
 		//Constructor for the Dungeon
 		public Dungeon(Game g)
 		{
 			int roller;
-			roomButtons = new Button[20, 20];
-			dungeonlayout = new Encounter[20, 20];
 
             DungeonDimension = 7;
 
@@ -41,7 +40,7 @@ namespace WarrenWarriorsGame
 				for (int y = 0; y < DungeonDimension; y++)
 				{
 					//Generates a random encounter difficulty for each room
-					roller = rn.Next(0, 5);
+					roller = rn.Next(0, 4);
 					switch (roller)
 					{
 						case 0:
@@ -58,10 +57,6 @@ namespace WarrenWarriorsGame
 							break;
 						case 3:
 							dungeonlayout[x, y] = new Encounter(g, Difficulty.Hard);
-							roomButtons[x, y] = new Button(g.Content.Load<Texture2D>("RoomNormal"), g.Content.Load<Texture2D>("RoomNext"), g.Content.Load<Texture2D>("RoomCleared"), new Rectangle(x * 60, y * 60, 60, 60));
-							break;
-						case 4:
-							dungeonlayout[x, y] = new Encounter(g, Difficulty.Boss);
 							roomButtons[x, y] = new Button(g.Content.Load<Texture2D>("RoomNormal"), g.Content.Load<Texture2D>("RoomNext"), g.Content.Load<Texture2D>("RoomCleared"), new Rectangle(x * 60, y * 60, 60, 60));
 							break;
 					}
@@ -114,7 +109,7 @@ namespace WarrenWarriorsGame
 
         public bool GameWin()
         {
-            if (dungeonlayout[19,19].CombatHandler.EnemyHealth() == 0)
+            if (dungeonlayout[DungeonDimension - 1, DungeonDimension - 1].CombatHandler.EnemyHealth() <= 0)
             {
                 return true;
             }
