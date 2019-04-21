@@ -88,7 +88,7 @@ namespace WarrenWarriorsGame
 			{
 				case SelectedState.deselected:
 
-					#region player controls
+					#region player keyboard controls
 					//First characters inventory
 					//cannot access when attacking
 					if (Config.SingleKeyPress(Keys.Q, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
@@ -185,8 +185,9 @@ namespace WarrenWarriorsGame
 					{
 						invButtons[SelectedItemX, SelectedItemY].Select();
 					}
+                    #endregion
 
-					for (int j = 0; j < 3; j++)
+                    for (int j = 0; j < 3; j++)
 					{
 						for (int k = 0; k < 4; k++)
 						{
@@ -202,14 +203,14 @@ namespace WarrenWarriorsGame
 					}
 
 					//dont call update for craft button because it cannot be used unless you have already selected an item
-					#endregion
+					
 					break;
 
-				case SelectedState.selected: 
+				case SelectedState.selected:
 
-
-					//first char inv
-					if (Config.SingleKeyPress(Keys.Q, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
+                    #region Player Keyboard Controls
+                    //first char inv
+                    if (Config.SingleKeyPress(Keys.Q, kbState, PrevkbState) && Units[0].IsAttacking == false && Units[0].Health > 0)
                     {
                         Swap(0, 0);
                         selected = SelectedState.deselected;
@@ -287,6 +288,7 @@ namespace WarrenWarriorsGame
                         selected = SelectedState.deselected;
 
                     }
+                    #endregion
 
                     //deselects any selected items?
                     if (Config.SingleKeyPress(Keys.Tab, kbState, PrevkbState))
