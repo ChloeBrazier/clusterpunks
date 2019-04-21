@@ -337,7 +337,7 @@ namespace WarrenWarriorsGame
 					spriteBatch.Draw(
 						UI.GameUI[7],
 						new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height),
-						Color.White
+						Color.DarkGray //Changed to Dark Gray to make the UI and Characters stand out more
 						);
 
 					//draw characters and combat UI
