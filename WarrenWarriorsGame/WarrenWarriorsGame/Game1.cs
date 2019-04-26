@@ -35,6 +35,9 @@ namespace WarrenWarriorsGame
         //Map Background Sprite
         Texture2D MapBackground;
 
+        //Victory Screen
+        Texture2D Victory;
+
 		//field for encounter
 		Encounter current;
 
@@ -130,6 +133,7 @@ namespace WarrenWarriorsGame
 			UI.Load();
 
             MapBackground = Content.Load<Texture2D>("MapBack");
+            Victory = Content.Load<Texture2D>("Victory");
 
 			TitleImage = Content.Load<Texture2D>("titleImage");
 			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.PLAY_BUTTON_NORM),
@@ -384,7 +388,7 @@ namespace WarrenWarriorsGame
                     break;
 
                 case GameState.Win:
-                    spriteBatch.DrawString(menuFont, "You win, press enter to return to menu", new Vector2(50, 50), Color.White);
+                    spriteBatch.Draw(Victory, new Rectangle(0,0,800,480), Color.White);
                     break;
 
                 

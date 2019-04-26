@@ -246,9 +246,6 @@ namespace WarrenWarriorsGame
             cooldown = cooldownTime;
             string longName = reader.ReadLine();
             reader.Close(); //Close Reader
-
-            health = 1;
-
             //Code to reduce the sprite filename to just the name
             String[] storage = longName.Split('\\');
             string shorterName = storage[storage.Length-1];
