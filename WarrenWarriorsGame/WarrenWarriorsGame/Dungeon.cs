@@ -90,17 +90,21 @@ namespace WarrenWarriorsGame
 		//Draws the array of buttons
 		public void Draw(SpriteBatch sb)
 		{
-			for (int x = 0; x < DungeonDimension; x++)
-			{
-				for (int y = 1; y < DungeonDimension; y++)
-				{
-					if (roomButtons[x, y] != null && checkAdjacent(x,y))
-					{
-						roomButtons[x, y].Draw(sb);
-					}
+            roomButtons[0, 0].Draw(sb);
+            if(roomButtons[0,0].State == BtnState.Selected)
+            {
+                for (int x = 0; x < DungeonDimension; x++)
+                {
+                    for (int y = 0; y < DungeonDimension; y++)
+                    {
+                        if (roomButtons[x, y] != null && checkAdjacent(x, y))
+                        {
+                            roomButtons[x, y].Draw(sb);
+                        }
 
-				}
-			}
+                    }
+                }
+            }
 		}
 
         public bool GameWin()
