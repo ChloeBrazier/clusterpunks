@@ -75,6 +75,7 @@ namespace WarrenWarriorsGame
 					atk = new Attack(Config.GetRandom(10, 16), Config.GetRandom(5, 11));
 					name = "Kevin's Grand-Dad";
                     sprite = game.Content.Load<Texture2D>("player_char_ranger_red");
+                    animSprite = new AnimatedSprite(game.Content.Load<Texture2D>("Player3Animation"), 0, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT, 2);
 
                     break;
 				case CharType.Medium:
@@ -119,11 +120,12 @@ namespace WarrenWarriorsGame
 			Vector2 pos = position * 5 * Config.LineSpacing;
             pos.X = pos.X - 10;
             pos.Y = pos.Y - 40;
-
+            
             //vector for character info
             Vector2 textPos = new Vector2(470, 100);
             textPos.Y = textPos.Y * (1 + position);
             textPos.Y = textPos.Y + 100;
+            
 
             if (this.Health > 0)
             {
@@ -133,7 +135,15 @@ namespace WarrenWarriorsGame
                 if (isAttacking != true)
                 {
                     //player is normally colored when not attacking
+                    //if (animSprite != null)
+                    //{
+                        //sb.Draw(animSprite.Texture, animSprite.Position, Color.White);
+                        
+                    //}
+                    //else
+                    //{
                     sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.White);
+                   // }
                 }
                 else
                 {
@@ -151,6 +161,7 @@ namespace WarrenWarriorsGame
 
 		public override void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time)
 		{
+            
 			//---this does nothing right now but should contain the attack stuff---//
 			throw new NotImplementedException();
 		}

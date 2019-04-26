@@ -20,7 +20,7 @@ namespace WarrenWarriorsGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        AnimationHandler animHandler;
+        
 
 		KeyboardState kbState; //keyboard states for updating
 		KeyboardState PrevkbState;
@@ -81,8 +81,8 @@ namespace WarrenWarriorsGame
             gameState = GameState.Menu;
             
             songStart = false;
-            animHandler = new AnimationHandler();
-            animHandler.Initalize();
+            
+            
             base.Initialize();
         }
 
@@ -167,7 +167,7 @@ namespace WarrenWarriorsGame
 			// TODO: Add your update logic here
 			kbState = Keyboard.GetState();
             mState = Mouse.GetState();
-            animHandler.UpdateAnimation(gameTime);
+            ;
             //switch statement to determine which state the game is in and run update methods accordingly
             switch(gameState)
             {
