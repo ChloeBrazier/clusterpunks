@@ -124,7 +124,7 @@ namespace WarrenWarriorsGame
         public static void Draw(Game g, SpriteBatch sb, SpriteFont font)
         {
             //create a temporary vector to control spacing of log text
-            Vector2 logVector = new Vector2(460, (g.GraphicsDevice.Viewport.Height/3 * 2));
+            Vector2 logVector = new Vector2(460, (g.GraphicsDevice.Viewport.Height / 3 * 2));
             Console.WriteLine(logVector);
 
             //run checkqueue to get rid of the oldest message in the log
@@ -138,20 +138,52 @@ namespace WarrenWarriorsGame
             Color logTextColor = Color.White;
 
             //print all info in the log
-            for(int i = 0; i < logArray.Length; i++)
+            for (int i = 0; i < logArray.Length; i++)
             {
+                //set logvector based on current iteration
+                if(i > 0)
+                {
+                    logVector.Y = logVector.Y + 15;
+                }
+
                 //change text to red if item is latest in the queue
-                if(i == logArray.Length - 1)
+                if (i == logArray.Length - 1)
                 {
                     logTextColor = Color.Red;
                 }
 
-                sb.DrawString(
-                    font, 
-                    logArray[i], 
-                    new Vector2(logVector.X, logVector.Y + (i * 15)), 
+                //check if battlelog string is greater than the character width of the battle log box
+                if (logArray[i].Length > 41)
+                {
+                    //split log string into two substrings
+                    int stringTwoLength = (logArray[i].Length - 1) - 39;
+                    string stringOne = logArray[i].Substring(0, 39);
+                    string stringTwo = logArray[i].Substring(40, stringTwoLength);
+
+                    //create one string from the split strings
+                    logArray[i] = stringOne + "\n" + stringTwo;
+
+                    //draw string with added line break to the battle log box
+                    sb.DrawString(
+                        font,
+                        logArray[i],
+                        logVector,
+                        logTextColor
+                        );
+
+                    //add extra length to logVector for following lines of text
+                    logVector.Y = logVector.Y + 15;
+                }
+                else
+                {
+                    //draw battle string normally if it doesn't exceed character limit
+                    sb.DrawString(
+                    font,
+                    logArray[i],
+                    logVector,
                     logTextColor
                     );
+                }
             }
         }
     }
