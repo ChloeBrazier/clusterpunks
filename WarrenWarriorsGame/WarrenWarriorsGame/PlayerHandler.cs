@@ -238,6 +238,18 @@ namespace WarrenWarriorsGame
 
 		}
 
+        public void EndEncounter()
+        {
+            foreach (PlayerChar p in Units)
+            {
+                p.IsAttacking = false;
+                p.Atk.ResetAttack(p,"Player");
+            }
+
+
+        }
+
+
 
 	}
 }

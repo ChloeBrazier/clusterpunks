@@ -60,6 +60,9 @@ namespace WarrenWarriorsGame
 		Button[] controlsIncrementer = new Button[2];
 		int controlspage = 0;
 
+        //create playerhandler, which in turn initializes player units
+        PlayerHandler handler; //initializes the player handler
+
 		public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -111,12 +114,13 @@ namespace WarrenWarriorsGame
 			ControlsSheet.Add(Content.Load<Texture2D>("btnCraftHovered"));
 			ControlsSheet.Add(Content.Load<Texture2D>("itemUseIcon"));
 
-			//load in texture2D for enemy (when implemented), may change later
-			//Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
+            //load in texture2D for enemy (when implemented), may change later
+            //Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
 
+            //inititalize the player handler
+            handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"), this);
 
-
-			song = Content.Load<Song>("Power Rangers");  // Put the name of your song here instead of "song_title"
+            song = Content.Load<Song>("Power Rangers");  // Put the name of your song here instead of "song_title"
 
 			//load temporary menu font
 			menuFont = Content.Load<SpriteFont>("Arial-12");
@@ -211,6 +215,7 @@ namespace WarrenWarriorsGame
 					if (current != null)
 					{
 						gameState = GameState.Combat;
+                        current.Handler = handler;
 					}
 					break;
 				case GameState.Combat:
@@ -233,11 +238,13 @@ namespace WarrenWarriorsGame
                         if (mainDungeon.GameWin())
                         {
                             gameState = GameState.Win;
+                            handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"), this);
                         }
                         else
                         {
                             gameState = GameState.RoomSelect;
                             current.Handler.PlayerInv.DropItems(0, 10);
+                            current.Handler.EndEncounter();
                             BattleLog.ClearLog();
                         }
 					}

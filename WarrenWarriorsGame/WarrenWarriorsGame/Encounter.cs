@@ -24,6 +24,7 @@ namespace WarrenWarriorsGame
 		public PlayerHandler Handler
 		{
 			get { return handler; }
+            set { handler = value; }
 		}
 
 
