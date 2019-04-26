@@ -85,7 +85,9 @@ namespace WarrenWarriorsGame
             gameUI.Add(coolGame.Content.Load<Texture2D>("btnHovered")); //5
             gameUI.Add(coolGame.Content.Load<Texture2D>("timer_icon")); //6
             gameUI.Add(coolGame.Content.Load<Texture2D>("game_background_prototype")); //7
-            GameUI.Add(coolGame.Content.Load<Texture2D>("cooldown_icon")); //8
+            gameUI.Add(coolGame.Content.Load<Texture2D>("cooldown_icon")); //8
+            gameUI.Add(coolGame.Content.Load<Texture2D>("farmer_target_icon")); //9
+
         }
 
         

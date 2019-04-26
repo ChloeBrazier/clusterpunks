@@ -18,6 +18,8 @@ namespace WarrenWarriorsGame
     /// </summary>
     public class PlayerChar: Unit
 	{
+        //private field to store target icon
+        private Texture2D icon;
 
         //public accessor/mutator for IsAttacking bool
         public bool IsAttacking
@@ -63,6 +65,15 @@ namespace WarrenWarriorsGame
             }
         }
 
+        //accessor for icon
+        public Texture2D Icon
+        {
+            get
+            {
+                return icon;
+            }
+        }
+
         public PlayerChar(SpriteFont spriteFont, Game game, CharType type)
 		{
 			font = spriteFont;
@@ -75,12 +86,14 @@ namespace WarrenWarriorsGame
 					atk = new Attack(Config.GetRandom(10, 16), Config.GetRandom(5, 11));
 					name = "Kevin's Grand-Dad";
                     sprite = game.Content.Load<Texture2D>("player_char_ranger_red");
+                    icon = game.Content.Load<Texture2D>("ranger_target_icon");
 
                     break;
 				case CharType.Medium:
 					health = Config.GetRandom(30, 41);
 					name = "The Farmer";
                     sprite = game.Content.Load<Texture2D>("farmer");
+                    icon = game.Content.Load<Texture2D>("farmer_target_icon");
                     if (Config.GetRandom(1, 3) == 2)
 					{
 						atk = new Attack(Config.GetRandom(10, 16), Config.GetRandom(4, 6));
@@ -96,6 +109,7 @@ namespace WarrenWarriorsGame
 					atk = new Attack(Config.GetRandom(5, 11), Config.GetRandom(1, 3));
 					name = "Kevin (Heroic)";
                     sprite = game.Content.Load<Texture2D>("player_char_ranger_fixed");
+                    icon = game.Content.Load<Texture2D>("ranger_target_icon");
 
                     break;
 

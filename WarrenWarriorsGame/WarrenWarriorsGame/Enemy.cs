@@ -33,6 +33,9 @@ namespace WarrenWarriorsGame
         //field to hold a reference to the enemy's current target
         private PlayerChar currentTarget;
 
+        //field to hold the target's target icon
+        private Texture2D targetIcon;
+
         //public accessor for IsAttacking bool
         public bool IsAttacking
         {
@@ -127,14 +130,19 @@ namespace WarrenWarriorsGame
         //required methods based on unit parent class
         public override void Draw(SpriteBatch sb, int position)
         {
-            //Eddie: Added readout for attack speed to test combat and
-            //and made an if statement to change text color when attacking
+            //vectors for drawing enemy and related UI
             Vector2 pos = new Vector2(510, 0) + position * 5 * Config.LineSpacing;
-            Vector2 textPos = new Vector2(pos.X + (212/3), pos.Y + 250);
+            Vector2 textPos = new Vector2(pos.X + (212/3), pos.Y + 245);
+            Vector2 healthPos = new Vector2(pos.X, textPos.Y);
+            Vector2 targetVector = new Vector2((pos.X + 212), textPos.Y);
 
             //draw enemy based on its health
             if(this.Health > 0)
             {
+                //draw enemy health icon and info
+                sb.Draw(UI.GameUI[0], new Rectangle((int)healthPos.X, (int)healthPos.Y, 50, 50), Color.White);
+                sb.DrawString(font, string.Format("Health:" + string.Format("{0: 0}", health)), healthPos, Color.Black);
+
                 if (isAttacking != true)
                 {
                     //enemy is drawn normally on cooldown
@@ -148,6 +156,9 @@ namespace WarrenWarriorsGame
                     sb.Draw(UI.GameUI[6], new Rectangle((int)textPos.X, (int)textPos.Y, 50, 50), Color.White);
                     sb.DrawString(font, string.Format("Attack time: " + string.Format("{0: 0.00}", atk.Length)), textPos, Color.Red);
                     sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 250), Color.PaleVioletRed);
+
+                    //draw target icon and info
+                    sb.Draw(targetIcon, new Rectangle((int)targetVector.X, (int)targetVector.Y, 50, 50), Color.White);
                 }
             }
             else
@@ -174,6 +185,9 @@ namespace WarrenWarriorsGame
 
                     //set current target to the new attacked player
                     currentTarget = playerParty[attackedPlayer];
+
+                    //set target icon to target player
+                    targetIcon = playerParty[attackedPlayer].Icon;
                 }
                 
                 //execute attack when timer runs down
@@ -202,6 +216,9 @@ namespace WarrenWarriorsGame
 
                 //set current target to the player in the spot that was rolled
                 currentTarget = playerParty[attackedPlayer];
+
+                //set target icon to target player
+                targetIcon = playerParty[attackedPlayer].Icon;
 
                 //inform the user which player is being attacked
                 BattleLog.AddEnemyAttack(this.name, playerParty[attackedPlayer].Name);
