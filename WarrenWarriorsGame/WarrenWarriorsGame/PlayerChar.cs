@@ -85,8 +85,8 @@ namespace WarrenWarriorsGame
 					health = Config.GetRandom(40, 51);
 					atk = new Attack(Config.GetRandom(10, 16), Config.GetRandom(5, 11));
 					name = "Kevin's Grand-Dad";
-                    sprite = game.Content.Load<Texture2D>("player_char_ranger_red");
-                    animSprite = new AnimatedSprite(game.Content.Load<Texture2D>("Player3Animation"), 0, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT, 2);
+                    //sprite = game.Content.Load<Texture2D>("player_char_ranger_red");
+                    animSprite = new AnimatedSprite(game.Content.Load<Texture2D>("Player3Animation"), 0, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT, 2, 1000f);
                     icon = game.Content.Load<Texture2D>("ranger_target_icon");
 
                     break;
@@ -149,35 +149,55 @@ namespace WarrenWarriorsGame
                 if (isAttacking != true)
                 {
                     //player is normally colored when not attacking
-                    //if (animSprite != null)
-                    //{
-                        //sb.Draw(animSprite.Texture, animSprite.Position, Color.White);
+                    if (animSprite != null)
+                    {
+                        sb.Draw(animSprite.Texture, new Vector2(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC), 
+                            new Rectangle(animSprite.SourceRect.X, animSprite.SourceRect.Y, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.White, 0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0);
                         
-                    //}
-                    //else
-                    //{
+                    }
+                    else
+                    {
                     sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.White);
-                   // }
+                    }
                 }
                 else
                 {
                     //player is red when attacking
-                    sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.PaleVioletRed);
+                    if (animSprite != null)
+                    {
+                        sb.Draw(animSprite.Texture, new Vector2(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC),
+                            new Rectangle(animSprite.SourceRect.X, animSprite.SourceRect.Y, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.PaleVioletRed, 0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0);
+                    }
+                    else
+                    {
+                        
+                        sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.PaleVioletRed);
+                    }
                 }
             }
             else
             {
                 //player is grayed out when dead
-                sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.Gray);
+                if (animSprite != null)
+                {
+                    sb.Draw(animSprite.Texture, new Vector2(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC),
+                            new Rectangle(animSprite.SourceRect.X, animSprite.SourceRect.Y, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.Gray, 0f, Vector2.Zero, 1.0f, SpriteEffects.None, 0);
+                }
+                else
+                {
+                    
+                    sb.Draw(sprite, new Rectangle(Config.PLAYER_AVATAR_X_LOC + position * (Config.PLAYER_AVATAR_WIDTH + Config.PLAYER_AVATAR_SPACING), Config.PLAYER_AVATAR_Y_LOC, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT), Color.Gray);
+                }
             }
             
 		}
 
 		public override void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time)
 		{
-            
-			//---this does nothing right now but should contain the attack stuff---//
-			throw new NotImplementedException();
+            if (animSprite != null)
+            {
+                animSprite.Animate(time);
+            }
 		}
 	}
 }

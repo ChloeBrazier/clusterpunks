@@ -226,7 +226,10 @@ namespace WarrenWarriorsGame
 
 					//Initiates combat in the current room, with the encounter generated
 					current.CombatEncounter(this, kbState, PrevkbState, mState, prevMsState, gameTime);
-
+                    for(int i = 0; i < handler.PlayerParty.Length; i++)
+                    {
+                        handler.PlayerParty[i].Update(kbState, PrevkbState, gameTime);
+                    }
 					//check party's health and enter GameOver state if it equals zero
 					int partyHealth = current.CombatHandler.PartyHealth();
 					if (partyHealth == 0)
