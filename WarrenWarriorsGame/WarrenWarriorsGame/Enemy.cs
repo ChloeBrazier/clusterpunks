@@ -130,7 +130,7 @@ namespace WarrenWarriorsGame
             //Eddie: Added readout for attack speed to test combat and
             //and made an if statement to change text color when attacking
             Vector2 pos = new Vector2(510, 0) + position * 5 * Config.LineSpacing;
-            Vector2 textPos = new Vector2(pos.X + (212/2), pos.Y + 250);
+            Vector2 textPos = new Vector2(pos.X + (212/3), pos.Y + 250);
 
             //draw enemy based on its health
             if(this.Health > 0)
