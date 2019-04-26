@@ -348,7 +348,7 @@ namespace WarrenWarriorsGame
                     }
 
                     //Handles crafting controls
-                    if (items[SelectedItemX, SelectedItemY].ItemType != Item.Empty && (craftButton.Update(mState) || Config.SingleKeyPress(Keys.LeftShift, kbState, PrevkbState) || Config.SingleKeyPress(Keys.RightShift, kbState, PrevkbState)))
+                    if (SelectedItemX != -1 && SelectedItemY != -1 && items[SelectedItemX, SelectedItemY].ItemType != Item.Empty && (craftButton.Update(mState) || Config.SingleKeyPress(Keys.LeftShift, kbState, PrevkbState) || Config.SingleKeyPress(Keys.RightShift, kbState, PrevkbState)))
                     {
                         switch (craftState)
                         {
