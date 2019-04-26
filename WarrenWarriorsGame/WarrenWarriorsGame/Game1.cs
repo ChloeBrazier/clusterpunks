@@ -35,6 +35,9 @@ namespace WarrenWarriorsGame
         //Map Background Sprite
         Texture2D MapBackground;
 
+        //Victory Screen
+        Texture2D Victory;
+
 		//field for encounter
 		Encounter current;
 
@@ -59,6 +62,9 @@ namespace WarrenWarriorsGame
 		List<Texture2D> ControlsSheet = new List<Texture2D>();
 		Button[] controlsIncrementer = new Button[2];
 		int controlspage = 0;
+
+        //create playerhandler, which in turn initializes player units
+        PlayerHandler handler; //initializes the player handler
 
 		public Game1()
         {
@@ -111,12 +117,13 @@ namespace WarrenWarriorsGame
 			ControlsSheet.Add(Content.Load<Texture2D>("btnCraftHovered"));
 			ControlsSheet.Add(Content.Load<Texture2D>("itemUseIcon"));
 
-			//load in texture2D for enemy (when implemented), may change later
-			//Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
+            //load in texture2D for enemy (when implemented), may change later
+            //Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
 
+            //inititalize the player handler
+            handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"), this);
 
-
-			song = Content.Load<Song>("Power Rangers");  // Put the name of your song here instead of "song_title"
+            song = Content.Load<Song>("Power Rangers");  // Put the name of your song here instead of "song_title"
 
 			//load temporary menu font
 			menuFont = Content.Load<SpriteFont>("Arial-12");
@@ -126,6 +133,7 @@ namespace WarrenWarriorsGame
 			UI.Load();
 
             MapBackground = Content.Load<Texture2D>("MapBack");
+            Victory = Content.Load<Texture2D>("Victory");
 
 			TitleImage = Content.Load<Texture2D>("titleImage");
 			titleButtons.Add(new Button(Content.Load<Texture2D>(Config.PLAY_BUTTON_NORM),
@@ -211,6 +219,7 @@ namespace WarrenWarriorsGame
 					if (current != null)
 					{
 						gameState = GameState.Combat;
+                        current.Handler = handler;
 					}
 					break;
 				case GameState.Combat:
@@ -233,11 +242,13 @@ namespace WarrenWarriorsGame
                         if (mainDungeon.GameWin())
                         {
                             gameState = GameState.Win;
+                            handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"), this);
                         }
                         else
                         {
                             gameState = GameState.RoomSelect;
                             current.Handler.PlayerInv.DropItems(0, 10);
+                            current.Handler.EndEncounter();
                             BattleLog.ClearLog();
                         }
 					}
@@ -377,7 +388,7 @@ namespace WarrenWarriorsGame
                     break;
 
                 case GameState.Win:
-                    spriteBatch.DrawString(menuFont, "You win, press enter to return to menu", new Vector2(50, 50), Color.White);
+                    spriteBatch.Draw(Victory, new Rectangle(0,0,800,480), Color.White);
                     break;
 
                 

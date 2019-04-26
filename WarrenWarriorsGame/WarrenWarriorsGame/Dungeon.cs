@@ -24,6 +24,7 @@ namespace WarrenWarriorsGame
 		Button[,] roomButtons;
 		Encounter[,] dungeonlayout;
 
+
 		//Constructor for the Dungeon
 		public Dungeon(Game g)
 		{
@@ -75,10 +76,11 @@ namespace WarrenWarriorsGame
 				{
 					if (roomButtons[x, y] != null)
 					{
-						if (roomButtons[x, y].Update(ms) && Config.SingleMouseClick(ms, prev))
+						if (checkAdjacent(x,y) && roomButtons[x, y].Update(ms) && Config.SingleMouseClick(ms, prev))
 						{
 							Encounter fight = dungeonlayout[x, y];
-							return fight;
+                            dungeonlayout[x, y] = null;
+                            return fight;
 						}
 					}
 				}
@@ -90,22 +92,26 @@ namespace WarrenWarriorsGame
 		//Draws the array of buttons
 		public void Draw(SpriteBatch sb)
 		{
-			for (int x = 0; x < DungeonDimension; x++)
-			{
-				for (int y = 1; y < DungeonDimension; y++)
-				{
-					if (roomButtons[x, y] != null && checkAdjacent(x,y))
-					{
-						roomButtons[x, y].Draw(sb);
-					}
+            roomButtons[0, 0].Draw(sb);
+            if(roomButtons[0,0].State == BtnState.Selected)
+            {
+                for (int x = 0; x < DungeonDimension; x++)
+                {
+                    for (int y = 0; y < DungeonDimension; y++)
+                    {
+                        if (roomButtons[x, y] != null && checkAdjacent(x, y))
+                        {
+                            roomButtons[x, y].Draw(sb);
+                        }
 
-				}
-			}
+                    }
+                }
+            }
 		}
 
         public bool GameWin()
         {
-            if (dungeonlayout[DungeonDimension - 1, DungeonDimension - 1].CombatHandler.EnemyHealth() <= 0)
+            if (dungeonlayout[DungeonDimension - 1, DungeonDimension - 1] == null)
             {
                 return true;
             }
@@ -162,6 +168,10 @@ namespace WarrenWarriorsGame
                         return true;
                     }
                 }
+                else if (roomButtons[x - 1, y].State == BtnState.Selected || roomButtons[x, y + 1].State == BtnState.Selected || roomButtons[x, y - 1].State == BtnState.Selected)
+                {
+                    return true;
+                }
             }
             else if (y == DungeonDimension - 1)
             {
@@ -171,6 +181,10 @@ namespace WarrenWarriorsGame
                     {
                         return true;
                     }
+                }
+                else if (roomButtons[x - 1, y].State == BtnState.Selected || roomButtons[x + 1, y].State == BtnState.Selected || roomButtons[x, y - 1].State == BtnState.Selected)
+                {
+                    return true;
                 }
             }
             else if (roomButtons[x - 1, y].State == BtnState.Selected || roomButtons[x, y - 1].State == BtnState.Selected || roomButtons[x + 1, y].State == BtnState.Selected || roomButtons[x, y + 1].State == BtnState.Selected)

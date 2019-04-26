@@ -356,6 +356,18 @@
 /processorParam:TextureFormat=Color
 /build:ClemAvatar.png
 
+#begin cooldown_icon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:cooldown_icon.png
+
 #begin DefaultAttackIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -379,6 +391,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:farmer.png
+
+#begin farmer_target_icon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:farmer_target_icon.png
 
 #begin game_background_prototype.png
 /importer:TextureImporter
@@ -626,6 +650,18 @@
 /processorParam:Quality=Best
 /build:Power Rangers.mp3
 
+#begin ranger_target_icon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:ranger_target_icon.png
+
 #begin RoomCleared.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -715,4 +751,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:titleImage.png
+
+#begin Victory.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Victory.png
 

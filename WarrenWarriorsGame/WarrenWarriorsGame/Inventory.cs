@@ -348,7 +348,7 @@ namespace WarrenWarriorsGame
                     }
 
                     //Handles crafting controls
-                    if (items[SelectedItemX, SelectedItemY].ItemType != Item.Empty && (craftButton.Update(mState) || Config.SingleKeyPress(Keys.LeftShift, kbState, PrevkbState) || Config.SingleKeyPress(Keys.RightShift, kbState, PrevkbState)))
+                    if (SelectedItemX != -1 && SelectedItemY != -1 && items[SelectedItemX, SelectedItemY].ItemType != Item.Empty && (craftButton.Update(mState) || Config.SingleKeyPress(Keys.LeftShift, kbState, PrevkbState) || Config.SingleKeyPress(Keys.RightShift, kbState, PrevkbState)))
                     {
                         switch (craftState)
                         {
@@ -439,73 +439,73 @@ namespace WarrenWarriorsGame
 
 		}
 
-		private string GetKeyName(int x, int y) //gets the names of keys to be displayed
-		{
-			switch (x)
-			{
-				case 0:
+		//private string GetKeyName(int x, int y) //gets the names of keys to be displayed
+		//{
+		//	switch (x)
+		//	{
+		//		case 0:
 
-					switch (y)
-					{
-						case 0:
-							return "Q";
-						case 1:
-							return "W";
-						case 2:
-							return "A";
-						case 3:
-							return "S";
+		//			switch (y)
+		//			{
+		//				case 0:
+		//					return "Q";
+		//				case 1:
+		//					return "W";
+		//				case 2:
+		//					return "A";
+		//				case 3:
+		//					return "S";
 
-					}
-
-
-					break;
-				case 1:
-
-					switch (y)
-					{
-						case 0:
-							return "E";
-						case 1:
-							return "R";					
-						case 2:
-							return "D";
-						case 3:
-							return "F";
+		//			}
 
 
+		//			break;
+		//		case 1:
 
-					}
-
-
-					break;
-				case 2:
-
-					switch (y)
-					{
-						case 0:
-							return "T";
-						case 1:
-							return "Y";
-						case 2:
-							return "G";
-						case 3:
-							return "H";
+		//			switch (y)
+		//			{
+		//				case 0:
+		//					return "E";
+		//				case 1:
+		//					return "R";					
+		//				case 2:
+		//					return "D";
+		//				case 3:
+		//					return "F";
 
 
 
-					}
+		//			}
 
 
-					break;
+		//			break;
+		//		case 2:
+
+		//			switch (y)
+		//			{
+		//				case 0:
+		//					return "T";
+		//				case 1:
+		//					return "Y";
+		//				case 2:
+		//					return "G";
+		//				case 3:
+		//					return "H";
 
 
 
-			}
+		//			}
 
 
-			return "key not found"; 
-		}
+		//			break;
+
+
+
+		//	}
+
+
+		//	return "key not found"; 
+		//}
 
 		/// <summary>
 		/// used to swap the inventory of two characters
