@@ -130,7 +130,7 @@ namespace WarrenWarriorsGame
             //Eddie: Added readout for attack speed to test combat and
             //and made an if statement to change text color when attacking
             Vector2 pos = new Vector2(510, 0) + position * 5 * Config.LineSpacing;
-            Vector2 textPos = new Vector2(pos.X, pos.Y + 255);
+            Vector2 textPos = new Vector2(pos.X + (212/2), pos.Y + 250);
 
             //draw enemy based on its health
             if(this.Health > 0)
@@ -138,13 +138,15 @@ namespace WarrenWarriorsGame
                 if (isAttacking != true)
                 {
                     //enemy is drawn normally on cooldown
-                    sb.DrawString(font, string.Format("{0}/{1}/{2:2.2}", name, Health, "Cooldown: " + string.Format("{0: 0.00}", cooldown)), textPos, Color.Black);
+                    sb.Draw(UI.GameUI[8], new Rectangle((int)textPos.X, (int)textPos.Y, 50, 50), Color.White);
+                    sb.DrawString(font, string.Format("Cooldown: " + string.Format("{0: 0.00}", cooldown)), textPos, Color.Black);
                     sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 250), Color.White);
                 }
                 else
                 {
                     //enemy turns red when it starts to attack
-                    sb.DrawString(font, string.Format("{0}/{1}/{2}", name, Health, "Attack time: " + string.Format("{0: 0.00}", atk.Length)), textPos, Color.Red);
+                    sb.Draw(UI.GameUI[6], new Rectangle((int)textPos.X, (int)textPos.Y, 50, 50), Color.White);
+                    sb.DrawString(font, string.Format("Attack time: " + string.Format("{0: 0.00}", atk.Length)), textPos, Color.Red);
                     sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 250), Color.PaleVioletRed);
                 }
             }
