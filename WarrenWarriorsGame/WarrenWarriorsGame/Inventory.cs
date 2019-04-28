@@ -204,6 +204,15 @@ namespace WarrenWarriorsGame
 						}
 					}
 
+                    if (selected == SelectedState.deselected)
+                    {
+                        foreach (Button button in invButtons)
+                        {
+                            button.Deselect();
+                        }
+                    }
+
+
 					//dont call update for craft button because it cannot be used unless you have already selected an item
 					
 					break;

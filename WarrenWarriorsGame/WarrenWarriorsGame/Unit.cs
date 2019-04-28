@@ -22,9 +22,9 @@ namespace WarrenWarriorsGame
         protected bool isAttacking;
 		protected SpriteFont font;
 		protected Texture2D sprite;
+        protected AnimatedSprite animSprite;
 		protected Attack atk;
-
-		public abstract void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time);
+        
 		public abstract void Draw(SpriteBatch sb,int position);
 	}
 }
