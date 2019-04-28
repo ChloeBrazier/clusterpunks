@@ -112,7 +112,6 @@ namespace WarrenWarriorsGame
 			handler.Update(kbState, PrevkbState, mState, prevMsState, gameTime, current); //updates all of the keyboardhandler
 
 			//update enemy and handle combat
-
 			if (current.IsAttacking != true)
 			{
 				current.CoolDown(gameTime, handler.PlayerParty);
