@@ -68,7 +68,7 @@ namespace WarrenWarriorsGame
             }
 
 			
-			current = new Enemy(g.Content.Load<SpriteFont>("Arial-12"), randomEnemy, handler.PlayerParty);
+			current = new Enemy(g.Content.Load<SpriteFont>("Arial-12"), randomEnemy);
 			current.LoadSprite(g);
 
             //Intialize Combat Handler using loaded players and enemies
@@ -114,11 +114,11 @@ namespace WarrenWarriorsGame
 			//update enemy and handle combat
 			if (current.IsAttacking != true)
 			{
-				current.CoolDown(gameTime);
+				current.CoolDown(gameTime, handler.PlayerParty);
 			}
 			else
 			{
-				current.Update(kbState, PrevkbState, gameTime);
+				current.Update(kbState, PrevkbState, gameTime, handler.PlayerParty);
 			}
 
 

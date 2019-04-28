@@ -80,14 +80,11 @@ namespace WarrenWarriorsGame
             }
         }
 
-        public Enemy(SpriteFont enemyFont, int type, PlayerChar[] Units)
+        public Enemy(SpriteFont enemyFont, int type)
         {
             //set font based on the spritefont that's passed in
             font = enemyFont;
-
-            //initialize playerParty 
-            playerParty = Units;
-
+            
             //switch statement to determine enemy stats based on type
             switch (type)
             {
@@ -168,17 +165,20 @@ namespace WarrenWarriorsGame
             }
         }
         
-        public override void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time)
+        public void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time, PlayerChar[] Units)
         {
+            //initialize playerParty 
+            playerParty = Units;
+
             //enemy only takes action if it has health
-            if(this.Health > 0)
+            if (this.Health > 0)
             {
                 //enemy starts their attack timer
                 atk.Length = atk.Length - time.ElapsedGameTime.TotalSeconds;
 
                 //if the position of the attacked party member is swapped,
                 //inform the player that the swapped-in member is being attacked
-                if(currentTarget != playerParty[attackedPlayer])
+                if(playerParty[attackedPlayer] != currentTarget)
                 {
                     //add info to the combat log
                     BattleLog.ChangeEnemyTarget(this.name, playerParty[attackedPlayer].Name);
@@ -187,7 +187,7 @@ namespace WarrenWarriorsGame
                     currentTarget = playerParty[attackedPlayer];
 
                     //set target icon to target player
-                    targetIcon = playerParty[attackedPlayer].Icon;
+                    targetIcon = currentTarget.Icon;
                 }
                 
                 //execute attack when timer runs down
@@ -198,10 +198,13 @@ namespace WarrenWarriorsGame
             }
         }
 
-        public void CoolDown(GameTime time)
+        public void CoolDown(GameTime time, PlayerChar[] Units)
         {
+            //initialize playerParty 
+            playerParty = Units;
+
             //enemy attacks periodically until it dies
-            
+
             //start the enemy on a cooldown of 15 seconds
             cooldown = cooldown - time.ElapsedGameTime.TotalSeconds;
 
@@ -218,7 +221,7 @@ namespace WarrenWarriorsGame
                 currentTarget = playerParty[attackedPlayer];
 
                 //set target icon to target player
-                targetIcon = playerParty[attackedPlayer].Icon;
+                targetIcon = currentTarget.Icon;
 
                 //inform the user which player is being attacked
                 BattleLog.AddEnemyAttack(this.name, playerParty[attackedPlayer].Name);
