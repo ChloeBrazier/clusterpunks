@@ -84,10 +84,10 @@ namespace WarrenWarriorsGame
 				case CharType.Heavy:
 					health = Config.GetRandom(40, 51);
 					atk = new Attack(Config.GetRandom(10, 16), Config.GetRandom(5, 11));
-					name = "Kevin's Grand-Dad";
+					name = "The third guy";
                     //sprite = game.Content.Load<Texture2D>("player_char_ranger_red");
                     animSprite = new AnimatedSprite(game.Content.Load<Texture2D>("Player3Animation"), 0, Config.PLAYER_AVATAR_WIDTH, Config.PLAYER_AVATAR_HEIGHT, 2, 1000f);
-                    icon = game.Content.Load<Texture2D>("ranger_target_icon");
+                    icon = game.Content.Load<Texture2D>("PlayerThree_target_icon");
 
                     break;
 				case CharType.Medium:
@@ -192,7 +192,7 @@ namespace WarrenWarriorsGame
             
 		}
 
-		public override void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time)
+		public void Update(KeyboardState kbState, KeyboardState PrevkbState, GameTime time)
 		{
             if (animSprite != null)
             {
