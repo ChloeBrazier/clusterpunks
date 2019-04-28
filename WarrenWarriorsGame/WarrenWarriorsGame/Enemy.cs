@@ -138,20 +138,20 @@ namespace WarrenWarriorsGame
             {
                 //draw enemy health icon and info
                 sb.Draw(UI.GameUI[0], new Rectangle((int)healthPos.X, (int)healthPos.Y, 50, 50), Color.White);
-                sb.DrawString(font, string.Format("Health:" + string.Format("{0: 0}", health)), healthPos, Color.Black);
+                sb.DrawString(font, string.Format("{0: 0}", health), healthPos + new Vector2(15,15), Color.Black);
 
                 if (isAttacking != true)
                 {
                     //enemy is drawn normally on cooldown
                     sb.Draw(UI.GameUI[8], new Rectangle((int)textPos.X, (int)textPos.Y, 50, 50), Color.White);
-                    sb.DrawString(font, string.Format("Cooldown: " + string.Format("{0: 0.00}", cooldown)), textPos, Color.Black);
+                    sb.DrawString(font, string.Format("{0: 0.00}", cooldown), textPos + new Vector2(10,15), Color.Black);
                     sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 250), Color.White);
                 }
                 else
                 {
                     //enemy turns red when it starts to attack
                     sb.Draw(UI.GameUI[6], new Rectangle((int)textPos.X, (int)textPos.Y, 50, 50), Color.White);
-                    sb.DrawString(font, string.Format("Attack time: " + string.Format("{0: 0.00}", atk.Length)), textPos, Color.Red);
+                    sb.DrawString(font, string.Format("{0: 0.00}", atk.Length), textPos + new Vector2(15, 15), Color.Red);
                     sb.Draw(sprite, new Rectangle((int)pos.X, (int)pos.Y, 212, 250), Color.PaleVioletRed);
 
                     //draw target icon and info
