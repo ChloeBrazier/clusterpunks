@@ -133,8 +133,12 @@ namespace WarrenWarriorsGame
 
         public void Deselect()
         {
-            state = BtnState.Default;
-        }
+			if (state == BtnState.Selected)
+			{
+				state = BtnState.Default;
+			}
+
+		}
 
 
     }

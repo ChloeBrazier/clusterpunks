@@ -38,6 +38,9 @@ namespace WarrenWarriorsGame
         //Victory Screen
         Texture2D Victory;
 
+		//Defeat screen
+		Texture2D Defeat;
+
 		//field for encounter
 		Encounter current;
 
@@ -113,15 +116,16 @@ namespace WarrenWarriorsGame
 												Content.Load<Texture2D>("btnPrevClicked"),
 												new Rectangle(Config.EXIT_BUTTON_XY.X + 600, Config.EXIT_BUTTON_XY.Y + 50, 50, 50));
 
-			ControlsSheet.Add(Content.Load<Texture2D>("btnCraftNormal"));
-			ControlsSheet.Add(Content.Load<Texture2D>("btnCraftHovered"));
-			ControlsSheet.Add(Content.Load<Texture2D>("itemUseIcon"));
+			ControlsSheet.Add(Content.Load<Texture2D>("Controls1"));
+			ControlsSheet.Add(Content.Load<Texture2D>("Controls2"));
+			ControlsSheet.Add(Content.Load<Texture2D>("crafting_chart"));
 
-            //load in texture2D for enemy (when implemented), may change later
-            //Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
 
-            //inititalize the player handler
-            handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"), this);
+			//load in texture2D for enemy (when implemented), may change later
+			//Texture2D enemyTexture = enemyName.LoadSprite(enemytype);
+
+			//inititalize the player handler
+			handler = new PlayerHandler(Content.Load<SpriteFont>("Arial-12"), this);
 
             song = Content.Load<Song>("Power Rangers");  // Put the name of your song here instead of "song_title"
 
@@ -150,6 +154,8 @@ namespace WarrenWarriorsGame
 										Content.Load<Texture2D>(Config.EXIT_BUTTON_HOVERED),
 										Content.Load<Texture2D>(Config.EXIT_BUTTON_CLICKED),
 										new Rectangle(Config.EXIT_BUTTON_XY, Config.MAIN_MENU_BUTTON_WIDTH)));
+
+			Defeat = Content.Load<Texture2D>("Defeat");
 
 		}
 
@@ -371,24 +377,19 @@ namespace WarrenWarriorsGame
 				case GameState.GameOver:
 
 					//temporary game over screen that informs the player to press enter to return to the menu
-					spriteBatch.DrawString
-						(
-						menuFont,
-						"Press Enter to return to the menu",
-						new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2),
-						Color.Black
-						);
+					spriteBatch.Draw(Defeat, new Rectangle(0, 0, 800, 480), Color.White);
 
 					break;
 
 				case GameState.ControlMenu:
+					
+					spriteBatch.Draw(ControlsSheet[controlspage], new Rectangle(0, 0,800,480), Color.White);
 					titleButtons[2].Draw(spriteBatch);
 					foreach (Button b in controlsIncrementer)
 					{
 						b.Draw(spriteBatch);
 					}
-					spriteBatch.Draw(ControlsSheet[controlspage], new Vector2(0, 0), Color.White);
-                    break;
+					break;
 
                 case GameState.Win:
                     spriteBatch.Draw(Victory, new Rectangle(0,0,800,480), Color.White);

@@ -193,7 +193,7 @@ namespace WarrenWarriorsGame
 					{
 						for (int k = 0; k < 4; k++)
 						{
-							if (!Units[j].IsAttacking && invButtons[j, k].Update(mState) == true) //player inv is locked when attacking
+							if (!Units[j].IsAttacking && invButtons[j, k].Update(mState) == true && Units[j].Health > 0) //player inv is locked when attacking
 							{
 								selected = SelectedState.selected;
 								SelectedItemX = j;

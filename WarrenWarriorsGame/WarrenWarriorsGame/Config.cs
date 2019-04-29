@@ -110,8 +110,8 @@ namespace WarrenWarriorsGame
         public const string CRAFT_BUTTON_HOVERED = "btnCraftHovered";
         public const string CRAFT_BUTTON_CLICKED = "btnCraftSelected";
 
-        public const string ATTACK_BUTTON_NORMAL = "btnCraftNormal";
-        public const string ATTACK_BUTTON_HOVERED = "btnCraftHovered";
+        public const string ATTACK_BUTTON_NORMAL = "Attack Normal";
+        public const string ATTACK_BUTTON_HOVERED = "Attack Hovered";
         public const string ATTACK_BUTTON_CLICKED = "btnCraftSelected";
 
 
